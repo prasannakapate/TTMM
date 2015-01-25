@@ -1,0 +1,32 @@
+<ion-view ng-controller="LoginCtrl as vm">
+    <ion-header-bar class="bar-calm">
+        <div class="buttons">
+            <h1 class="title">TTMM</h1>
+        </div>
+    </ion-header-bar>
+
+    <ion-content>
+
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="Username" ng-model="user.username">
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Password" ng-model="user.password">
+            </label>
+
+            <label class="item item-input">
+                <input type="text" placeholder="Email" ng-model="user.email">
+            </label>
+            <label class="item item-input">
+                <input type="number" placeholder="Mobile" ng-model="user.mobileNo">
+            </label>
+
+            <button class="button button-block button-outline button-calm"
+                    ng-click="vm.signIn(user)">
+                Sign In
+            </button>
+
+        </div>
+    </ion-content>
+</ion-view>
