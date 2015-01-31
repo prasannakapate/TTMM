@@ -17,6 +17,12 @@
             });
         })
         .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+            $ionicConfigProvider.views.transition('ios');
+            $ionicConfigProvider.views.forwardCache(false);
+            $ionicConfigProvider.navBar.alignTitle('center');
+
+            // note that you can also chain configs
             $ionicConfigProvider.tabs.position('bottom').style('standard');
 
             $stateProvider
@@ -25,6 +31,12 @@
                     url: "/app/login",
                     templateUrl: "app/login/login.html"
                 })
+
+                .state('new-event', {
+                    url: '/new-event',
+                    templateUrl: 'app/event/new-event/new-event.html'
+                })
+
                 .state('tab', {
                     url: "/tab",
                     abstract: true,
@@ -34,7 +46,7 @@
                     url: '/events',
                     views: {
                         'tab-events': {
-                            templateUrl: 'app/event/event-list.html'
+                            templateUrl: 'app/event/event-list/event-list.html'
                         }
                     }
                 })

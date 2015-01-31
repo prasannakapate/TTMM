@@ -1,0 +1,29 @@
+<ion-view ng-controller="NewEventCtrl as vm">
+
+    <ion-header-bar class="bar-calm">
+        <div class="buttons">
+            <a class="button button-small button-clear icon ion-chevron-left"
+               ui-sref="tab.events"> Back</a>
+            <h1 class="title">New Event</h1>
+        </div>
+    </ion-header-bar>
+
+    <ion-content>
+        <form>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Event Name</span>
+                    <input type="text" placeholder="event name" ng-model="event.eventName">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Description</span>
+                    <input type="text" placeholder="description" ng-model="event.eventDescription">
+                </label><br/>
+                <center>
+                    <button class="button button-calm" ng-click="vm.createNewEvent(event)">Create</button>
+                    <button class="button button-stable" type="reset">Reset</button>
+                </center>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

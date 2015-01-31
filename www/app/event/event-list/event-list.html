@@ -1,0 +1,21 @@
+<ion-view ng-controller="EventListCtrl">
+    <ion-header-bar class="bar-calm">
+        <div class="buttons">
+            <h1 class="title title-left">Event List</h1>
+            <button class="button" ui-sref="new-event">New</button>
+        </div>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="list">
+            <a class="item item-avatar item-icon-right"
+               ng-repeat="event in events | orderBy: '-createdAt'"
+               href="#/app/edit-event/{{event.objectId}}/{{event.eventName}}">
+                <img src="#">
+                <h2>{{event.eventName}}</h2>
+                <p>{{event.eventDescription}}</p>
+                <i class="icon icon-accessory ion-chevron-right"></i>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
