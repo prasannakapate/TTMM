@@ -2,7 +2,7 @@
     <ion-header-bar class="bar-calm">
         <div class="buttons">
             <h1 class="title title-left">Event List</h1>
-            <button class="button" ui-sref="new-event">New</button>
+            <a class="button button-icon icon ion-ios7-plus-outline" ui-sref="new-event"></a>
         </div>
     </ion-header-bar>
 
@@ -10,8 +10,8 @@
         <div class="list">
             <a class="item item-avatar item-icon-right"
                ng-repeat="event in events | orderBy: '-createdAt'"
-               href="#/app/edit-event/{{event.objectId}}/{{event.eventName}}">
-                <img src="#">
+               href="#/events/event-details/{{event.objectId}}">
+                <img ng-src="{{event.photo.url}}">
                 <h2>{{event.eventName}}</h2>
                 <p>{{event.eventDescription}}</p>
                 <i class="icon icon-accessory ion-chevron-right"></i>

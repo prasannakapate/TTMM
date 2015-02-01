@@ -36,6 +36,10 @@
                     url: '/new-event',
                     templateUrl: 'app/event/new-event/new-event.html'
                 })
+                .state('event-details', {
+                    url: '/events/event-details/:id',
+                    templateUrl: 'app/event/event-details/event-details.html'
+                })
 
                 .state('tab', {
                     url: "/tab",
@@ -50,6 +54,7 @@
                         }
                     }
                 })
+
                 .state('tab.account', {
                     url: '/account',
                     views: {

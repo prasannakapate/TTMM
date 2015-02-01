@@ -1,11 +1,32 @@
-<ion-view ng-controller="EventListCtrl as ">
+<ion-view ng-controller="EventDetailsCtrl as vm">
     <ion-header-bar class="bar-calm">
         <div class="buttons">
-            <h1 class="title">Event Name</h1>
+            <button class="button  button-clear icon ion-chevron-left"
+                    ui-sref="tab.events"> Back
+            </button>
+            <h1 class="title">Event Details</h1>
+            <a class="button button-icon icon ion-edit" ui-sref="event-event"></a>
         </div>
     </ion-header-bar>
 
     <ion-content>
-        <h2>Event Details</h2>
+        <div class="list card" ng-model="vm.eventDetails">
+
+            <div class="item item-avatar">
+                <img ng-src="{{vm.eventDetails.photo.url}}">
+                <h2>{{vm.eventDetails.eventName}}</h2>
+                <p>{{vm.eventDetails.createdAt | date:'medium'}}</p>
+            </div>
+
+            <div class="item item-body">
+                <p>{{vm.eventDetails.eventDescription}}</p>
+
+                <p>
+                    <a href="#" class="subdued">1 In</a>
+                    <a href="#" class="subdued">5 Out</a>
+                </p>
+            </div>
+
+        </div>
     </ion-content>
 </ion-view>
