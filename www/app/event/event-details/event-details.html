@@ -1,32 +1,43 @@
 <ion-view ng-controller="EventDetailsCtrl as vm">
     <ion-header-bar class="bar-calm">
         <div class="buttons">
-            <button class="button  button-clear icon ion-chevron-left"
-                    ui-sref="tab.events"> Back
+            <button class="button  button-clear icon ion-chevron-left" ui-sref="tab.events"> Back
             </button>
             <h1 class="title">Event Details</h1>
-            <a class="button button-icon icon ion-edit" ui-sref="event-event"></a>
+            <a class="button button-icon icon ion-edit" ui-sref="event-edit"></a>
         </div>
     </ion-header-bar>
-
     <ion-content>
         <div class="list card" ng-model="vm.eventDetails">
-
             <div class="item item-avatar">
                 <img ng-src="{{vm.eventDetails.photo.url}}">
                 <h2>{{vm.eventDetails.eventName}}</h2>
+                <p>Expected Budget = 12000 /-</p>
+                <p>{{vm.eventDetails.eventDescription}}</p>
                 <p>{{vm.eventDetails.createdAt | date:'medium'}}</p>
             </div>
+            <div class="item item-divider">
+                <h2>Contributor List</h2>
+                <p>
+                    <li>Prasanna kapate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In
+                        <i class="balanced ion-checkmark"></i>
+                    </li>
+                    <li>Shiva Vengal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In
+                        <i class="balanced ion-checkmark"></i>
+                    </li>
+                    <li>Mahesh Gupta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In
+                        <i class="balanced ion-checkmark"></i>
+                    </li>
+                    <li>Chirag Jain &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In
+                        <i class="balanced ion-checkmark"></i>
+                    </li>
 
-            <div class="item item-body">
-                <p>{{vm.eventDetails.eventDescription}}</p>
-
+                </p>
                 <p>
                     <a href="#" class="subdued">1 In</a>
                     <a href="#" class="subdued">5 Out</a>
                 </p>
             </div>
-
         </div>
     </ion-content>
 </ion-view>

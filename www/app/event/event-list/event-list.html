@@ -1,7 +1,8 @@
 <ion-view ng-controller="EventListCtrl">
     <ion-header-bar class="bar-calm">
         <div class="buttons">
-            <h1 class="title title-left">Events</h1>
+            <b>TTMM</b>
+            <h1 class="title">Events</h1>
             <a class="button button-icon icon ion-ios7-plus-outline" ui-sref="new-event"></a>
         </div>
     </ion-header-bar>
@@ -13,7 +14,8 @@
                href="#/events/event-details/{{event.objectId}}">
                 <img ng-src="{{event.photo.url}}">
                 <h2>{{event.eventName}}</h2>
-                <p>{{event.eventDescription}}</p>
+                <p>{{event.createdAt | date:'medium'}}</p>
+                <p>status: open</p>
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
         </div>
