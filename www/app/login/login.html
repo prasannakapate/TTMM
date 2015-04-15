@@ -4,29 +4,14 @@
             <h1 class="title">TTMM</h1>
         </div>
     </ion-header-bar>
-
     <ion-content>
-
         <div class="list">
-            <label class="item item-input">
-                <input type="text" placeholder="Username" ng-model="user.username">
-            </label>
-            <label class="item item-input">
-                <input type="password" placeholder="Password" ng-model="user.password">
-            </label>
-
-            <label class="item item-input">
-                <input type="text" placeholder="Email" ng-model="user.email">
-            </label>
-            <label class="item item-input">
-                <input type="text" placeholder="Mobile" ng-model="user.mobileNo">
-            </label>
-
-            <button class="button button-block button-outline button-calm"
-                    ng-click="vm.signIn(user)">
-                Sign In
+            <button class="button button-block button-assertive button-outline" ng-click="vm.signIn(user)">
+                <i class="ion-social-googleplus"> </i> sign in with google
             </button>
-
+            <button class="button button-block button-positive button-outline" ng-click="vm.signIn(user)">
+                <i class="ion-social-facebook"> </i> sign in with facebook
+            </button>
         </div>
     </ion-content>
 </ion-view>
