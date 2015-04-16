@@ -1,10 +1,10 @@
-(function () {
+(function() {
     'use strict';
     angular
-        .module('ttmmApp', ['ionic'])
+        .module('ttmmApp', ['ionic', 'ngSanitize', 'ngCookies'])
 
-        .run(function ($ionicPlatform) {
-            $ionicPlatform.ready(function () {
+    .run(function($ionicPlatform) {
+            $ionicPlatform.ready(function() {
                 // Hide the accessory bar by default
                 // (remove this to show the accessory bar above the keyboard for form inputs)
                 if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -16,7 +16,7 @@
                 }
             });
         })
-        .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+        .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
             $ionicConfigProvider.views.transition('ios');
             $ionicConfigProvider.views.forwardCache(false);
@@ -28,11 +28,11 @@
             $stateProvider
 
                 .state('app', {
-                    url: "/app/login",
-                    templateUrl: "app/login/login.html"
-                })
+                url: "/app/login",
+                templateUrl: "app/login/login.html"
+            })
 
-                .state('new-event', {
+            .state('new-event', {
                     url: '/new-event',
                     templateUrl: 'app/event/new-event/new-event.html'
                 })
@@ -41,7 +41,7 @@
                     templateUrl: 'app/event/event-details/event-details.html'
                 })
 
-                .state('tab', {
+            .state('tab', {
                     url: "/tab",
                     abstract: true,
                     templateUrl: "app/layout/tabs.html"
@@ -54,8 +54,16 @@
                         }
                     }
                 })
+                .state('tab.budget', {
+                    url: '/budget',
+                    views: {
+                        'tab-budget': {
+                            templateUrl: 'app/budget/budget.html'
+                        }
+                    }
+                })
 
-                .state('tab.account', {
+            .state('tab.account', {
                     url: '/account',
                     views: {
                         'tab-account': {

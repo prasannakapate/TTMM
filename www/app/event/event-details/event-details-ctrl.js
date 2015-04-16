@@ -9,14 +9,14 @@
     /* @ngInject */
     function EventDetailsCtrl($scope, $state, $stateParams, eventListApi) {
         /* jshint validthis: true */
-        var vm = this;
+        
         $scope.eventDetails = '';
-        vm.eventId = '';
-        vm.showDetails = showDetails;
+        $scope.eventId = '';
+        
         ////////////////
 
-        vm.eventId = $stateParams.id;
-        console.log("Event Id:", vm.eventId);
+        $scope.eventId = $stateParams.id;
+        console.log("Event Id:", $scope.eventId);
 
         function showDetails() {
             console.log("Show Details");
@@ -25,7 +25,7 @@
         eventListApi.getEventList().then(function(data) {
             $scope.eventDetails = _(data.results).chain()
                 .find({
-                    'objectId': vm.eventId
+                    'objectId': $scope.eventId
                 })
                 .pick('eventName', 'eventDescription', 'createdAt', 'photo')
                 .value();
