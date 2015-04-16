@@ -1,23 +1,21 @@
-(function () {
+(function() {
     'use strict';
 
     angular
         .module('ttmmApp')
         .controller('NewEventCtrl', NewEventCtrl);
 
-    NewEventCtrl.$inject = ['$state', 'newEventApi'];
+    NewEventCtrl.$inject = ['$scope', '$state', 'newEventApi'];
 
-    function NewEventCtrl($state, newEventApi) {
+    function NewEventCtrl($scope, $state, newEventApi) {
 
-        var vm = this;
-
-        vm.title = '';
-        vm.createNewEvent = createNewEvent;
+        $scope.title = '';
+        $scope.createNewEvent = createNewEvent;
 
         ////////////////
         function createNewEvent(event) {
             console.log("Create New Event Called", event)
-            newEventApi.createNewEvent(event).then(function (data) {
+            newEventApi.createNewEvent(event).then(function(data) {
                 $state.go('tab.events');
             });
         }

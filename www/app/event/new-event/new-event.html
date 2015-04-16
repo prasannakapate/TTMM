@@ -1,13 +1,10 @@
-<ion-view ng-controller="NewEventCtrl as vm">
-
+<ion-view ng-controller="NewEventCtrl">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
-            <a class="button button-small button-clear icon ion-chevron-left"
-               ui-sref="tab.events"> Back</a>
-            <h1 class="title">Create New Event</h1>
+            <a class="button button-small button-clear icon ion-chevron-left" ui-sref="tab.events"> Back</a>
+            <h1 class="title">Make your new Event</h1>
         </div>
     </ion-header-bar>
-
     <ion-content>
         <form>
             <div class="list">
@@ -18,10 +15,27 @@
                 <label class="item item-input">
                     <span class="input-label">Description</span>
                     <input type="text" placeholder="description" ng-model="event.eventDescription">
-                </label><br/>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Expected Budget</span>
+                    <input list="budget-amount" placeholder="amount">
+                    <datalist id="budget-amount">
+                        <option value="100 - 1000 /-Rs"></option>
+                        <option value="1000 - 2000 /-Rs"></option>
+                    </datalist>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">End Time</span>
+                    <input type="datetime-local" >
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Contributors</span>
+                    <input type="text" placeholder="contacts">
+                </label>
+                <br/>
                 <center>
-                    <button class="button button-calm" ng-click="vm.createNewEvent(event)">Create</button>
-                    <button class="button button-stable" type="reset">Reset</button>
+                    <button class="button button-royal" ng-click="createNewEvent(event)"><i class="ion-clock"></i> Make Event</button>
+                    <button class="button button-stable" type="reset">Clear</button>
                 </center>
             </div>
         </form>
