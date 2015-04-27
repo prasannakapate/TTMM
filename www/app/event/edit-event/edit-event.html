@@ -1,10 +1,10 @@
-<ion-view>
+<ion-view ng-controller="EditEventCtrl as vm">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
             <button class="button  button-clear icon ion-chevron-left"
                     ui-sref="tab.events"> Back
             </button>
-            <h1 class="title">Edit Event</h1>
+            <h1 class="title">Edit {{vm.title}}</h1>
         </div>
     </ion-header-bar>
 
