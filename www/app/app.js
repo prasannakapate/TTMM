@@ -26,10 +26,9 @@
             $ionicConfigProvider.tabs.position('bottom').style('standard');
 
             $stateProvider
-
                 .state('app', {
-                url: "/app/login",
-                templateUrl: "app/login/login.html"
+                    url: "/app/login",
+                    templateUrl: "app/login/login.html"
             })
 
             .state('new-event', {
