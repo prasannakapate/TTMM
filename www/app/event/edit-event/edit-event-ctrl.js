@@ -5,19 +5,24 @@
         .module('ttmmApp')
         .controller('EditEventCtrl', EditEventCtrl);
 
-    EditEventCtrl.$inject = ['$scope', '$state', '$stateParams'];
+    EditEventCtrl.$inject = ['$scope', '$state', '$stateParams', 'removeEventApi'];
 
-    function EditEventCtrl($scope, $state, $stateParams) {
-        var vm = this;
-        vm.title = 'EditEventCtrl';
-        vm.eventDetails = '';
-        vm.eventId = '';
+    function EditEventCtrl($scope, $state, $stateParams, removeEventApi) {
+
+        $scope.eventDetails = '';
+        $scope.eventId = '';
 
         ////////////////
 
-        vm.eventId = $stateParams.id;
+        $scope.eventId = $stateParams.id;
 
-        console.log("From Edit EventCtrl=", vm.eventId);
+        $scope.removeEvent = function() {
+            removeEventApi.removeEvent($scope.eventId);
+             	$state.go('tab.events');
+	            console.log('Remove Event Is Called');
+	            console.log("Item is removed");
+        }
+        console.log("From Edit EventCtrl=", $scope.eventId);
 
 
     }

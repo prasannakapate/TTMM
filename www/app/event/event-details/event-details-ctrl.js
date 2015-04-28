@@ -16,7 +16,7 @@
         ////////////////
 
         $scope.eventId = $stateParams.id;
-        console.log("Event Id:", $scope.eventId);
+        console.log("Event Id EventDetailsCtrl:", $scope.eventId);
 
         function showDetails() {
             console.log("Show Details");

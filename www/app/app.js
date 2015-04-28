@@ -40,7 +40,7 @@
                     templateUrl: 'app/event/event-details/event-details.html'
                 })
                 .state('event-edit', {
-                    url: '/events/edit-event/:id',
+                    url: '/events/event-details/:id/edit',
                     templateUrl: 'app/event/edit-event/edit-event.html'
                 })
 

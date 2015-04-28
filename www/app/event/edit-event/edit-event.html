@@ -1,10 +1,11 @@
-<ion-view ng-controller="EditEventCtrl as vm">
+<ion-view ng-controller="EditEventCtrl">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
-            <button class="button  button-clear icon ion-chevron-left"
-                    ui-sref="tab.events"> Back
-            </button>
-            <h1 class="title">Edit {{vm.title}}</h1>
+            <a class="button  button-clear icon ion-chevron-left"
+                    href="#/events/event-details/{{eventId}}"> Back
+            </a>
+            <h1 class="title">Edit {{title}}</h1>
+            <a class="button" ng-click="removeEvent()">Remove <i class="icon ion-trash-a"></i></a>
         </div>
     </ion-header-bar>
 
@@ -12,7 +13,6 @@
         <div class="list card">
 
             <div class="item item-avatar">
-                <img src="mcfly.jpg">
 
                 <h2>Marty McFly</h2>
 
@@ -20,7 +20,6 @@
             </div>
 
             <div class="item item-body">
-                <img class="full-image" src="delorean.jpg">
 
                 <p>
                     This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
