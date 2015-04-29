@@ -6,11 +6,8 @@
 
     EventDetailsCtrl.$inject = ['$scope', '$state', '$stateParams', 'eventsDataApi'];
 
-    /* @ngInject */
     function EventDetailsCtrl($scope, $state, $stateParams, eventsDataApi) {
-        /* jshint validthis: true */
-        
-        $scope.eventDetails = '';
+
         $scope.eventId = '';
         
         ////////////////

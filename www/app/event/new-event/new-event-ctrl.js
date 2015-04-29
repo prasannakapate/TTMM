@@ -9,7 +9,6 @@
 
     function NewEventCtrl($scope, $state, eventsDataApi) {
 
-        $scope.title = '';
         $scope.createNewEvent = createNewEvent;
 
         ////////////////

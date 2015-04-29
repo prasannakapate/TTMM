@@ -4,50 +4,44 @@
             <a class="button  button-clear icon ion-chevron-left"
                     href="#/events/event-details/{{eventId}}"> Back
             </a>
-            <h1 class="title">Edit {{title}}</h1>
-            <a class="button" ng-click="removeEvent()">Remove <i class="icon ion-trash-a"></i></a>
+            <h1 class="title">Edit Event</h1>
+            <a class="button" ng-click="removeEvent()">remove <i class="icon ion-trash-a"></i></a>
         </div>
     </ion-header-bar>
 
     <ion-content>
-        <div class="list card">
-
-            <div class="item item-avatar">
-
-                <h2>Marty McFly</h2>
-
-                <p>November 05, 1955</p>
+        <form>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Event Name</span>
+                    <input type="text" placeholder="event name" ng-model="event.eventName">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Description</span>
+                    <input type="text" placeholder="description" ng-model="event.eventDescription">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Expected Budget</span>
+                    <input list="budget-amount" placeholder="amount" ng-model="event.budgetAmount">
+                    <datalist id="budget-amount">
+                        <option value="100 - 1000 /-Rs"></option>
+                        <option value="1000 - 2000 /-Rs"></option>
+                    </datalist>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">End Time</span>
+                    <input type="datetime-local" ng-model="event.date">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Contributors</span>
+                    <input type="text" placeholder="contacts" ng-model="event.eventContributors">
+                </label>
+                <br/>
+                <center>
+                    <button class="button button-royal" ng-click="editEvent(event)"><i class="ion-clock"></i> Edit Event</button>
+                    <button class="button button-stable" type="reset">Clear</button>
+                </center>
             </div>
-
-            <div class="item item-body">
-
-                <p>
-                    This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-                    the content is from a card-body consisting of an image and paragraph text. The footer
-                    consists of tabs, icons aligned left, within the card-footer.
-                </p>
-
-                <p>
-                    <a href="#" class="subdued">1 Like</a>
-                    <a href="#" class="subdued">5 Comments</a>
-                </p>
-            </div>
-
-            <div class="item tabs tabs-secondary tabs-icon-left">
-                <a class="tab-item" href="#">
-                    <i class="icon ion-thumbsup"></i>
-                    Like
-                </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ion-chatbox"></i>
-                    Comment
-                </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ion-share"></i>
-                    Share
-                </a>
-            </div>
-
-        </div>
+        </form>
     </ion-content>
 </ion-view>

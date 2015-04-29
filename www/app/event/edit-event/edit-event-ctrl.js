@@ -15,14 +15,14 @@
         ////////////////
 
         $scope.eventId = $stateParams.id;
+        console.log("From Edit EventCtrl=", $scope.eventId);
 
         $scope.removeEvent = function() {
             eventsDataApi.removeEvent($scope.eventId);
              	$state.go('tab.events');
-	            console.log('Remove Event Is Called');
 	            console.log("Item is removed");
         }
-        console.log("From Edit EventCtrl=", $scope.eventId);
+
 
 
     }
