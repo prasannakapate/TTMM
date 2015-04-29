@@ -5,9 +5,9 @@
         .module('ttmmApp')
         .controller('NewEventCtrl', NewEventCtrl);
 
-    NewEventCtrl.$inject = ['$scope', '$state', 'newEventApi'];
+    NewEventCtrl.$inject = ['$scope', '$state', 'eventsDataApi'];
 
-    function NewEventCtrl($scope, $state, newEventApi) {
+    function NewEventCtrl($scope, $state, eventsDataApi) {
 
         $scope.title = '';
         $scope.createNewEvent = createNewEvent;
@@ -15,7 +15,7 @@
         ////////////////
         function createNewEvent(event) {
             console.log("Create New Event Called", event)
-            newEventApi.createNewEvent(event).then(function(data) {
+            eventsDataApi.createNewEvent(event).then(function(data) {
                 $state.go('tab.events');
             });
         }

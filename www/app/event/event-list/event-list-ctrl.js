@@ -3,11 +3,11 @@
     angular
         .module("ttmmApp")
         .controller("EventListCtrl", EventListCtrl);
-    EventListCtrl.$inject = ['$scope', 'eventListApi'];
+    EventListCtrl.$inject = ['$scope', 'eventsDataApi'];
 
-    function EventListCtrl($scope, eventListApi) {
+    function EventListCtrl($scope, eventsDataApi) {
 
-        eventListApi.getEventList().then(function (data) {
+        eventsDataApi.getEventList().then(function (data) {
             $scope.events = data.results;
             console.log("Event List =", $scope.events);
         });

@@ -4,10 +4,10 @@
         .module('ttmmApp')
         .controller('EventDetailsCtrl', EventDetailsCtrl);
 
-    EventDetailsCtrl.$inject = ['$scope', '$state', '$stateParams', 'eventListApi'];
+    EventDetailsCtrl.$inject = ['$scope', '$state', '$stateParams', 'eventsDataApi'];
 
     /* @ngInject */
-    function EventDetailsCtrl($scope, $state, $stateParams, eventListApi) {
+    function EventDetailsCtrl($scope, $state, $stateParams, eventsDataApi) {
         /* jshint validthis: true */
         
         $scope.eventDetails = '';
@@ -22,7 +22,7 @@
             console.log("Show Details");
         }
 
-        eventListApi.getEventList().then(function(data) {
+        eventsDataApi.getEventList().then(function(data) {
             $scope.eventDetails = _(data.results).chain()
                 .find({
                     'objectId': $scope.eventId
