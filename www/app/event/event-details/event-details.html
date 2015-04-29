@@ -10,13 +10,13 @@
     <ion-content>
         <div class="list card" ng-model="vm.eventDetails">
             <div class="item item-avatar">
-                <img ng-src="{{vm.eventDetails.photo.url}}">
+                <img ng-src="{{eventDetails.photo.url}}">
                 <p>{{eventDetails.eventDescription}}</p>
                 <p>Expected Budget = 12000 /-</p>
                 <p>{{eventDetails.createdAt | date:'MM/dd/yyyy @ h:mma'}}</p>
             </div>
             <div class="item">
-                <b>Contributors List</b>
+                <b>Contributors List </b><a class="button button-icon icon ion-more pull-right"></a>
                 <div class="row">
                     <div class="col col-75">Prasanna kapate</div>
                     <div class="col">In <i class="balanced ion-checkmark"></i></div>
