@@ -20,13 +20,13 @@
                     <span class="input-label">Expected Budget</span>
                     <input list="budget-amount" placeholder="amount" ng-model="event.budgetAmount">
                     <datalist id="budget-amount">
-                        <option value="100 - 1000 /-Rs"></option>
-                        <option value="1000 - 2000 /-Rs"></option>
+                        <option value="1000"></option>
+                        <option value="2000"></option>
                     </datalist>
                 </label>
                 <label class="item item-input">
                     <span class="input-label">End Time</span>
-                    <input type="datetime-local" ng-model="event.date">
+                    <input type="date" ng-model="event.endDate">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Contributors</span>

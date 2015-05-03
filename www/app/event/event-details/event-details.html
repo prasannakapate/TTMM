@@ -4,7 +4,7 @@
             <button class="button  button-clear icon ion-chevron-left" ui-sref="tab.events"> Back
             </button>
             <h1 class="title">{{eventDetails.eventName }}</h1>
-            <a class="button" href="#/events/event-details/{{eventId}}/edit">edit <i class="button-icon icon ion-edit"></i></a>
+            <a class="button button-icon ion-edit" href="#/events/event-details/{{eventId}}/edit"></a>
         </div>
     </ion-header-bar>
     <ion-content>
@@ -12,8 +12,8 @@
             <div class="item item-avatar">
                 <img ng-src="{{eventDetails.photo.url}}">
                 <p>{{eventDetails.eventDescription}}</p>
-                <p>Expected Budget = 12000 /-</p>
-                <p>{{eventDetails.createdAt | date:'MM/dd/yyyy @ h:mma'}}</p>
+                <p>Expected Budget = {{eventDetails.budgetAmount}} /-</p>
+                <p>{{eventDetails.endDate | date:'MM/dd/yyyy @ h:mma'}}</p>
             </div>
             <div class="item">
                 <b>Contributors List </b><a class="button button-icon icon ion-more pull-right"></a>

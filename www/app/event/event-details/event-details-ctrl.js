@@ -24,7 +24,7 @@
                 .find({
                     'objectId': $scope.eventId
                 })
-                .pick('eventName', 'eventDescription', 'createdAt', 'photo')
+                .pick('eventName', 'eventDescription', 'createdAt', 'photo','budgetAmount','endDate')
                 .value();
         });
     }
