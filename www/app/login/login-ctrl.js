@@ -19,10 +19,8 @@
     LoginCtrl.$inject = ['$state', '$scope', 'LoginApi', '$cookieStore'];
 
     function LoginCtrl($state, $scope, LoginApi, $cookieStore) {
-        var vm = this;
-        vm.signIn = signIn;
 
-        function signIn(user) {
+        $scope.signIn = function(user) {
             console.log("User Data=", user);
             $state.go('tab.events');
         }

@@ -53,7 +53,6 @@
         }
 
         function removeEvent(id) {
-
             var deffered = $q.defer();
             $http.delete('https://api.parse.com/1/classes/Events/' + id, {
                 headers: {

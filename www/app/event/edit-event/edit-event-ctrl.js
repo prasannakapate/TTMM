@@ -5,9 +5,9 @@
         .module('ttmmApp')
         .controller('EditEventCtrl', EditEventCtrl);
 
-    EditEventCtrl.$inject = ['$scope', '$state', '$stateParams', '$ionicPopup', 'eventsDataApi'];
+    EditEventCtrl.$inject = ['$scope', '$state', '$stateParams', '$rootScope', '$ionicPopup', 'eventsDataApi'];
 
-    function EditEventCtrl($scope, $state, $stateParams, $ionicPopup, eventsDataApi) {
+    function EditEventCtrl($scope, $state, $stateParams, $rootScope, $ionicPopup, eventsDataApi) {
 
         $scope.eventDetails = '';
         $scope.eventId = '';
@@ -34,7 +34,13 @@
                 eventDescription: $scope.eventDetails.eventDescription,
                 budgetAmount: $scope.eventDetails.budgetAmount
             }).then(function() {
-                $state.go('tab.events');
+                eventsDataApi.getEventList().then(function(data) {
+                    $rootScope.events = data.results;
+                    $state.go('tab.events');
+
+                    //console.log("Event List =", $rootScope.events);
+                });
+
             });
         }
 
@@ -47,19 +53,20 @@
             });
             confirmPopup.then(function(res) {
                 if (res) {
-                    eventsDataApi.removeEvent($scope.eventId);
-                    $state.go('tab.events');
-                    console.log("Item is removed");
+                    eventsDataApi.removeEvent($scope.eventId).then(function() {
+                        eventsDataApi.getEventList().then(function(data) {
+                            $rootScope.events = data.results;
+                            console.log("Data list=" + $rootScope.events);
+                            $state.go('tab.events');
+                            console.log("Item is removed");
+                        });
+                    });
 
                 } else {
                     console.log('You are not sure');
                 }
             });
         };
-
-
-
-
 
     }
 })();

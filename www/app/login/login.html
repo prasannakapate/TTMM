@@ -1,4 +1,4 @@
-<ion-view ng-controller="LoginCtrl as vm">
+<ion-view ng-controller="LoginCtrl">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
             <h1 class="title">TTMM</h1>
@@ -6,7 +6,7 @@
     </ion-header-bar>
     <ion-content>
         <div class="list">
-            <button class="button button-block button-assertive button-outline" ng-click="vm.signIn(user)">
+            <button class="button button-block button-assertive button-outline" ng-click="signIn(user)">
                 <i class="ion-social-googleplus"> </i> sign in with google
             </button>
             <button class="button button-block button-positive button-outline" ng-click="fbLogin()"">
