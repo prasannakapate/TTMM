@@ -1,7 +1,7 @@
 <ion-view ng-controller="EventDetailsCtrl">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
-            <button class="button  button-clear icon ion-chevron-left" ui-sref="tab.events"> Back
+            <button class="button button-clear icon ion-chevron-left" ui-sref="tab.events"> Back
             </button>
             <h1 class="title">{{eventDetails.eventName }}</h1>
             <a class="button button-icon ion-edit" href="#/events/event-details/{{eventId}}/edit"></a>
@@ -16,7 +16,14 @@
                 <p>{{eventDetails.endDate | date:'MM/dd/yyyy @ h:mma'}}</p>
             </div>
             <div class="item">
-                <b>Contributors List </b><a class="button button-icon icon ion-more pull-right"></a>
+                <div class="row">
+                    <div class="col col-75"><b>Contributors List</b> </div>
+                    <div class="col">
+                        <a class="button button-small button-outline button-icon icon ion-plus"> Add</a>
+                        </i>
+                    </div>
+                </div>
+                <div class="clear-fix"></div>
                 <div class="row">
                     <div class="col col-75">Prasanna kapate</div>
                     <div class="col">In <i class="balanced ion-checkmark"></i></div>
