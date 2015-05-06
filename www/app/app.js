@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('ttmmApp', ['ionic', 'ngSanitize', 'ngCookies'])
+        .module('ttmmApp', ['ionic', 'ngSanitize', 'ngCookies', 'ngCordova'])
 
     .run(function($ionicPlatform) {
             $ionicPlatform.ready(function() {
@@ -29,7 +29,7 @@
                 .state('app', {
                     url: "/app/login",
                     templateUrl: "app/login/login.html"
-            })
+                })
 
             .state('new-event', {
                     url: '/new-event',
