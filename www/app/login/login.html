@@ -1,17 +1,19 @@
-<ion-view ng-controller="LoginCtrl">
-    <ion-header-bar class="bar-royal">
-        <div class="buttons">
-            <h1 class="title">TTMM</h1>
-        </div>
-    </ion-header-bar>
+<ion-view ng-controller="LoginCtrl" class="bg-image">
     <ion-content>
         <div class="list">
-            <button class="button button-block button-assertive button-outline" ng-click="signIn(user)">
+            <br/><br/><br/><br/>
+            <center >
+                    <h1 class="white-text">ttmm</h1>
+                    <h5 class="white-text">your money will always be yours</h5>
+            </center>
+            <br/><br/>
+            <button class="button button-block button-assertive white-text" ng-click="signIn(user)">
                 <i class="ion-social-googleplus"> </i> sign in with google
             </button>
-            <button class="button button-block button-positive button-outline" ng-click="fbLogin()"">
+            <button class="button button-block button-positive white-text" ng-click="fbLogin()">
                 <i class="ion-social-facebook"> </i> sign in with facebook
             </button>
+       
         </div>
     </ion-content>
 </ion-view>

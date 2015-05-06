@@ -17,8 +17,8 @@
             var  deffered = $q.defer();
             $http.post('https://api.parse.com/1/classes/User',data,{
                 header:{
-                    'X-Parse-Application-Id': 'mF8l9ob91ObHNIgzfX8tnzD8WKcRJGyUkYxm45o4',
-                    'X-Parse-REST-API-Key': 'l8qZLpxhTxZWZYmfJZJu3r5fvwcJcHGYTe7w6igT',
+                    'X-Parse-Application-Id': key.appid,
+                    'X-Parse-REST-API-Key': key.restid,
                     'Content-Type': 'application/json'
                 }
             }).success(function (response) {
@@ -29,7 +29,6 @@
                 deffered.reject(error, status);
             })
             return deffered.promise;
-
         }
     }
 

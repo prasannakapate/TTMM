@@ -1,1 +1,9 @@
 /* Empty. Add your own CSS if you like */
+.bg-image {
+    background-image: url("../img/bg.jpg");
+    background-repeat: no-repeat;
+}
+.white-text{
+	color:white;
+	font-family: "Verdana";
+}
