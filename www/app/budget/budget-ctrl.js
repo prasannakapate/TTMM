@@ -1,11 +1,14 @@
 (function() {
     'use strict';
-    angular
-        .module("ttmmApp")
-        .controller("EventListCtrl", EventListCtrl);
-    EventListCtrl.$inject = ['$rootScope', 'eventsDataApi'];
 
-    function EventListCtrl($rootScope, eventsDataApi) {
+    angular
+        .module('ttmmApp')
+        .controller('BudgetCtrl', BudgetCtrl);
+
+    BudgetCtrl.$inject = ['$scope', '$rootScope', 'eventsDataApi'];
+
+    function BudgetCtrl($scope, $rootScope, eventsDataApi) {
+        $scope.title = 'Budget';
 
         activate();
 

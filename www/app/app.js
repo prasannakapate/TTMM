@@ -65,6 +65,10 @@
                         }
                     }
                 })
+                .state('budget-details',{
+                    url:'/budget/budget-details/:id',
+                    templateUrl:'app/budget/budget-details/budget-details.html'
+                })
 
             .state('tab.account', {
                     url: '/account',
