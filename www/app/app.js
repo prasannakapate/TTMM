@@ -31,7 +31,7 @@
                     templateUrl: "app/login/login.html"
                 })
 
-            .state('new-event', {
+                .state('new-event', {
                     url: '/new-event',
                     templateUrl: 'app/event/new-event/new-event.html'
                 })
@@ -44,7 +44,7 @@
                     templateUrl: 'app/event/edit-event/edit-event.html'
                 })
 
-            .state('tab', {
+                .state('tab', {
                     url: "/tab",
                     abstract: true,
                     templateUrl: "app/layout/tabs.html"
@@ -54,6 +54,14 @@
                     views: {
                         'tab-events': {
                             templateUrl: 'app/event/event-list/event-list.html'
+                        }
+                    }
+                })
+                .state('tab.makeExpense', {
+                    url: '/makeExpense',
+                    views: {
+                        'tab-events': {
+                            templateUrl: 'app/expense/make-expense/make-expense.html'
                         }
                     }
                 })
@@ -70,7 +78,7 @@
                     templateUrl:'app/budget/budget-details/budget-details.html'
                 })
 
-            .state('tab.account', {
+                .state('tab.account', { 
                     url: '/account',
                     views: {
                         'tab-account': {
