@@ -60,7 +60,7 @@
                 .state('tab.makeExpense', {
                     url: '/makeExpense',
                     views: {
-                        'tab-events': {
+                        'tab-makeExpense': {
                             templateUrl: 'app/expense/make-expense/make-expense.html'
                         }
                     }

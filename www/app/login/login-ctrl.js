@@ -60,7 +60,7 @@
                         }
                         user.profilePic = picResponse.data.url;
                         $cookieStore.put('userInfo', user);
-                        $state.go('tab.events');
+                        $state.go('tab.makeExpense');
 
                     });
                 });
