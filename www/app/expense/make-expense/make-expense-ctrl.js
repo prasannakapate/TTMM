@@ -5,19 +5,13 @@
         .module('ttmmApp')
         .controller('MakeExpenseCtrl', MakeExpenseCtrl);
 
-    MakeExpenseCtrl.$inject = ['$scope','expenseDataApi'];
+    MakeExpenseCtrl.$inject = ['$scope', 'expenseDataApi'];
 
-    /* @ngInject */
-    function MakeExpenseCtrl($scope) {
-        var vm = this;
-        vm.title = 'MakeExpenseCtrl';
+    function MakeExpenseCtrl($scope, expenseDataApi) {
 
-        activate();
+        $scope.makeExpense = makeExpense;
 
         ////////////////
-
-        function activate() {
-        }
 
         function makeExpense(expense) {
             console.log("makeExpense Called", expense);

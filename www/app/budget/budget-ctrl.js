@@ -5,16 +5,16 @@
         .module('ttmmApp')
         .controller('BudgetCtrl', BudgetCtrl);
 
-    BudgetCtrl.$inject = ['$scope', '$rootScope', 'eventsDataApi'];
+    BudgetCtrl.$inject = ['$scope', '$rootScope', 'expenseDataApi'];
 
-    function BudgetCtrl($scope, $rootScope, eventsDataApi) {
+    function BudgetCtrl($scope, $rootScope, expenseDataApi) {
         $scope.title = 'Budget';
-
+        $rootScope.expenses = '';
         activate();
 
         function activate() {
-            eventsDataApi.getEventList().then(function(data) {
-                $rootScope.events = data.results;
+            expenseDataApi.getExpenseList().then(function(data) {
+                $rootScope.expenses = data.results;
             });
         }
     }
