@@ -31,7 +31,7 @@
             }).error(function(error, status) {
                 console.log("getEventList Data Error");
                 deffered.reject(error, status);
-            })
+            });
             return deffered.promise;
         }
 
@@ -48,7 +48,7 @@
             }).error(function(error, status) {
                 deffered.reject(error, status);
                 console.log("create new event error");
-            })
+            });
             return deffered.promise;
         }
 
@@ -65,7 +65,7 @@
             }).error(function(error, status) {
                 console.log("Data delete error");
                 deffered.reject(error, status);
-            })
+            });
             return deffered.promise;
         }
 
@@ -82,7 +82,7 @@
             }).error(function(error, status) {
                 console.log("Data edit error");
                 deffered.reject(error, status);
-            })
+            });
             return deffered.promise;
         }
 

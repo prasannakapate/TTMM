@@ -10,6 +10,7 @@
     function BudgetCtrl($scope, $rootScope, expenseDataApi) {
         $scope.title = 'Budget';
         $rootScope.expenses = '';
+        $scope.totalAmountByMonth = totalAmountByMonth;
         activate();
 
         function activate() {
@@ -17,5 +18,11 @@
                 $rootScope.expenses = data.results;
             });
         }
+
+        function totalAmountByMonth(){
+            var expenseAmount = expenses.expenseAmount + expenseAmount;
+            console.log(expenseAmount);
+        }
+        //console.log("Expense Amount",expenseAmount);
     }
 })();

@@ -11,16 +11,17 @@
                <h2 class="text-balanced">Monthly Expenses</h2>
             </div>
             <a class="item item-icon-right" ng-repeat="expense in expenses | orderBy: '-createdAt'" 
-                href="#/budget/budget-details/{{expense.objectId}}"> {{expense.expenseName}}
+                href="#/budget/budget-details/{{expense.objectId}}"> {{expense.expenseName}} - {{expense.expenseAmount}}<br/>
+                <small>{{expense.expenseDate | date:"MM/dd/yyyy"}}</small>
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
             
-            <a class="item item-icon-right" href="#"> August
+           <!--  <a class="item item-icon-right" href="#"> August
                 <i class="icon icon-accessory ion-chevron-right ion-assertive"></i>
             </a>
             <a class="item item-icon-right" href="#"> September 
                 <i class="icon icon-accessory ion-chevron-right"></i>
-            </a>
+            </a> -->
         </div>
     </ion-content>
 </ion-view>
