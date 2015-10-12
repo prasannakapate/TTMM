@@ -13,7 +13,7 @@
 
         ////////////////
         function createNewEvent(event) {
-            console.log("Create New Event Called", event)
+            console.log("Create New Event Called", event);
             eventsDataApi.createNewEvent(event).then(function(data) {
                 eventsDataApi.getEventList().then(function(data) {
                     $rootScope.events = data.results;

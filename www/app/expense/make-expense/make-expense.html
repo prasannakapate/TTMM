@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view ng-controller="MakeExpenseCtrl">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
             <b>TTMM</b>
@@ -10,23 +10,23 @@
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">Expense For</span>
-                    <input type="text" placeholder="event name" ng-model="eventDetails.eventName">
+                    <input type="text" placeholder="event name" ng-model="expense.expenseName">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Description</span>
-                    <input type="text" placeholder="description" ng-model="eventDetails.eventDescription">
+                    <input type="text" placeholder="description" ng-model="expense.expenseDescription">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Spend Amount</span>
-                    <input type="text" placeholder="amount" ng-model="eventDetails.budgetAmount">
+                    <input type="text" placeholder="amount" ng-model="expense.expenseAmount">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Date</span>
-                    <input type="date" ng-model="eventDetails.endDate">
+                    <input type="date" ng-model="expense.expenseDate">
                 </label>
                 <br/>
                 <center>
-                    <button class="button button-royal" ng-click="editEvent()"><i class="ion-clock"></i> Make Expense</button>
+                    <button class="button button-royal" ng-click="makeExpense(expense)"><i class="ion-clock"></i> Make Expense</button>
                     <button class="button button-stable" type="reset">Clear</button>
                 </center>
             </div>

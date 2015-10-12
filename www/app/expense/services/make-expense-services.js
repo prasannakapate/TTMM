@@ -3,16 +3,16 @@
 
     angular
         .module('ttmmApp')
-        .factory('eventsDataApi', eventsDataApi);
+        .factory('expenseDataApi', expenseDataApi);
 
-    eventsDataApi.$inject = ['$http', '$q'];
+    expenseDataApi.$inject = ['$http', '$q'];
 
-    function eventsDataApi($http, $q) {
+    function expenseDataApi($http, $q) {
         var service = {
             getExpenseList: getExpenseList,
-            makeExpense: createNewEvent,
-            removeExpense: removeEvent,
-            editExpense: editEvent
+            makeExpense: makeExpense,
+            removeExpense: removeExpense,
+            editExpense: editExpense
         };
         return service;
 
@@ -35,26 +35,26 @@
             return deffered.promise;
         }
 
-        function createNewEvent(eventData) {
+        function makeExpense(expenseData) {
             var deffered = $q.defer();
-            $http.post('https://api.parse.com/1/classes/Events', eventData, {
+            $http.post('https://api.parse.com/1/classes/Expenses', expenseData, {
                 headers: {
                     'X-Parse-Application-Id':  key.appid,
                     'X-Parse-REST-API-Key':  key.restid
                 }
             }).success(function(response) {
                 deffered.resolve(response);
-                console.log("create new event success");
+                console.log("make new expense success");
             }).error(function(error, status) {
                 deffered.reject(error, status);
-                console.log("create new event error");
+                console.log("make new expense success");
             });
             return deffered.promise;
         }
 
-        function removeEvent(id) {
+        function removeExpense(id) {
             var deffered = $q.defer();
-            $http.delete('https://api.parse.com/1/classes/Events/' + id, {
+            $http.delete('https://api.parse.com/1/classes/Expenses/' + id, {
                 headers: {
                     'X-Parse-Application-Id':  key.appid,
                     'X-Parse-REST-API-Key':  key.restid
@@ -69,9 +69,9 @@
             return deffered.promise;
         }
 
-        function editEvent(id, data) {
+        function editExpense(id, data) {
             var deffered = $q.defer();
-            $http.put('https://api.parse.com/1/classes/Events/' + id, data, {
+            $http.put('https://api.parse.com/1/classes/Expenses/' + id, data, {
                headers: {
                     'X-Parse-Application-Id':  key.appid,
                     'X-Parse-REST-API-Key':  key.restid
