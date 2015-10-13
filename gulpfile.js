@@ -11,7 +11,7 @@ var paths = {
     sass: ['./scss/**/*.scss']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'scripts']);
 
 gulp.task('sass', function(done) {
     gulp.src('./scss/ionic.app.scss')
@@ -25,6 +25,12 @@ gulp.task('sass', function(done) {
         }))
         .pipe(gulp.dest('./www/css/'))
         .on('end', done);
+});
+
+gulp.task('scripts', function() {
+    gulp.src('./www/app/**/*.js') // path to your files
+        .pipe(concat('all.js')) // concat and name it "concat.js"
+        .pipe(gulp.dest('./build'));
 });
 
 gulp.task('watch', function() {
@@ -50,3 +56,5 @@ gulp.task('git-check', function(done) {
     }
     done();
 });
+
+
