@@ -11,18 +11,25 @@
         $scope.title = 'Budget';
         $rootScope.expenses = '';
         $scope.totalAmountByMonth = totalAmountByMonth;
+
         activate();
 
         function activate() {
             expenseDataApi.getExpenseList().then(function(data) {
-                $rootScope.expenses = data.results;
+                $rootScope.expenses = _(data.results).chain()
+                    .groupBy('expenseMonth')
+                    .pairs()
+                    .map(function(currentItem) {
+                        return _.object(_.zip(["month", "expenseDetails"], currentItem));
+                    })
+                    .value();
+
+                console.log("groupBy", $rootScope.expenses);
+                //$rootScope.expenses = data.results;
             });
         }
 
-        function totalAmountByMonth(){
-            var expenseAmount = expenses.expenseAmount + expenseAmount;
-            console.log(expenseAmount);
-        }
+        function totalAmountByMonth() {}
         //console.log("Expense Amount",expenseAmount);
     }
 })();

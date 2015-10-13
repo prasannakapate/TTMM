@@ -10,10 +10,10 @@
             <div class="item item-divider item-energized">
                <h2 class="text-balanced">Monthly Expenses</h2>
             </div>
-            <a class="item item-icon-right" ng-repeat="expense in expenses | orderBy: '-createdAt'" 
-                href="#/budget/budget-details/{{expense.objectId}}"> 
-                {{expense.expenseMonth}}<br>
-                <small>Total Expenses = </small>
+            <a class="item item-icon-right" ng-repeat="expense in expenses " 
+                href="#/budget/budget-details/{{expense.month}}"> 
+                {{expense.month}} &nbsp;&nbsp;&nbsp;&nbsp;
+                <small class="pull-right">Total Expenses = </small>
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
             
