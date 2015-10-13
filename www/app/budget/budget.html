@@ -11,8 +11,8 @@
                <h2 class="text-balanced">Monthly Expenses</h2>
             </div>
             <a class="item item-icon-right" ng-repeat="expense in expenses | orderBy: '-createdAt'" 
-                href="#/budget/budget-details/{{expense.objectId}}"> {{expense.expenseName}} - {{expense.expenseAmount}}<br/>
-                <small>{{expense.expenseDate | date:"MM/dd/yyyy"}}</small>
+                href="#/budget/budget-details/{{expense.objectId}}"> {{expense.expenseDate | date:'MMMM-yyyy'}}<br>
+                <small>Total Expenses = </small>
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
             

@@ -5,8 +5,11 @@
         .module('ttmmApp')
         .controller('BudgetDetailsCtrl', BudgetDetailsCtrl);
 
-    BudgetDetailsCtrl.$inject = ['$scope'];
-    function BudgetDetailsCtrl($scope) {
+    BudgetDetailsCtrl.$inject = ['$scope', '$stateParams'];
+
+    function BudgetDetailsCtrl($scope, $stateParams) {
+        $scope.expenseId = $stateParams.id;
+        console.log("stateParams = ", $scope.expenseId);
         $scope.pendingTitle = 'Pending Contributors';
 
     }

@@ -10,19 +10,34 @@
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">Expense For</span>
-                    <input type="text" placeholder="event name" ng-model="expense.expenseName">
+                    <input type="text" placeholder="expense name" ng-model="expense.expenseName">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Description</span>
-                    <input type="text" placeholder="description" ng-model="expense.expenseDescription">
+                    <input type="text" placeholder="expense description" ng-model="expense.expenseDescription">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Spend Amount</span>
-                    <input type="text" placeholder="amount" ng-model="expense.expenseAmount">
+                    <span class="input-label">Spent Amount</span>
+                    <input type="text" placeholder="expense amount" ng-model="expense.expenseAmount">
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Date</span>
-                    <input type="date" ng-model="expense.expenseDate">
+                <label class="item item-input item-select">
+                    <span class="input-label">Expense Month</span>
+                    <select ng-model="expense.expenseDate">
+                        <option>--select--</option>
+                        <option>Jan</option>
+                        <option>Feb</option>
+                        <option>Mar</option>
+                        <option>Apr</option>
+                        <option>May</option>
+                        <option>Jun</option>
+                        <option>Jul</option>
+                        <option>Aug</option>
+                        <option>Sep</option>
+                        <option>Oct</option>
+                        <option>Nov</option>
+                        <option>Dec</option>
+
+                    </select>
                 </label>
                 <br/>
                 <center>
