@@ -10,15 +10,19 @@
     function BudgetDetailsCtrl($scope, $stateParams, expenseDataApi) {
         $scope.expenseMonth = $stateParams.id;
         $scope.expenseDetails = '';
+        $scope.totalMonthlySum = '';
         console.log("stateParams = ", $scope.expenseMonth);
 
         expenseDataApi.getExpenseList().then(function(data) {
-                $scope.expenseDetails = _(data.results).chain()
+            $scope.expenseDetails = _(data.results).chain()
                 .where({
                     'expenseMonth': $scope.expenseMonth
                 })
                 .value();
-            });
+
+            $scope.totalMonthlySum = _.sum($scope.expenseDetails, 'expenseAmount');
+                console("totalMonthlySum",$scope.totalMonthlySum );
+        });
     }
 })();
 
