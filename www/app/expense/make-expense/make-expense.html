@@ -1,7 +1,7 @@
 <ion-view ng-controller="MakeExpenseCtrl">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
-            <b>TTMM</b>
+            <b>meTrack</b>
             <h1 class="title">Make Expense</h1>
         </div>
     </ion-header-bar>
@@ -22,8 +22,8 @@
                 </label>
                 <label class="item item-input item-select">
                     <span class="input-label">Expense Month</span>
-                    <select ng-model="expense.expenseDate">
-                        <option>--select--</option>
+                    <select ng-model="expense.expenseMonth">
+                        <option value="selected">--select--</option>
                         <option>Jan</option>
                         <option>Feb</option>
                         <option>Mar</option>
@@ -36,7 +36,6 @@
                         <option>Oct</option>
                         <option>Nov</option>
                         <option>Dec</option>
-
                     </select>
                 </label>
                 <br/>

@@ -8,7 +8,7 @@
     </ion-header-bar>
     <ion-content>
         <div class="list">
-            <div class="item item-button-right" ng-repeat="expense in expenseDetails">
+            <div class="item item-button-right" ng-repeat="expense in expenseDetails | orderBy: '-createdAt'">
                 <h2>{{expense.expenseName}}</h2>
                 <p>{{expense.expenseDescription}}</p>
                 <p>{{expense.expenseAmount}} /- spent.</p>
