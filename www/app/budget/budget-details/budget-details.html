@@ -3,15 +3,17 @@
         <div class="buttons">
             <button class="button button-clear icon ion-chevron-left" ui-sref="tab.budget"> Back
             </button>
-            <h1 class="title">{{expenseMonth}} Total Expenses = </h1>
+            <h1 class="title">{{expenseMonth}} </h1>
         </div>
     </ion-header-bar>
     <ion-content>
         <div class="list">
+            <div class="item item-divider">
+                Total Expenses = {{totalMonthlySum}} Rs.
+            </div>
             <div class="item item-button-right" ng-repeat="expense in expenseDetails | orderBy: '-createdAt'">
                 <h2>{{expense.expenseName}}</h2>
-                <p>{{expense.expenseDescription}}</p>
-                <p>{{expense.expenseAmount}} /- spent.</p>
+                <p>{{expense.expenseDescription}}, {{expense.expenseAmount}} /- spent.</p>
             </div>
         </div>
     </ion-content>

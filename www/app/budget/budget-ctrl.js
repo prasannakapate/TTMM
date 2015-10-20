@@ -11,7 +11,6 @@
         $scope.title = 'Budget';
         $scope.expenseGroupByMonth = '';
         $rootScope.expenses = '';
-
         activate();
 
         function activate() {

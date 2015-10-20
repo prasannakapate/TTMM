@@ -5,12 +5,12 @@
         .module('ttmmApp')
         .controller('BudgetDetailsCtrl', BudgetDetailsCtrl);
 
-    BudgetDetailsCtrl.$inject = ['$scope', '$stateParams', 'expenseDataApi'];
+    BudgetDetailsCtrl.$inject = ['$scope', '$rootScope', '$stateParams', 'expenseDataApi'];
 
-    function BudgetDetailsCtrl($scope, $stateParams, expenseDataApi) {
+    function BudgetDetailsCtrl($scope, $rootScope, $stateParams, expenseDataApi) {
         $scope.expenseMonth = $stateParams.id;
         $scope.expenseDetails = '';
-        $scope.totalMonthlySum = '';
+        $rootScope.totalMonthlySum = '';
         console.log("stateParams = ", $scope.expenseMonth);
 
         expenseDataApi.getExpenseList().then(function(data) {
@@ -20,8 +20,15 @@
                 })
                 .value();
 
-            $scope.totalMonthlySum = _.sum($scope.expenseDetails, 'expenseAmount');
-                console("totalMonthlySum",$scope.totalMonthlySum );
+            $rootScope.totalMonthlySum = _(data.results).chain()
+                .where({
+                    'expenseMonth': $scope.expenseMonth
+                })
+                .sum('expenseAmount');
+
+            // $scope.totalMonthlySum = _.sum($scope.expenseDetails, 'expenseAmount')
+            //                           .value();
+            // console("totalMonthlySum",$scope.totalMonthlySum );
         });
     }
 })();
