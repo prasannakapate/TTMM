@@ -1,16 +1,3 @@
-/* template for controller
- (function(){
- 'use strict';
- angular
- .module("ModuleName")
- .controller("ControllerName",ControllerName);
- ControllerName.$inject = [];
-
- function ControllerName(){
- var vm = this;
- }
- })();
- */
 (function() {
     'use strict';
     angular
@@ -24,8 +11,6 @@
             console.log("User Data=", user);
             $state.go('tab.events');
         }
-
-
 
         // FB Login
         $scope.fbLogin = function() {

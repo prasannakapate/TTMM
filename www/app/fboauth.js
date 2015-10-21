@@ -1,3 +1,5 @@
+'use strict';
+
 window.fbAsyncInit = function() {
     FB.init({
         appId: '1653907274837998',
