@@ -28,7 +28,7 @@ gulp.task('sass', function(done) {
 
 gulp.task('scripts', function() {
     gulp.src('./www/app/**/*.js') // path to your files
-        .pipe(concat('all.js')) // concat and name it "concat.js"
+        .pipe(concat('all.min.js')) // concat and name it "concat.js"
         .pipe(gulp.dest('./build'));
 });
 
@@ -37,7 +37,11 @@ gulp.task('watch', function() {
     gulp.watch(paths.scripts, ['scripts']);
 });
 
-gulp.task('default', ['sass','scripts']);
+gulp.task('wiredep',function(){
+
+});
+
+//////////////////////
 
 gulp.task('install', ['git-check'], function() {
     return bower.commands.install()
@@ -58,3 +62,5 @@ gulp.task('git-check', function(done) {
     }
     done();
 });
+
+gulp.task('default', ['sass','scripts']);

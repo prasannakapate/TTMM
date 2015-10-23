@@ -14,9 +14,11 @@
     "bower": "^1.6.3",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
+    "gulp-inject": "^3.0.0",
     "gulp-util": "^3.0.7",
     "node-sass": "^3.3.3",
-    "shelljs": "^0.3.0"
+    "shelljs": "^0.3.0",
+    "wiredep": "^2.2.2"
   },
   "cordovaPlugins": [],
   "cordovaPlatforms": [

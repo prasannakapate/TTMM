@@ -7,21 +7,14 @@
     </ion-header-bar>
     <ion-content>
         <div class="list">
-            <div class="item item-divider item-energized">
-               <h2 class="text-balanced">Monthly Expenses</h2>
+            <div class="item item-divider item-stable">
+               <h2 class="text-balanced"><b>Monthly Expenses</b></h2>
             </div>
-            <a class="item item-icon-right" ng-repeat="expense in expenseGroupByMonth " 
+            <a class="item item-icon-right item-divider-royal" ng-repeat="expense in expenseGroupByMonth " 
                 href="#/budget/budget-details/{{expense.month}}"> 
                 {{expense.month}}
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
-            
-           <!--  <a class="item item-icon-right" href="#"> August
-                <i class="icon icon-accessory ion-chevron-right ion-assertive"></i>
-            </a>
-            <a class="item item-icon-right" href="#"> September 
-                <i class="icon icon-accessory ion-chevron-right"></i>
-            </a> -->
         </div>
     </ion-content>
 </ion-view>

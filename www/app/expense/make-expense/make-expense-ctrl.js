@@ -17,7 +17,6 @@
             console.log("makeExpense Called", expense);
             expenseDataApi.makeExpense(expense).then(function(data) {
                 expenseDataApi.getExpenseList().then(function(data) {
-                    console.log("expense made successfully");
                     $state.go('tab.budget');
                 });
 

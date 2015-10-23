@@ -9,7 +9,7 @@
     <ion-content>
         <div class="list">
             <div class="item item-divider">
-                Total Expenses = {{totalMonthlySum}} Rs.
+                <b>Total Expenses = {{totalMonthlySum}} Rs.</b>
             </div>
             <div class="item item-button-right" ng-repeat="expense in expenseDetails | orderBy: '-createdAt'">
                 <h2>{{expense.expenseName}}</h2>
