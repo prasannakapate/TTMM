@@ -6,44 +6,46 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <form>
+        
+        <form name="makeExpenseForm" novalidate="">
             <div class="list">
-                <label class="item item-input">
+                <label class="item item-input" ng-class="{ 'has-error' : makeExpenseForm.expenseName.$invalid}">
                     <span class="input-label">Expense For</span>
-                    <input type="text" placeholder="expense name" ng-model="expense.expenseName">
+                    <input type="text" name="expenseName" ng-model="expense.expenseName" ng-minlength="2" ng-maxlength="10" required>
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Description</span>
-                    <input type="text" placeholder="expense description" ng-model="expense.expenseDescription">
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Spent Amount</span>
-                    <input type="text" placeholder="expense amount" ng-model="expense.expenseAmount">
-                </label>
-                <label class="item item-input item-select">
-                    <span class="input-label">Expense Month</span>
-                    <select ng-model="expense.expenseMonth">
-                        <option value="selected">--select--</option>
-                        <option>Jan</option>
-                        <option>Feb</option>
-                        <option>Mar</option>
-                        <option>Apr</option>
-                        <option>May</option>
-                        <option>Jun</option>
-                        <option>Jul</option>
-                        <option>Aug</option>
-                        <option>Sep</option>
-                        <option>Oct</option>
-                        <option>Nov</option>
-                        <option>Dec</option>
-                    </select>
-                </label>
-                <br/>
-                <center>
-                    <button class="button button-royal" ng-click="makeExpense(expense)"><i class="ion-clock"></i> Make Expense</button>
-                    <button class="button button-stable" type="reset">Clear</button>
-                </center>
-            </div>
+                <div class="form-errors" ng-messages="makeExpenseForm.expenseName.$error">
+                    <label class="item item-input">
+                        <span class="input-label">Description</span>
+                        <input type="text" placeholder="expense description" ng-model="expense.expenseDescription" required>
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Spent Amount</span>
+                        <input type="text" placeholder="expense amount" ng-model="expense.expenseAmount" required>
+                    </label>
+                    <label class="item item-input item-select">
+                        <span class="input-label">Expense Month</span>
+                        <select ng-model="expense.expenseMonth" required>
+                            <option value="selected">--select--</option>
+                            <option>Jan</option>
+                            <option>Feb</option>
+                            <option>Mar</option>
+                            <option>Apr</option>
+                            <option>May</option>
+                            <option>Jun</option>
+                            <option>Jul</option>
+                            <option>Aug</option>
+                            <option>Sep</option>
+                            <option>Oct</option>
+                            <option>Nov</option>
+                            <option>Dec</option>
+                        </select>
+                    </label>
+                    <br/>
+                    <center>
+                        <button class="button button-royal" ng-click="makeExpense(expense)"><i class="ion-clock"></i> Make Expense</button>
+                        <button class="button button-stable" type="reset">Clear</button>
+                    </center>
+                </div>
         </form>
     </ion-content>
 </ion-view>

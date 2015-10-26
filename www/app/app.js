@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('ttmmApp', ['ionic', 'ngSanitize', 'ngCookies', 'ngCordova'])
+        .module('ttmmApp', ['ionic', 'ngSanitize', 'ngCookies', 'ngCordova', 'ngMessages'])
 
     .run(function($ionicPlatform) {
             $ionicPlatform.ready(function() {
@@ -31,7 +31,7 @@
                     templateUrl: "app/login/login.html"
                 })
 
-                .state('new-event', {
+            .state('new-event', {
                     url: '/new-event',
                     templateUrl: 'app/event/new-event/new-event.html'
                 })
@@ -44,7 +44,7 @@
                     templateUrl: 'app/event/edit-event/edit-event.html'
                 })
 
-                .state('tab', {
+            .state('tab', {
                     url: "/tab",
                     abstract: true,
                     templateUrl: "app/layout/tabs.html"
@@ -73,12 +73,12 @@
                         }
                     }
                 })
-                .state('budget-details',{
-                    url:'/budget/budget-details/:id',
-                    templateUrl:'app/budget/budget-details/budget-details.html'
+                .state('budget-details', {
+                    url: '/budget/budget-details/:id',
+                    templateUrl: 'app/budget/budget-details/budget-details.html'
                 })
 
-                .state('tab.account', { 
+            .state('tab.account', {
                     url: '/account',
                     views: {
                         'tab-account': {

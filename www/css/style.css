@@ -7,3 +7,7 @@
 	color:white;
 	font-family: "Verdana";
 }
+
+label.item.has-error {
+  border-bottom: 2px solid red;
+}
