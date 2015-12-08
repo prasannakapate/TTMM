@@ -12,7 +12,7 @@
             </div>
             <a class="item item-icon-right item-divider-royal" ng-repeat="expense in expenseGroupByMonth " 
                 href="#/budget/budget-details/{{expense.month}}"> 
-                {{expense.month}}
+                {{expense.month | date:'MMM/yyyy'}}
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
         </div>

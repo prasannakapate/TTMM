@@ -14,17 +14,39 @@
         console.log("stateParams = ", $scope.expenseMonth);
 
         expenseDataApi.getExpenseList().then(function(data) {
-            $scope.expenseDetails = _(data.results).chain()
-                .where({
-                    'expenseMonth': $scope.expenseMonth
+            var createdAtFilter = _(data.results).chain()
+                .groupBy(function(item) {
+                    return item.createdAt.substring(0, 7);
                 })
+                .pairs()
+                .map(function(currentItem) {
+                    return _.object(_.zip(["month", "expenseDetails"], currentItem));
+                })
+                .find({
+                    'month': $scope.expenseMonth
+                })
+                .pick('month','expenseDetails')
                 .value();
 
-            $scope.totalMonthlySum = _(data.results).chain()
+            console.log('createdAtFilter', createdAtFilter);
+
+            $scope.expenseDetails = _(data.results).chain()                
                 .where({
-                    'expenseMonth': $scope.expenseMonth
+                    createdAtFilter: $scope.expenseMonth
                 })
-                .sum('expenseAmount');
+                .pick('month')
+                .value();
+
+                console.log("Expense details", $scope.expenseDetails);
+
+
+            $scope.totalMonthlySum = _(data.results).chain()
+                .find({
+                    'month': $scope.expenseMonth
+                })
+                .sum('expenseAmount')
+                .value();
+            console.log("Total sum", $scope.totalMonthlySum);
         });
     }
 })();
