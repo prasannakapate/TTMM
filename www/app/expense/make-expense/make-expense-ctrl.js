@@ -10,37 +10,41 @@
     function MakeExpenseCtrl($scope, $state, expenseDataApi) {
 
         $scope.makeExpense = makeExpense;
+        $scope.expense = {};
+        $scope.datepickerObject = {};
+        $scope.expenseMonth ='';
+        $scope.datepickerObject.inputDate = new Date();
 
-
-        $scope.datepickerObject = {
+        $scope.datepickerObjectPopup = {
+            titleLabel: 'Select Expense Date', //Optional
             todayLabel: 'Today', //Optional
             closeLabel: 'Close', //Optional
             setLabel: 'Set', //Optional
             setButtonType: 'button-royal', //Optional
-            todayButtonType: 'button-royal', //Optional
-            closeButtonType: 'button-royal', //Optional
-            inputDate: new Date(), //Optional
+            todayButtonType: 'button-stable', //Optional
+            closeButtonType: 'button-stable', //Optional
+            inputDate: $scope.datepickerObject.inputDate, //Optional
             mondayFirst: true, //Optional
-            // disabledDates: disabledDates, //Optional
-            // weekDaysList: weekDaysList, //Optional
-            // monthList: monthList, //Optional
             templateType: 'popup', //Optional
             showTodayButton: 'true', //Optional
-            modalHeaderColor: 'bar-royal', //Optional
-            modalFooterColor: 'bar-royal', //Optional
+            modalHeaderColor: 'bar-positive', //Optional
+            modalFooterColor: 'bar-positive', //Optional
             from: new Date(2012, 8, 2), //Optional
             to: new Date(2018, 8, 25), //Optional
             callback: function(val) { //Mandatory
                 datePickerCallback(val);
-            }
+            },
+            dateFormat: 'MMM - yyyy - dd', //Optional
+            closeOnSelect: false, //Optional
         };
 
         var datePickerCallback = function(val) {
             if (typeof(val) === 'undefined') {
                 console.log('No date selected');
             } else {
-                $scope.expenseMonth = val;
-                console.log('Selected date is : ', val)
+                $scope.datepickerObjectPopup.inputDate = val;
+                $scope.expense.expenseMonth = $scope.datepickerObjectPopup.inputDate;
+                console.log('Selected date is : ', val);
             }
         };
         ////////////////
@@ -51,7 +55,6 @@
                 expenseDataApi.getExpenseList().then(function(data) {
                     $state.go('tab.budget');
                 });
-
             });
         }
     }

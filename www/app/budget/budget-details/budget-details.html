@@ -12,10 +12,8 @@
                 <b>Total Expenses = {{totalMonthlySum}} Rs.</b>
             </div>
             <div class="item item-button-right" ng-repeat="expenseDetails in createdAtFilter | orderBy: '-createdAt'">
-            <div ng-repeat="expense in expenseDetails"></div>
-                <h2>{{expense.expenseName}}</h2>
-                <p>{{expense.expenseDescription}}, {{expense.expenseAmount}} /- spent.</p>
-            </div>
+                <h2>{{expenseDetails.month}}</h2>
+                <p>{{expenseDetails.expenseDescription}}, {{expenseDetails.expenseAmount}} /- spent.</p>
         </div>
     </ion-content>
 </ion-view>

@@ -10,9 +10,9 @@
             <div class="item item-divider item-stable">
                <h2 class="text-balanced"><b>Monthly Expenses</b></h2>
             </div>
-            <a class="item item-icon-right item-divider-royal" ng-repeat="expense in expenseGroupByMonth " 
+            <a class="item item-icon-right item-divider-royal" ng-repeat="expense in expenseGroupByMonth | orderBy: 'createdAt'" 
                 href="#/budget/budget-details/{{expense.month}}"> 
-                {{expense.month | date:'MMM/yyyy'}}
+                {{expense.month | date:'MMM - yyyy'}}
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
         </div>

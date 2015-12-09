@@ -11,33 +11,34 @@
         $scope.expenseMonth = $stateParams.id;
         $scope.expenseDetails = '';
         $scope.totalMonthlySum = '';
+        var pickMonthYear = '';
         console.log("stateParams = ", $scope.expenseMonth);
 
         expenseDataApi.getExpenseList().then(function(data) {
             var createdAtFilter = _(data.results).chain()
                 .groupBy(function(item) {
-                    return item.createdAt.substring(0, 7);
+                    return item.expenseMonth.substring(0, 7);
                 })
                 .pairs()
                 .map(function(currentItem) {
-                    return _.object(_.zip(["month", "expenseDetails"], currentItem));
+                    return _.object(_.zip(["month"], currentItem));
                 })
                 .find({
                     'month': $scope.expenseMonth
                 })
-                .pick('month','expenseDetails')
-                .value();
-
-            console.log('createdAtFilter', createdAtFilter);
-
-            $scope.expenseDetails = _(data.results).chain()                
-                .where({
-                    createdAtFilter: $scope.expenseMonth
-                })
                 .pick('month')
                 .value();
 
-                console.log("Expense details", $scope.expenseDetails);
+            pickMonthYear = createdAtFilter.month;
+            console.log('pickMonthYear', pickMonthYear);
+
+            $scope.expenseDetails = _(data.results).chain()
+                .where({
+                    pickMonthYear : $scope.expenseMonth
+                })
+                .value();
+
+            console.log("Expense details", $scope.expenseDetails);
 
 
             $scope.totalMonthlySum = _(data.results).chain()

@@ -17,7 +17,7 @@
             expenseDataApi.getExpenseList().then(function(data) {
                 $scope.expenseGroupByMonth = _(data.results).chain()
                     .groupBy(function(item){
-                        return item.createdAt.substring(0,7);
+                        return item.expenseMonth.substring(0,7);
                     })
                     .pairs()
                     .map(function(currentItem) {

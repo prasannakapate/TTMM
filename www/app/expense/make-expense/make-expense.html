@@ -8,9 +8,9 @@
     <ion-content>
         <form name="makeExpenseForm" novalidate="">
             <div class="list">
-                <label class="item item-input" ng-class="{ 'has-error' : makeExpenseForm.expenseName.$invalid}">
+                <label class="item item-input" >
                     <span class="input-label">Expense For</span>
-                    <input type="text" name="expenseName" ng-model="expense.expenseName" ng-minlength="2" ng-maxlength="10" required>
+                    <input type="text" name="expenseName" placeholder="expense name" ng-model="expense.expenseName" ng-minlength="2" ng-maxlength="10" required>
                 </label>
                 <div class="form-errors" ng-messages="makeExpenseForm.expenseName.$error">
                     <label class="item item-input">
@@ -22,34 +22,16 @@
                         <input type="text" placeholder="expense amount" ng-model="expense.expenseAmount" ng-minlength="2" required>
                     </label>
                     <label class="item item-input item-select">
-                        <span class="input-label">Expense Month</span>
-                        <ionic-datepicker popup input-obj="datepickerObject">
-                            <button class="button button-clear button-small button-stable" ng-model="expense.expenseMonth"> {{datepickerObject.inputDate | date:'MMM - yyyy - dd'}}</button>
+                        <span class="input-label">Expense Date</span>
+                        <ionic-datepicker  input-obj="datepickerObjectPopup" >
+                            <button class="button button-clear button-small button-stable"> {{datepickerObjectPopup.inputDate | date:' dd- MMM - yyyy'}}</button>
                         </ionic-datepicker>
                     </label>
-                        <!-- <label class="item item-input item-select">
-                            <span class="input-label">Expense Month</span>
-                            <select ng-model="expense.expenseMonth" required>
-                                <option value="selected">--select--</option>
-                                <option>Jan</option>
-                                <option>Feb</option>
-                                <option>Mar</option>
-                                <option>Apr</option>
-                                <option>May</option>
-                                <option>Jun</option>
-                                <option>Jul</option>
-                                <option>Aug</option>
-                                <option>Sep</option>
-                                <option>Oct</option>
-                                <option>Nov</option>
-                                <option>Dec</option>
-                            </select>
-                        </label> -->
-                        <br/>
-                        <center>
-                            <button class="button button-royal" ng-click="makeExpense(expense)"><i class="ion-clock"></i> Make Expense</button>
-                            <button class="button button-stable" type="reset">Clear</button>
-                        </center>
+                    <br/>
+                    <center>
+                        <button class="button button-royal" ng-click="makeExpense(expense)"><i class="ion-clock"></i> Make Expense</button>
+                        <button class="button button-stable" type="reset">Clear</button>
+                    </center>
                 </div>
         </form>
     </ion-content>
