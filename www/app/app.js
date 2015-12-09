@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('ttmmApp', ['ionic', 'ngSanitize', 'ngCookies', 'ngCordova', 'ngMessages'])
+        .module('ttmmApp', ['ionic', 'ngSanitize', 'ngCookies', 'ngCordova', 'ngMessages', 'ionic-datepicker'])
 
     .run(function($ionicPlatform) {
             $ionicPlatform.ready(function() {
