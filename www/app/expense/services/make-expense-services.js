@@ -5,9 +5,9 @@
         .module('ttmmApp')
         .factory('expenseDataApi', expenseDataApi);
 
-    expenseDataApi.$inject = ['$http', '$q'];
+    expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout'];
 
-    function expenseDataApi($http, $q) {
+    function expenseDataApi($http, $q, $ionicLoading, $timeout) {
         var service = {
             getExpenseList: getExpenseList,
             makeExpense: makeExpense,
@@ -20,17 +20,27 @@
 
         function getExpenseList() {
             var deffered = $q.defer();
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
             $http.get('https://api.parse.com/1/classes/Expenses', {
                 headers: {
-                    'X-Parse-Application-Id':  key.appid,
-                    'X-Parse-REST-API-Key':  key.restid
+                    'X-Parse-Application-Id': key.appid,
+                    'X-Parse-REST-API-Key': key.restid
                 }
             }).success(function(response) {
                 console.log("getExpenseList Data Successfully");
-                deffered.resolve(response);
+                $timeout(function() {
+                    $ionicLoading.hide();
+                    deffered.resolve(response);
+                }, 2000);
+
             }).error(function(error, status) {
                 console.log("getExpenseList Data Error");
-                deffered.reject(error, status);
+                $timeout(function() {
+                    $ionicLoading.hide();
+                    deffered.reject(error, status);
+                }, 2000);
             });
             return deffered.promise;
         }
@@ -39,8 +49,8 @@
             var deffered = $q.defer();
             $http.post('https://api.parse.com/1/classes/Expenses', expenseData, {
                 headers: {
-                    'X-Parse-Application-Id':  key.appid,
-                    'X-Parse-REST-API-Key':  key.restid
+                    'X-Parse-Application-Id': key.appid,
+                    'X-Parse-REST-API-Key': key.restid
                 }
             }).success(function(response) {
                 deffered.resolve(response);
@@ -56,8 +66,8 @@
             var deffered = $q.defer();
             $http.delete('https://api.parse.com/1/classes/Expenses/' + id, {
                 headers: {
-                    'X-Parse-Application-Id':  key.appid,
-                    'X-Parse-REST-API-Key':  key.restid
+                    'X-Parse-Application-Id': key.appid,
+                    'X-Parse-REST-API-Key': key.restid
                 }
             }).success(function(response) {
                 console.log("Data delete successfully");
@@ -72,9 +82,9 @@
         function editExpense(id, data) {
             var deffered = $q.defer();
             $http.put('https://api.parse.com/1/classes/Expenses/' + id, data, {
-               headers: {
-                    'X-Parse-Application-Id':  key.appid,
-                    'X-Parse-REST-API-Key':  key.restid
+                headers: {
+                    'X-Parse-Application-Id': key.appid,
+                    'X-Parse-REST-API-Key': key.restid
                 }
             }).success(function(response) {
                 console.log("Data edit successfully");
