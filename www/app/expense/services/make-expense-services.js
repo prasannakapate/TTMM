@@ -21,7 +21,7 @@
         function getExpenseList() {
             var deffered = $q.defer();
             $ionicLoading.show({
-                template: 'Loading...'
+                template: '<div class="ion-loading-c"></div> Loading...'
             });
             $http.get('https://api.parse.com/1/classes/Expenses', {
                 headers: {
