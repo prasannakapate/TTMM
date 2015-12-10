@@ -11,9 +11,11 @@
             <div class="item item-divider">
                 <b>Total Expenses = {{totalMonthlySum}} Rs.</b>
             </div>
-            <div class="item item-button-right" ng-repeat="expenseDetails in createdAtFilter | orderBy: '-createdAt'">
-                <h2>{{expenseDetails.month}}</h2>
-                <p>{{expenseDetails.expenseDescription}}, {{expenseDetails.expenseAmount}} /- spent.</p>
-        </div>
+            <div ng-repeat="expenses in expenseDetails ">
+                <div class="item item-button-right" ng-repeat="expense in expenses | orderBy: '-createdAt'">
+                    <h2>{{expense.expenseName}}</h2>
+                    <p>{{expense.expenseDescription}}, {{expense.expenseAmount}} /- spent.</p>
+                </div>
+            </div>
     </ion-content>
 </ion-view>

@@ -24,7 +24,7 @@
                         return _.object(_.zip(["month", "expenseDetails"], currentItem));
                     })
                     .value();
-                    console.log($scope.expenseGroupByMonth);
+                    //console.log($scope.expenseGroupByMonth);
             });
         }
     }

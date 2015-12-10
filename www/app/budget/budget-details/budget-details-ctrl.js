@@ -29,25 +29,30 @@
                 .pick('month')
                 .value();
 
-            pickMonthYear = createdAtFilter.month;
-            console.log('pickMonthYear', pickMonthYear);
+            /*pickMonthYear = createdAtFilter.month;
+            console.log('pickMonthYear', pickMonthYear);*/
 
             $scope.expenseDetails = _(data.results).chain()
-                .where({
-                    pickMonthYear : $scope.expenseMonth
+                .groupBy(function(item) {
+                    return item.expenseMonth.substring(0, 7);
                 })
-                .value();
-
-            console.log("Expense details", $scope.expenseDetails);
-
-
-            $scope.totalMonthlySum = _(data.results).chain()
+                .pairs()
+                .map(function(currentItem) {
+                    return _.object(_.zip(["month", "expenses"], currentItem));
+                })
                 .find({
                     'month': $scope.expenseMonth
                 })
-                .sum('expenseAmount')
+                .pick('expenses')
                 .value();
-            console.log("Total sum", $scope.totalMonthlySum);
+
+            // console.log("Expense details", $scope.expenseDetails);
+
+
+            $scope.totalMonthlySum = _($scope.expenseDetails.expenses).chain()
+                            .sum('expenseAmount')
+                            .value();
+            // console.log("Total sum", $scope.totalMonthlySum);
         });
     }
 })();
