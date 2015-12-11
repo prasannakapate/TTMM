@@ -8,11 +8,11 @@
     MakeExpenseCtrl.$inject = ['$scope', '$state', 'expenseDataApi'];
 
     function MakeExpenseCtrl($scope, $state, expenseDataApi) {
-
+        $scope.loadList = '';
         $scope.makeExpense = makeExpense;
         $scope.expense = {};
         $scope.datepickerObject = {};
-        $scope.expenseMonth ='';
+        $scope.expenseMonth = '';
         $scope.datepickerObject.inputDate = new Date();
 
         $scope.datepickerObjectPopup = {
@@ -51,11 +51,16 @@
 
         function makeExpense(expense) {
             console.log("makeExpense Called", expense);
-            expenseDataApi.makeExpense(expense).then(function(data) {
-                expenseDataApi.getExpenseList().then(function(data) {
-                    $state.go('tab.budget');
+            $scope.loadList = function(forceRefresh) {
+                expenseDataApi.makeExpense(expense).then(function(data) {
+                    expenseDataApi.getExpenseList(forceRefresh).then(function(data) {
+                        $state.go('tab.budget');
+                    });
                 });
-            });
+            };
+            $scope.loadList(false);
         }
+
+
     }
 })();

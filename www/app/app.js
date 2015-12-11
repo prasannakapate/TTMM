@@ -25,7 +25,7 @@
 
                 CacheFactory("getExpenseListCache", {
                     storageMode: "localStorage",
-                    maxAge: 10000,
+                    maxAge: 100000,
                     deleteOnExpire: "aggressive"
                 });
 

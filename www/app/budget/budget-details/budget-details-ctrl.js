@@ -5,55 +5,58 @@
         .module('ttmmApp')
         .controller('BudgetDetailsCtrl', BudgetDetailsCtrl);
 
-    BudgetDetailsCtrl.$inject = ['$scope', '$rootScope', '$stateParams', 'expenseDataApi'];
+    BudgetDetailsCtrl.$inject = ['$scope', '$stateParams', 'expenseDataApi'];
 
-    function BudgetDetailsCtrl($scope, $rootScope, $stateParams, expenseDataApi) {
+    function BudgetDetailsCtrl($scope, $stateParams, expenseDataApi) {
         $scope.expenseMonth = $stateParams.id;
         $scope.expenseDetails = '';
         $scope.totalMonthlySum = '';
-        var pickMonthYear = '';
+        $scope.loadList = '';
+
         console.log("stateParams = ", $scope.expenseMonth);
 
-        expenseDataApi.getExpenseList().then(function(data) {
-            var createdAtFilter = _(data.results).chain()
-                .groupBy(function(item) {
-                    return item.expenseMonth.substring(0, 7);
-                })
-                .pairs()
-                .map(function(currentItem) {
-                    return _.object(_.zip(["month"], currentItem));
-                })
-                .find({
-                    'month': $scope.expenseMonth
-                })
-                .pick('month')
-                .value();
+        $scope.loadList = function(forceRefresh) {
 
-            /*pickMonthYear = createdAtFilter.month;
-            console.log('pickMonthYear', pickMonthYear);*/
+            expenseDataApi.getExpenseList(forceRefresh).then(function(data) {
+                var createdAtFilter = _(data.results).chain()
+                    .groupBy(function(item) {
+                        return item.expenseMonth.substring(0, 7);
+                    })
+                    .pairs()
+                    .map(function(currentItem) {
+                        return _.object(_.zip(["month"], currentItem));
+                    })
+                    .find({
+                        'month': $scope.expenseMonth
+                    })
+                    .pick('month')
+                    .value();
 
-            $scope.expenseDetails = _(data.results).chain()
-                .groupBy(function(item) {
-                    return item.expenseMonth.substring(0, 7);
-                })
-                .pairs()
-                .map(function(currentItem) {
-                    return _.object(_.zip(["month", "expenses"], currentItem));
-                })
-                .find({
-                    'month': $scope.expenseMonth
-                })
-                .pick('expenses')
-                .value();
+                /*pickMonthYear = createdAtFilter.month;
+                console.log('pickMonthYear', pickMonthYear);*/
 
-            // console.log("Expense details", $scope.expenseDetails);
+                $scope.expenseDetails = _(data.results).chain()
+                    .groupBy(function(item) {
+                        return item.expenseMonth.substring(0, 7);
+                    })
+                    .pairs()
+                    .map(function(currentItem) {
+                        return _.object(_.zip(["month", "expenses"], currentItem));
+                    })
+                    .find({
+                        'month': $scope.expenseMonth
+                    })
+                    .pick('expenses')
+                    .value();
 
 
-            $scope.totalMonthlySum = _($scope.expenseDetails.expenses).chain()
-                            .sum('expenseAmount')
-                            .value();
-            // console.log("Total sum", $scope.totalMonthlySum);
-        });
+                $scope.totalMonthlySum = _($scope.expenseDetails.expenses).chain()
+                    .sum('expenseAmount')
+                    .value();
+            }); //end of event call
+        };
+
+        $scope.loadList(false);
     }
 })();
 

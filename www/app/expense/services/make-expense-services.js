@@ -11,6 +11,22 @@
 
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
 
+        self.getExpenseListCache.setOptions({
+            onExpire: function(key, value) {
+                getExpenseList()
+                    .then(function() {
+                        console.log("getExpenseListCache was automatically refreshed", new Date());
+                    }, function() {
+                        console.log("Error getting data. Putting expired item back to cache", new Date());
+                        self.getExpenseListCache.put(key, value);
+                    });
+            },
+            cacheFlushInterval: 55000,
+            maxAge: 3600000,
+            verifyIntegrity: true
+        });
+
+
         var service = {
             getExpenseList: getExpenseList,
             makeExpense: makeExpense,
@@ -21,11 +37,20 @@
 
         ////////////////
 
-        function getExpenseList() {
 
-            var deffered = $q.defer();
-            var cacheKey = 'expenses';
-            var expenseListData = self.getExpenseListCache.get(cacheKey);
+
+        function getExpenseList(forceRefresh) {
+
+            if (typeof forceRefresh === 'undefined') {
+                forceRefresh = false;
+            }
+            var deffered = $q.defer(),
+                cacheKey = 'expenses',
+                expenseListData = null;
+
+            if (!forceRefresh) {
+                expenseListData = self.getExpenseListCache.get(cacheKey);
+            }
 
             if (expenseListData) {
                 console.log("Found data inside the cache", expenseListData);
@@ -110,6 +135,5 @@
             });
             return deffered.promise;
         }
-
     }
 })();
