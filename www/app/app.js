@@ -1,9 +1,17 @@
 (function() {
     'use strict';
     angular
-        .module('ttmmApp', ['ionic', 'ngSanitize', 'ngCookies', 'ngCordova', 'ngMessages', 'ionic-datepicker'])
-
-    .run(function($ionicPlatform) {
+        .module('ttmmApp', [
+            'ionic',
+            'ngSanitize',
+            'ngCookies',
+            'ngCordova',
+            'ngMessages',
+            'ionic-datepicker',
+            'angular-cache'
+        ])
+        //DSCacheFactory is not CacheFactory
+        .run(function($ionicPlatform, CacheFactory) {
             $ionicPlatform.ready(function() {
                 // Hide the accessory bar by default
                 // (remove this to show the accessory bar above the keyboard for form inputs)
@@ -14,6 +22,22 @@
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
+
+                CacheFactory("getExpenseListCache", {
+                    storageMode: "localStorage",
+                    maxAge: 10000,
+                    deleteOnExpire: "aggressive"
+                });
+
+               /* CacheFactory("myWatchlistCache", {
+                    storageMode: "localStorage",
+                    maxAge: 7000,
+                    deleteOnExpire: "aggressive"
+                });*/
+
+                CacheFactory("staticCache", {
+                    storageMode: "localStorage"
+                });
             });
         })
         .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {

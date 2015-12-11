@@ -5,9 +5,12 @@
         .module('ttmmApp')
         .factory('expenseDataApi', expenseDataApi);
 
-    expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout'];
+    expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', 'CacheFactory'];
 
-    function expenseDataApi($http, $q, $ionicLoading, $timeout) {
+    function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory) {
+
+        self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
+
         var service = {
             getExpenseList: getExpenseList,
             makeExpense: makeExpense,
@@ -19,29 +22,41 @@
         ////////////////
 
         function getExpenseList() {
-            var deffered = $q.defer();
-            $ionicLoading.show({
-                template: '<div class="ion-loading-c"></div> Loading...'
-            });
-            $http.get('https://api.parse.com/1/classes/Expenses', {
-                headers: {
-                    'X-Parse-Application-Id': key.appid,
-                    'X-Parse-REST-API-Key': key.restid
-                }
-            }).success(function(response) {
-                console.log("getExpenseList Data Successfully");
-                $timeout(function() {
-                    $ionicLoading.hide();
-                    deffered.resolve(response);
-                }, 2000);
 
-            }).error(function(error, status) {
-                console.log("getExpenseList Data Error");
-                $timeout(function() {
-                    $ionicLoading.hide();
-                    deffered.reject(error, status);
-                }, 2000);
-            });
+            var deffered = $q.defer();
+            var cacheKey = 'expenses';
+            var expenseListData = self.getExpenseListCache.get(cacheKey);
+
+            if (expenseListData) {
+                console.log("Found data inside the cache", expenseListData);
+                deffered.resolve(expenseListData);
+            } else {
+
+                $ionicLoading.show({
+                    template: '<div class="ion-loading-c"></div> Loading...'
+                });
+
+                $http.get('https://api.parse.com/1/classes/Expenses', {
+                    headers: {
+                        'X-Parse-Application-Id': key.appid,
+                        'X-Parse-REST-API-Key': key.restid
+                    }
+                }).success(function(response) {
+                    $timeout(function() {
+                        console.log("Received getExpenseList Data via HTTP");
+                        self.getExpenseListCache.put(cacheKey, response);
+                        $ionicLoading.hide();
+                        deffered.resolve(response);
+                    }, 2000);
+
+                }).error(function(error, status) {
+                    $timeout(function() {
+                        console.log("Error While making HTTP Call");
+                        $ionicLoading.hide();
+                        deffered.reject(error, status);
+                    }, 2000);
+                });
+            }
             return deffered.promise;
         }
 
