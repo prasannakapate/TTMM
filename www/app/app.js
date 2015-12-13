@@ -1,94 +1,106 @@
 (function() {
-    'use strict';
-    angular
-        .module('ttmmApp', [
-            'ionic',
-            'ngSanitize',
-            'ngCookies',
-            'ngCordova',
-            'ngMessages',
-            'ionic-datepicker',
-            'angular-cache'
-        ])
-        //DSCacheFactory is not CacheFactory
-        .run(function($ionicPlatform, CacheFactory) {
-            $ionicPlatform.ready(function() {
-                // Hide the accessory bar by default
-                // (remove this to show the accessory bar above the keyboard for form inputs)
-                if (window.cordova && window.cordova.plugins.Keyboard) {
-                    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-                }
-                if (window.StatusBar) {
-                    // org.apache.cordova.statusbar required
-                    StatusBar.styleDefault();
-                }
-
-                CacheFactory("getExpenseListCache", {
-                    storageMode: "localStorage",
-                    maxAge: 100000,
-                    deleteOnExpire: "aggressive"
-                });
-
-               /* CacheFactory("myWatchlistCache", {
-                    storageMode: "localStorage",
-                    maxAge: 7000,
-                    deleteOnExpire: "aggressive"
-                });*/
-
-                CacheFactory("staticCache", {
-                    storageMode: "localStorage"
-                });
-            });
-        })
-        .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-
-            $ionicConfigProvider.views.transition('ios');
-            $ionicConfigProvider.views.forwardCache(false);
-            $ionicConfigProvider.navBar.alignTitle('center');
-
-            // note that you can also chain configs
-            $ionicConfigProvider.tabs.position('bottom').style('standard');
-
-            $stateProvider
-                .state('app', {
-                    url: "/app/login",
-                    templateUrl: "app/login/login.html"
-                })
-
-            .state('new-event', {
-                    url: '/new-event',
-                    templateUrl: 'app/event/new-event/new-event.html'
-                })
-                .state('event-details', {
-                    url: '/events/event-details/:id',
-                    templateUrl: 'app/event/event-details/event-details.html'
-                })
-                .state('event-edit', {
-                    url: '/events/event-details/:id/edit',
-                    templateUrl: 'app/event/edit-event/edit-event.html'
-                })
-
-            .state('tab', {
-                    url: "/tab",
-                    abstract: true,
-                    templateUrl: "app/layout/tabs.html"
-                })
-                .state('tab.events', {
-                    url: '/events',
-                    views: {
-                        'tab-events': {
-                            templateUrl: 'app/event/event-list/event-list.html'
-                        }
+        'use strict';
+        angular
+            .module('ttmmApp', [
+                'ionic',
+                'ngSanitize',
+                'ngCookies',
+                'ngCordova',
+                'ngMessages',
+                'ionic-datepicker',
+                'angular-cache'
+            ])
+            //DSCacheFactory is not CacheFactory
+            .run(function($ionicPlatform, CacheFactory) {
+                $ionicPlatform.ready(function() {
+                    // Hide the accessory bar by default
+                    // (remove this to show the accessory bar above the keyboard for form inputs)
+                    if (window.cordova && window.cordova.plugins.Keyboard) {
+                        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                     }
-                })
-                .state('tab.makeExpense', {
-                    url: '/makeExpense',
-                    views: {
-                        'tab-makeExpense': {
-                            templateUrl: 'app/expense/make-expense/make-expense.html'
-                        }
+                    if (window.StatusBar) {
+                        // org.apache.cordova.statusbar required
+                        StatusBar.styleDefault();
                     }
-                })
+
+                    CacheFactory("getExpenseListCache", {
+                        storageMode: "localStorage",
+                        maxAge: 100000,
+                        deleteOnExpire: "aggressive"
+                    });
+
+                    /* CacheFactory("myWatchlistCache", {
+                         storageMode: "localStorage",
+                         maxAge: 7000,
+                         deleteOnExpire: "aggressive"
+                     });*/
+
+                    CacheFactory("staticCache", {
+                        storageMode: "localStorage"
+                    });
+                });
+            })
+            .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+                    $ionicConfigProvider.views.transition('ios');
+                    $ionicConfigProvider.views.forwardCache(false);
+                    $ionicConfigProvider.navBar.alignTitle('center');
+
+                    // note that you can also chain configs
+                    $ionicConfigProvider.tabs.position('bottom').style('standard');
+
+                    $stateProvider
+                        .state('app', {
+                            url: "/app/login",
+                            templateUrl: "app/login/login.html"
+                        })
+
+                    .state('new-event', {
+                            url: '/new-event',
+                            templateUrl: 'app/event/new-event/new-event.html'
+                        })
+                        .state('event-details', {
+                            url: '/events/event-details/:id',
+                            templateUrl: 'app/event/event-details/event-details.html'
+                        })
+                        .state('event-edit', {
+                            url: '/events/event-details/:id/edit',
+                            templateUrl: 'app/event/edit-event/edit-event.html'
+                        })
+
+                    .state('tab', {
+                            url: "/tab",
+                            abstract: true,
+                            templateUrl: "app/layout/tabs.html"
+                        })
+                        .state('tab.events', {
+                            url: '/events',
+                            views: {
+                                'tab-events': {
+                                    templateUrl: 'app/event/event-list/event-list.html'
+                                }
+                            }
+                        })
+                        .state('tab.makeExpense', {
+                            url: '/makeExpense',
+                            views: {
+                                'tab-makeExpense': {
+                                    templateUrl: 'app/expense/make-expense/make-expense.html'
+                                }
+                            }
+                        })
+                        .state('tab.expenses', {
+                            url: '/expenses',
+                            views: {
+                                'tab-expenses': {
+                                    templateUrl: 'app/expense/expense-list/expense-list.html'
+                                }
+                            }
+                        })
+                        .state('expense-details', {
+                                url: '/expenses/expense-details/:id',
+                                templateUrl: 'app/expense/expense-details/expense-details.html'
+                        })
                 .state('tab.budget', {
                     url: '/budget',
                     views: {
@@ -102,7 +114,7 @@
                     templateUrl: 'app/budget/budget-details/budget-details.html'
                 })
 
-            .state('tab.account', {
+                .state('tab.account', {
                     url: '/account',
                     views: {
                         'tab-account': {
@@ -119,6 +131,6 @@
                     }
                 });
 
-            $urlRouterProvider.otherwise('/app/login');
-        });
+                $urlRouterProvider.otherwise('/app/login');
+            });
 })();

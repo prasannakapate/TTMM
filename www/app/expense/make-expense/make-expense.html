@@ -8,31 +8,27 @@
     <ion-content>
         <form name="makeExpenseForm" novalidate="">
             <div class="list">
-                <label class="item item-input" >
+                <label class="item item-input item-stacked-label">
                     <span class="input-label">Expense For</span>
                     <input type="text" name="expenseName" placeholder="expense name" ng-model="expense.expenseName" ng-minlength="2" ng-maxlength="10" required>
                 </label>
-                <div class="form-errors" ng-messages="makeExpenseForm.expenseName.$error">
-                    <label class="item item-input">
-                        <span class="input-label">Description</span>
-                        <input type="text" placeholder="expense description" ng-model="expense.expenseDescription" ng-minlength="2" required>
-                    </label>
-                    <label class="item item-input">
-                        <span class="input-label">Spent Amount</span>
-                        <input type="text" placeholder="expense amount" ng-model="expense.expenseAmount" ng-minlength="2" required>
-                    </label>
-                    <label class="item item-input item-select">
-                        <span class="input-label">Expense Date</span>
-                        <ionic-datepicker  input-obj="datepickerObjectPopup" >
-                            <button class="button button-clear button-small button-stable"> {{datepickerObjectPopup.inputDate | date:' dd- MMM - yyyy'}}</button>
-                        </ionic-datepicker>
-                    </label>
-                    <br/>
-                    <center>
-                        <button class="button button-royal" ng-click="makeExpense(expense)"><i class="ion-clock"></i> Make Expense</button>
-                        <button class="button button-stable" type="reset">Clear</button>
-                    </center>
-                </div>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Description</span>
+                    <input type="text" placeholder="expense description" ng-model="expense.expenseDescription" ng-minlength="2" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Spent Amount</span>
+                    <input type="text" placeholder="expense amount" ng-model="expense.expenseAmount" ng-minlength="2" required>
+                </label>
+                <label class="item item-input item-select item-stacked-label">
+                    <span class="input-label">Expense Date</span>
+                    <ionic-datepicker input-obj="datepickerObjectPopup">
+                        <button class="button button-clear button-small button-stable"> {{datepickerObjectPopup.inputDate | date:' dd- MMM - yyyy'}}</button>
+                    </ionic-datepicker>
+                </label>
+                <br/>
+                <button class="button button-block button-royal " ng-click="makeExpense(expense)"><i class="ion-clock"></i> Make Expense</button>
+                <!-- <button class="button button-stable" type="reset">Clear</button> -->
         </form>
     </ion-content>
 </ion-view>

@@ -38,7 +38,9 @@
             closeOnSelect: false, //Optional
         };
 
-        var datePickerCallback = function(val) {
+        ////////////////
+
+        function datePickerCallback(val) {
             if (typeof(val) === 'undefined') {
                 console.log('No date selected');
             } else {
@@ -46,21 +48,18 @@
                 $scope.expense.expenseMonth = $scope.datepickerObjectPopup.inputDate;
                 console.log('Selected date is : ', val);
             }
-        };
-        ////////////////
+        }
 
         function makeExpense(expense) {
             console.log("makeExpense Called", expense);
             $scope.loadList = function(forceRefresh) {
                 expenseDataApi.makeExpense(expense).then(function(data) {
                     expenseDataApi.getExpenseList(forceRefresh).then(function(data) {
-                        $state.go('tab.budget');
+                        $state.go('tab.expenses');
                     });
                 });
             };
             $scope.loadList(false);
         }
-
-
     }
 })();

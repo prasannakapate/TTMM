@@ -1,4 +1,4 @@
-<ion-view ng-controller="BudgetCtrl">
+<ion-view ng-controller="ExpenseListCtrl">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
             <b>TTMM</b>
@@ -11,9 +11,9 @@
             <div class="item item-divider item-stable">
                <h2 class="text-balanced"><b>Monthly Expenses</b></h2>
             </div>
-            <a class="item item-icon-right" ng-repeat="expense in expenseGroupByMonth | orderBy: 'createdAt'" 
-                href="#/budget/budget-details/{{expense.month}}"> 
-                {{expense.month | date:'MMM - yyyy'}}
+            <a class="item item-icon-right" ng-repeat="expense in expenseGroupByMonth | orderBy: '-createdAt'" 
+                href="#/expenses/expense-details/{{expense.month}}"> 
+                {{expense.month}}
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
         </div>

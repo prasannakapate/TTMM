@@ -3,22 +3,24 @@
 
     angular
         .module('ttmmApp')
-        .controller('BudgetDetailsCtrl', BudgetDetailsCtrl);
+        .controller('ExpenseDetailsCtrl', ExpenseDetailsCtrl);
 
-    BudgetDetailsCtrl.$inject = ['$scope', '$stateParams', 'expenseDataApi'];
+    ExpenseDetailsCtrl.$inject = ['$scope', '$stateParams', '$filter', 'expenseDataApi'];
 
-    function BudgetDetailsCtrl($scope, $stateParams, expenseDataApi) {
+    function ExpenseDetailsCtrl($scope, $stateParams, $filter, expenseDataApi) {
         $scope.expenseMonth = $stateParams.id;
         $scope.expenseDetails = '';
         $scope.totalMonthlySum = '';
         $scope.loadList = '';
-        
-        //console.log("stateParams = ", $scope.expenseMonth);
+
+        console.log("stateParams = ", $scope.expenseMonth);
+
         $scope.loadList = function(forceRefresh) {
             expenseDataApi.getExpenseList(forceRefresh).then(function(data) {
                 $scope.expenseDetails = _(data.results).chain()
                     .groupBy(function(item) {
-                        return item.expenseMonth.substring(0, 7);
+                        item.expenseMonth = $filter('date')(item.expenseMonth, "MMM-yyyy");
+                        return item.expenseMonth.substring(0, 8);
                     })
                     .pairs()
                     .map(function(currentItem) {
