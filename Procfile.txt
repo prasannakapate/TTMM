@@ -1,1 +1,1 @@
-web:  node server.js # Tells Heroku what command to use to run your app.
+web: npm start # Tells Heroku what command to use to run your app.
