@@ -1,25 +1,26 @@
 <ion-view ng-controller="LoginCtrl">
+<ion-header-bar class="bar-royal">
+        <div class="buttons">
+            <button class="button button-clear ion-android-arrow-back" ui-sref="welcome"> back
+            </button>
+            <h1 class="title">Login </h1>
+        </div>
+    </ion-header-bar>
     <ion-content class="padding">
         <div class="list">
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <button class="button button-block button-assertive button-outline" ng-click="signIn(user)">
-                <b><i class="ion-social-googleplus"> </i> sign in with google</b>
+           <div class="list">
+            <label class="item item-input">
+                <span class="input-label"><i class="icon ion-person"></i> Username</span>
+                <input type="text" ng-model="currentUser.username" placeholder="Choose Username" autofocus>
+            </label>
+            <label class="item item-input">
+                <span class="input-label"><i class="icon ion-ios7-email"></i> password</span>
+                <input type="text" ng-model="currentUser.password" placeholder="password">
+            </label>
+            <button class="button button-block button-outline button-royal" ng-click="currentUserLogin(currentUser)">
+                <b> Login </b>
             </button>
-            <button class="button button-block button-positive button-outline" ng-click="fbLogin()">
-                <b><i class="ion-social-facebook"> </i> sign in with facebook</b>
-            </button>
-            <button class="button button-block button-stable button-outline" ng-click="goToSignUp()">
-                <b> Sign Up </b>
-            </button>
-            <center>
-                <p class="white-text">By sigingin up, I agree to TTMM's <a href=""> Terms of Service </a>, <a href=""> Privacy Policy </a> . </p>
-            </center>
+        </div>
         </div>
     </ion-content>
 </ion-view>
