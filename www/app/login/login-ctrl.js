@@ -9,12 +9,12 @@
 
         $scope.signIn = function(user) {
             console.log("User Data=", user);
-            $state.go('tab.expenses');
-        }
+            $state.go('tab.makeExpense');
+        };
 
         $scope.goToSignUp = function(user) {
             $state.go('newSignUp');
-        }
+        };
 
         // FB Login
         $scope.fbLogin = function() {

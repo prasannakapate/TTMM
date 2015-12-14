@@ -5,21 +5,22 @@
         .module('ttmmApp')
         .controller('SignUpCtrl', SignUpCtrl);
 
-    SignUpCtrl.$inject = ['$scope', '$state'];
+    SignUpCtrl.$inject = ['$scope', '$state', 'signUpDataApi'];
 
-    /* @ngInject */
-    function SignUpCtrl($scope, $state) {
-        var vm = this;
-        vm.title = 'SignUpCtrl';
-
-        activate();
+    function SignUpCtrl($scope, $state, signUpDataApi) {
+        $scope.userSignUp = userSignUp;
+        $scope.userData = {};
+        $scope.password = '';
 
         ////////////////
 
-        function activate() {}
+        function userSignUp(userData) {
+            $scope.userData.password = 'dummypassword';
+            console.log("New user sign up data", userData);
 
-        $scope.goToSignUp = function() {
-            $state.go('newSignUp');
+            signUpDataApi.newUserSignUp(userData).then(function() {
+                $state.go('tab.expenses');
+            });
         }
     }
 })();

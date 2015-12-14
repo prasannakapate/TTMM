@@ -97,7 +97,7 @@
                 console.log("make new expense success");
             }).error(function(error, status) {
                 deffered.reject(error, status);
-                console.log("make new expense success");
+                console.log("make new expense Error");
             });
             return deffered.promise;
         }

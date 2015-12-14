@@ -9,22 +9,31 @@
     <ion-content class="padding">
         <div class="list">
             <label class="item item-input">
-                <input type="text" placeholder="Choose Username">
+                <span class="input-label"><i class="icon ion-person"></i> Username</span>
+                <input type="text" ng-model="userData.username" placeholder="Choose Username" autofocus>
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Mobile">
+                <span class="input-label"><i class="icon ion-ios7-email"></i> Email</span>
+                <input type="text" ng-model="userData.email" placeholder="Email">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Country">
+                <span class="input-label"><i class="icon ion-iphone"></i> Mobile No</span>
+                <input type="text" ng-model="userData.mobileNo" placeholder="Mobile">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="DOB">
+                <span class="input-label"><i class="icon ion-ios7-flag"></i> Country</span>
+                <input type="text" ng-model="userData.country" placeholder="Country">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Gender">
+                <span class="input-label"><i class="icon ion-calendar"></i> DOB</span>
+                <input type="text" ng-model="userData.dob" placeholder="DOB">
             </label>
-            <button class="button button-block button-outline button-royal" ui-sref="tab.expenses">
-                <b> Sign In </b>
+            <label class="item item-input">
+                <span class="input-label"><i class="icon ion-person-stalker"></i> Gender</span>
+                <input type="text" ng-model="userData.gender" placeholder="Gender">
+            </label>
+            <button class="button button-block button-outline button-royal" ng-click="userSignUp(userData)">
+                <b> Sign Up </b>
             </button>
         </div>
     </ion-content>
