@@ -1,20 +1,26 @@
-<ion-view ng-controller="LoginCtrl">
+<ion-view ng-controller="WelcomeCtrl" class="bg-image">
     <ion-content class="padding">
         <div class="list">
             <br/>
             <br/>
+            <center>
+                <h2 class="white-text">Welcome To TTMM</h2>
+            </center>
             <br/>
             <br/>
             <br/>
             <br/>
             <br/>
-            <button class="button button-block button-assertive button-outline" ng-click="signIn(user)">
+            <!-- <button class="button button-block button-assertive button-outline" ng-click="signIn(user)">
                 <b><i class="ion-social-googleplus"> </i> sign in with google</b>
             </button>
             <button class="button button-block button-positive button-outline" ng-click="fbLogin()">
                 <b><i class="ion-social-facebook"> </i> sign in with facebook</b>
+            </button> -->
+            <button class="button button-block button-light button-outline" ng-click="goToLogin()">
+                <b> Login </b>
             </button>
-            <button class="button button-block button-stable button-outline" ng-click="goToSignUp()">
+            <button class="button button-block button-light button-outline" ng-click="goToSignUp()">
                 <b> Sign Up </b>
             </button>
             <center>

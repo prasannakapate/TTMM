@@ -50,6 +50,11 @@
             $ionicConfigProvider.tabs.position('bottom').style('standard');
 
             $stateProvider
+                .state('welcome', {
+                    url: "/app/welcome",
+                    templateUrl: "app/welcome/welcome.html"
+                })
+
                 .state('app', {
                     url: "/app/login",
                     templateUrl: "app/login/login.html"
@@ -122,6 +127,6 @@
                     }
                 });*/
 
-            $urlRouterProvider.otherwise('/app/login');
+            $urlRouterProvider.otherwise('/app/welcome');
         });
 })();
