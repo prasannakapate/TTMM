@@ -11,36 +11,30 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
     <script>
-        // Facebbok OAuth init
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '1653907274837998', // Facebook App ID
-                status: true, // check login status
-                cookie: true, // enable cookies to allow the server to access the session
-                xfbml: true // parse XFBML
-            });
-        };
-        // Load the SDK asynchronously
-        (function(d) {
-            var js, id = 'facebook-jssdk',
-                ref = d.getElementsByTagName('script')[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement('script');
-            js.id = id;
-            js.async = true;
-            js.src = "//connect.facebook.net/en_US/all.js";
-            ref.parentNode.insertBefore(js, ref);
-        }(document));
-        // Facebbok OAuth init - END
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '1653907274837998',
+            xfbml: true,
+            version: 'v2.3'
+        });
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "http://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
     </script>
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-
 </head>
 
 <body ng-app="ttmmApp">
@@ -52,7 +46,6 @@
     <script src="lib/angular-cookies/angular-cookies.min.js"></script>
     <script src="lib/angular-messages/angular-messages.min.js"></script>
     <script src="lib/angular-cache/dist/angular-cache.min.js"></script>
-
     <!-- your app's js -->
     <!-- <script src="../build/www/all.js"></script> -->
     <script src="app/settings.js"></script>
@@ -61,12 +54,7 @@
     <script src="app/event/services/event-services.js"></script>
     <script src="app/expense/services/make-expense-services.js"></script>
     <script src="app/login/login-ctrl.js"></script>
-    <script src="app/event/event-list/event-list-ctrl.js"></script>
-    <script src="app/event/event-details/event-details-ctrl.js"></script>
-    <script src="app/event/new-event/new-event-ctrl.js"></script>
-    <script src="app/event/edit-event/edit-event-ctrl.js"></script>
-    <script src="app/budget/budget-ctrl.js"></script>
-    <script src="app/budget/budget-details/budget-details-ctrl.js"></script>
+    <script src="app/sign-up/sign-up-ctrl.js"></script>
     <script src="app/expense/make-expense/make-expense-ctrl.js"></script>
     <script src="app/expense/expense-list/expense-list-ctrl.js"></script>
     <script src="app/expense/expense-details/expense-details-ctrl.js"></script>

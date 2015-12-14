@@ -1,31 +1,31 @@
-<ion-view>
+<ion-view ng-controller="SignUpCtrl">
     <ion-header-bar class="bar-royal">
-
         <div class="buttons">
+            <button class="button button-clear ion-android-arrow-back" ui-sref="tab.expenses"> back
+            </button>
             <h1 class="title">Sign Up</h1>
         </div>
     </ion-header-bar>
-
-    <ion-content>
-
+    <ion-content class="padding">
         <div class="list">
             <label class="item item-input">
-                <input type="text" placeholder="Email or Username">
+                <input type="text" placeholder="Choose Username">
             </label>
             <label class="item item-input">
                 <input type="text" placeholder="Mobile">
             </label>
-
-            <button class="button button-block button-outline button-calm"
-                    ui-sref="tab.events">
-                Sign In
+            <label class="item item-input">
+                <input type="text" placeholder="Country">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="DOB">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Gender">
+            </label>
+            <button class="button button-block button-outline button-royal" ui-sref="tab.expenses">
+                <b> Sign In </b>
             </button>
-
-            <button class="button button-block button-outline button-calm"
-                    ui-sref="sign-up">
-                Create New Account
-            </button>
-
         </div>
     </ion-content>
 </ion-view>

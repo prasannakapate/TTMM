@@ -1,19 +1,28 @@
 <ion-view ng-controller="LoginCtrl" class="bg-image">
-    <ion-content>
+    <ion-content class="padding">
         <div class="list">
-            <br/><br/><br/><br/>
-            <center >
-                    <h1 class="white-text">TTMM</h1>
-                    <h5 class="white-text">your monthly expense tracker</h5>
+            <br/>
+            <br/>
+            <center>
+                <h2 class="white-text">TTMM</h2>
             </center>
-            <br/><br/>
-            <button class="button button-block button-assertive white-text" ng-click="signIn(user)">
-                <i class="ion-social-googleplus"> </i> sign in with google
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <button class="button button-block button-assertive button-outline" ng-click="signIn(user)">
+                <b><i class="ion-social-googleplus"> </i> sign in with google</b>
             </button>
-            <button class="button button-block button-positive white-text" ng-click="fbLogin()">
-                <i class="ion-social-facebook"> </i> sign in with facebook
+            <button class="button button-block button-positive button-outline" ng-click="fbLogin()">
+                <b><i class="ion-social-facebook"> </i> sign in with facebook</b>
             </button>
-       
+            <button class="button button-block button-stable button-outline" ng-click="goToSignUp()">
+                <b> Sign Up </b>
+            </button>
+            <center>
+                <p class="white-text">By sigingin up, I agree to TTMM's <a href=""> Terms of Service </a>, <a href=""> Privacy Policy </a> . </p>
+            </center>
         </div>
     </ion-content>
 </ion-view>

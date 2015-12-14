@@ -9,7 +9,11 @@
 
         $scope.signIn = function(user) {
             console.log("User Data=", user);
-            $state.go('tab.events');
+            $state.go('tab.expenses');
+        }
+
+        $scope.goToSignUp = function(user) {
+            $state.go('newSignUp');
         }
 
         // FB Login
