@@ -22,18 +22,12 @@
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
-
+                //cache for the offline usage
                 CacheFactory("getExpenseListCache", {
                     storageMode: "localStorage",
                     maxAge: 100000,
                     deleteOnExpire: "aggressive"
                 });
-
-                /* CacheFactory("myWatchlistCache", {
-                     storageMode: "localStorage",
-                     maxAge: 7000,
-                     deleteOnExpire: "aggressive"
-                 });*/
 
                 CacheFactory("staticCache", {
                     storageMode: "localStorage"
@@ -55,37 +49,15 @@
                     templateUrl: "app/welcome/welcome.html"
                 })
 
-                .state('app', {
+            .state('app', {
                     url: "/app/login",
                     templateUrl: "app/login/login.html"
                 })
-
-           /* .state('new-event', {
-                    url: '/new-event',
-                    templateUrl: 'app/event/new-event/new-event.html'
-                })
-                .state('event-details', {
-                    url: '/events/event-details/:id',
-                    templateUrl: 'app/event/event-details/event-details.html'
-                })
-                .state('event-edit', {
-                    url: '/events/event-details/:id/edit',
-                    templateUrl: 'app/event/edit-event/edit-event.html'
-                })*/
-
-            .state('tab', {
+                .state('tab', {
                     url: "/tab",
                     abstract: true,
                     templateUrl: "app/layout/tabs.html"
                 })
-/*                .state('tab.events', {
-                    url: '/events',
-                    views: {
-                        'tab-events': {
-                            templateUrl: 'app/event/event-list/event-list.html'
-                        }
-                    }
-                })*/
                 .state('tab.makeExpense', {
                     url: '/makeExpense',
                     views: {
@@ -106,27 +78,18 @@
                     url: '/expenses/expense-details/:id',
                     templateUrl: 'app/expense/expense-details/expense-details.html'
                 })
-                .state('newSignUp',{
-                    url:'/newSignUp',
+                .state('newSignUp', {
+                    url: '/newSignUp',
                     templateUrl: 'app/sign-up/sign-up.html'
                 })
-/*            .state('tab.account', {
-                    url: '/account',
-                    views: {
-                        'tab-account': {
-                            templateUrl: 'app/account/account.html'
-                        }
-                    }
+                .state('forgotPassword', {
+                    url: '/forgotPassword',
+                    templateUrl: 'app/forgot-password/forgot-password.html'
                 })
-                .state('tab.notification', {
-                    url: '/notification',
-                    views: {
-                        'tab-notification': {
-                            templateUrl: 'app/notification/notification.html'
-                        }
-                    }
-                });*/
-
+                .state('contactUs', {
+                    url: '/contactUs',
+                    templateUrl: 'app/contact-us/contact-us.html'
+                });
             $urlRouterProvider.otherwise('/app/welcome');
         });
 })();
