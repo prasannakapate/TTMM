@@ -24,10 +24,10 @@
                 }
             }).success(function(response) {
                 deffered.resolve(response);
-                console.log("signUpUserData completed successfully");
+                console.log("signUpUserData completed successfully", JSON.stringify(response));
             }).error(function(error, status) {
                 deffered.reject(error, status);
-                console.log("signUpUserData completed Error");
+                console.log(JSON.stringify(error, status));
             });
             return deffered.promise;
         }

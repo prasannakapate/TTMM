@@ -3,13 +3,18 @@
     angular
         .module("ttmmApp")
         .controller("LoginCtrl", LoginCtrl);
-    LoginCtrl.$inject = ['$state', '$scope', 'LoginApi', '$cookieStore'];
+    LoginCtrl.$inject = ['$state', '$scope', 'userLoginDataApi', '$cookieStore'];
 
-    function LoginCtrl($state, $scope, LoginApi, $cookieStore) {
+    function LoginCtrl($state, $scope, userLoginDataApi, $cookieStore) {
 
-        $scope.signIn = function(user) {
-            console.log("User Data=", user);
-            $state.go('tab.makeExpense');
+        $scope.userData = {};
+
+        $scope.userLogin = function() {
+            console.log("User Login Successfully", $scope.userData.username, $scope.userData.password);
+            userLoginDataApi.loginUser($scope.userData.username, $scope.userData.password).then(function() {
+
+                $state.go('tab.makeExpense');
+            });
         };
 
         $scope.goToSignUp = function(user) {

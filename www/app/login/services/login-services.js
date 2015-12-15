@@ -1,35 +1,37 @@
-(function () {
+(function() {
     "use strict";
     angular
         .module('ttmmApp')
-        .factory('LoginApi', LoginApi);
+        .factory('userLoginDataApi', userLoginDataApi);
 
-    LoginApi.$inject = ['$http', '$q'];
+    userLoginDataApi.$inject = ['$http', '$q'];
 
-    function LoginApi($http, $q) {
+    function userLoginDataApi($http, $q) {
 
         var LoginServices = {
-            registerNewUser: registerNewUser
+            loginUser: loginUser
         }
         return LoginServices;
 
-        function registerNewUser(data) {
-            var  deffered = $q.defer();
-            $http.post('https://api.parse.com/1/classes/User',data,{
-                header:{
+        function loginUser(username, password) {
+            var deffered = $q.defer();
+            $http.get('https://api.parse.com/1/login', {
+                header: {
                     'X-Parse-Application-Id': key.appid,
-                    'X-Parse-REST-API-Key': key.restid,
-                    'Content-Type': 'application/json'
+                    'X-Parse-REST-API-Key': key.restid
+                },
+                params: {
+                    "username": "prasanna",
+                    "password": "prasanna"
                 }
-            }).success(function (response) {
-                console.log("user created Successfully");
+            }).success(function(response) {
+                console.log("user login Successfully", response.username, response.secrete);
                 deffered.resolve(response);
-            }).error(function (error, status) {
-                console.log("user create Data Error");
+            }).error(function(error, status) {
+                console.log("user login Error", error, " Status ", status);
                 deffered.reject(error, status);
             })
             return deffered.promise;
         }
     }
-
 })();
