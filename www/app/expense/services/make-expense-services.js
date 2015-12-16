@@ -5,9 +5,9 @@
         .module('ttmmApp')
         .factory('expenseDataApi', expenseDataApi);
 
-    expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', 'CacheFactory'];
+    expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', 'CacheFactory', 'userLoginDataApi'];
 
-    function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory) {
+    function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory, userLoginDataApi) {
 
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
 
@@ -25,7 +25,6 @@
             maxAge: 3600000,
             verifyIntegrity: true
         });
-
 
         var service = {
             getExpenseList: getExpenseList,
@@ -97,7 +96,7 @@
                 console.log("make new expense success");
             }).error(function(error, status) {
                 deffered.reject(error, status);
-                console.log("make new expense Error");
+                console.log("make new expense Error", error, " Status =", status);
             });
             return deffered.promise;
         }

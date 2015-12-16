@@ -8,16 +8,16 @@
     function LoginCtrl($state, $scope, userLoginDataApi, $cookieStore) {
 
         $scope.userData = {};
+        $scope.currentUser = {};
 
         $scope.userLogin = function() {
-            userLoginDataApi.loginUser($scope.userData.username, $scope.userData.password).then(function() {
+            userLoginDataApi.loginUser($scope.userData.username, $scope.userData.password).then(function(user) {
                 $state.go('tab.makeExpense');
+                $scope.currentUser = user;
+                //console.log("User details", user);
             });
         };
 
-        $scope.goToSignUp = function(user) {
-            $state.go('newSignUp');
-        };
 
         // FB Login
         $scope.fbLogin = function() {

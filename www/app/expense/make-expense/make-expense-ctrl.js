@@ -41,16 +41,19 @@
 
         ////////////////
 
-        $scope.currentUser = userLoginDataApi.getCurrentUser().then(function(data) {
-            console.log("current user details", data);
-        });
+        /*userLoginDataApi.getCurrentUser().then(function(data) {
+            $scope.currentUser = data;
+            console.log("current user details", $scope.currentUser);
+            $scope.expense.userId = data.objectId;
+        });*/
+
 
         function datePickerCallback(val) {
             if (typeof(val) === 'undefined') {
                 console.log('No date selected');
             } else {
                 $scope.datepickerObjectPopup.inputDate = val;
-                $scope.expense.expenseMonth = $scope.datepickerObjectPopup.inputDate;
+                $scope.expense.expenseMonth = val;
                 console.log('Selected date is : ', val);
             }
         }

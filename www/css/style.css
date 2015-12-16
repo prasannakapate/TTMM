@@ -12,6 +12,7 @@
 	font-family: "Verdana";
 }
 
+/** Styling for the username field **/
 label.item.has-error {  
   border-bottom: 2px solid red;
 }
@@ -29,9 +30,9 @@ label.item.valid-lr {
 }
 
 /** Styling for the error text and container **/
-/*.form-errors {
+.form-errors {
   margin: 5px 0
-}*/
+}
 .form-error {
   padding: 2px 0 2px 16px;
   color: red;

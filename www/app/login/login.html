@@ -8,20 +8,27 @@
     </ion-header-bar>
     <ion-content class="padding">
         <div class="list">
-            <label class="item item-input">
-                <span class="input-label"><i class="icon ion-person"></i> Username</span>
-                <input type="text" ng-model="userData.username" placeholder="Choose Username" autofocus>
-            </label>
-            <label class="item item-input">
-                <span class="input-label"><i class="icon ion-ios7-email"></i> password</span>
-                <input type="password" ng-model="userData.password" placeholder="password">
-            </label>
-            <button class="button button-block button-outline button-royal" ng-click="userLogin()">
-                <b> Login </b>
-            </button>
-            <center>
-                <button class="button button-block button-clear button-dark" ui-sref="forgotPassword"> Forgot your Password ?</button>
-            </center>
+            <form role="form" id="loginForm" name="loginForm" ng-submit="userLogin()" novalidate>
+                <label class="item item-input" ng-class="{ 'has-error' : loginForm.username.$invalid}">
+                    <span class="input-label"><i class="icon ion-person"></i> Username</span>
+                    <input type="text" name="username" ng-model="userData.username" placeholder="username" ng-minlength="5" ng-maxlength="10" required autofocus>
+                    <div class="form-errors" ng-messages="loginForm.username.$error">
+                        <div class="form-error" ng-message="maxlength">This field is must be less than 10 characters</div>
+                        <div class="form-error" ng-message="minlength">This field is must be at least 5 characters.</div>
+                        <div class="form-error" ng-message="maxlength">This field is must be less than 50 characters</div>
+                    </div>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label"><i class="icon ion-ios7-email"></i> password</span>
+                    <input type="password" ng-model="userData.password" placeholder="password">
+                </label>
+                <button type="submit" class="button button-block button-outline button-royal">
+                    <b> Login </b>
+                </button>
+                <center>
+                    <button class="button button-block button-clear button-dark" ui-sref="forgotPassword"> Forgot your Password ?</button>
+                </center>
+            </form>
         </div>
     </ion-content>
 </ion-view>
