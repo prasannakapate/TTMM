@@ -5,9 +5,9 @@
         .module('ttmmApp')
         .factory('signUpDataApi', signUpDataApi);
 
-    signUpDataApi.$inject = ['$http', '$q'];
+    signUpDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout'];
 
-    function signUpDataApi($http, $q) {
+    function signUpDataApi($http, $q, $ionicLoading, $timeout) {
         var service = {
             newUserSignUp: newUserSignUp
         };
@@ -17,17 +17,28 @@
 
         function newUserSignUp(newUserSignUpData) {
             var deffered = $q.defer();
+            $ionicLoading.show({
+                template: '<div class="ion-loading-c"></div> Loading...'
+            });
             $http.post('https://api.parse.com/1/users', newUserSignUpData, {
                 headers: {
                     'X-Parse-Application-Id': key.appid,
                     'X-Parse-REST-API-Key': key.restid
                 }
             }).success(function(response) {
-                deffered.resolve(response);
-                console.log("signUpUserData completed successfully", JSON.stringify(response));
+                $timeout(function() {
+                    $ionicLoading.hide();
+                    deffered.resolve(response);
+                    console.log("signUpUserData completed successfully", response);
+                }, 2000);
+
             }).error(function(error, status) {
-                deffered.reject(error, status);
-                console.log(JSON.stringify(error, status));
+                $timeout(function() {
+                    $ionicLoading.hide();
+                    deffered.reject(error, status);
+                    console.log(JSON.stringify(error, status));
+                }, 2000);
+
             });
             return deffered.promise;
         }

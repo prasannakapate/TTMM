@@ -4,17 +4,41 @@
         .module('ttmmApp')
         .factory('userLoginDataApi', userLoginDataApi);
 
-    userLoginDataApi.$inject = ['$http', '$q'];
+    userLoginDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout'];
 
-    function userLoginDataApi($http, $q) {
+    function userLoginDataApi($http, $q, $ionicLoading, $timeout) {
 
         var LoginServices = {
-            loginUser: loginUser
+            loginUser: loginUser,
+            getCurrentUser: getCurrentUser
         };
         return LoginServices;
 
+        function getCurrentUser() {
+            var deffered = $q.defer();
+            $http.get('https://api.parse.com//1/users/me', {
+                    headers: {
+                        'X-Parse-Application-Id': key.appid,
+                        'X-Parse-REST-API-Key': key.restid
+                    }
+                })
+                .success(function(response) {
+                    console.log("Current users details", respones);
+                    deffered.resolve(respone);
+                })
+                .error(function(error, status) {
+                    console.log("error getting current users details", error, status);
+                    deffered.reject(error, status);
+                });
+        }
+
         function loginUser(username, password) {
             var deffered = $q.defer();
+
+            $ionicLoading.show({
+                template: '<div class="ion-loading-c"></div> Loading...'
+            });
+
             $http.get('https://api.parse.com/1/login', {
                     headers: {
                         'X-Parse-Application-Id': key.appid,
@@ -26,11 +50,18 @@
                     }
                 })
                 .success(function(response) {
-                    console.log("user login Successfully", response.username);
-                    deffered.resolve(response);
+                    $timeout(function() {
+                        $ionicLoading.hide();
+                        console.log("user login Successfully", response);
+                        deffered.resolve(response);
+                    }, 2000);
+
                 }).error(function(error, status) {
-                    console.log("user login Error", error, " Status ", status);
-                    deffered.reject(error, status);
+                    $timeout(function() {
+                        console.log("Error While making HTTP Call");
+                        $ionicLoading.hide();
+                        deffered.reject(error, status);
+                    }, 2000);
                 });
             return deffered.promise;
         }

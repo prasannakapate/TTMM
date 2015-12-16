@@ -1,5 +1,5 @@
 <ion-view ng-controller="LoginCtrl">
-<ion-header-bar class="bar-royal">
+    <ion-header-bar class="bar-royal">
         <div class="buttons">
             <button class="button button-clear ion-android-arrow-back" ui-sref="welcome"> back
             </button>
@@ -8,7 +8,6 @@
     </ion-header-bar>
     <ion-content class="padding">
         <div class="list">
-           <div class="list">
             <label class="item item-input">
                 <span class="input-label"><i class="icon ion-person"></i> Username</span>
                 <input type="text" ng-model="userData.username" placeholder="Choose Username" autofocus>
@@ -20,8 +19,9 @@
             <button class="button button-block button-outline button-royal" ng-click="userLogin()">
                 <b> Login </b>
             </button>
-            <center><button class="button button-block button-clear button-dark" ui-sref="forgotPassword"> Forgot your Password ?</button></center>
-        </div>
+            <center>
+                <button class="button button-block button-clear button-dark" ui-sref="forgotPassword"> Forgot your Password ?</button>
+            </center>
         </div>
     </ion-content>
 </ion-view>

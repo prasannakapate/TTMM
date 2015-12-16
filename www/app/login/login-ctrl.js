@@ -10,9 +10,7 @@
         $scope.userData = {};
 
         $scope.userLogin = function() {
-            console.log("User Login Successfully", $scope.userData.username, $scope.userData.password);
             userLoginDataApi.loginUser($scope.userData.username, $scope.userData.password).then(function() {
-
                 $state.go('tab.makeExpense');
             });
         };

@@ -45,12 +45,12 @@
 
             $stateProvider
                 .state('welcome', {
-                    url: "/app/welcome",
+                    url: "/welcome",
                     templateUrl: "app/welcome/welcome.html"
                 })
 
-            .state('app', {
-                    url: "/app/login",
+            .state('login', {
+                    url: "/login",
                     templateUrl: "app/login/login.html"
                 })
                 .state('tab', {
@@ -90,6 +90,6 @@
                     url: '/contactUs',
                     templateUrl: 'app/contact-us/contact-us.html'
                 });
-            $urlRouterProvider.otherwise('/app/welcome');
+            $urlRouterProvider.otherwise('/welcome');
         });
 })();
