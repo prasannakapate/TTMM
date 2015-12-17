@@ -4,9 +4,9 @@
         .module('ttmmApp')
         .factory('userLoginDataApi', userLoginDataApi);
 
-    userLoginDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout'];
+    userLoginDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', '$ionicPopup'];
 
-    function userLoginDataApi($http, $q, $ionicLoading, $timeout) {
+    function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup) {
         var userToken = '';
 
         var LoginServices = {
@@ -81,6 +81,12 @@
                         console.log("Error While making HTTP Call");
                         $ionicLoading.hide();
                         deffered.reject(error, status);
+                        // An alert dialog
+                        $ionicPopup.alert({
+                            title: 'Try again !',
+                            template: 'Incorrect username or password',
+                            okType: 'button-assertive'
+                        });
                     }, 2000);
                 });
             return deffered.promise;

@@ -5,17 +5,18 @@
         .module('ttmmApp')
         .controller('SignUpCtrl', SignUpCtrl);
 
-    SignUpCtrl.$inject = ['$scope', '$state', 'signUpDataApi'];
+    SignUpCtrl.$inject = ['$state', 'signUpDataApi'];
 
-    function SignUpCtrl($scope, $state, signUpDataApi) {
-        $scope.userSignUp = userSignUp;
-        $scope.userData = {};
+    function SignUpCtrl($state, signUpDataApi) {
+        var vm = this;
+        vm.userSignUp = userSignUp;
+        vm.userData = {};
 
         ////////////////
 
         function userSignUp(userData) {
             signUpDataApi.newUserSignUp(userData).then(function() {
-                console.log("New user sign up data",userData);
+                console.log("New user sign up data", userData);
                 $state.go('login');
             });
         }

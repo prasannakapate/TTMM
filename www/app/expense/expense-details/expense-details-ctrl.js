@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ttmmApp')
+        .module('ttmmApp.expense')
         .controller('ExpenseDetailsCtrl', ExpenseDetailsCtrl);
 
     ExpenseDetailsCtrl.$inject = ['$scope', '$stateParams', '$filter', 'expenseDataApi'];

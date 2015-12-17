@@ -1,4 +1,4 @@
-<ion-view ng-controller="LoginCtrl">
+<ion-view ng-controller="LoginCtrl as vm">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
             <button class="button button-clear ion-android-arrow-back" ui-sref="welcome"> back
@@ -8,21 +8,24 @@
     </ion-header-bar>
     <ion-content class="padding">
         <div class="list">
-            <form role="form" id="loginForm" name="loginForm" ng-submit="userLogin()" novalidate>
-                <label class="item item-input" ng-class="{ 'has-error' : loginForm.username.$invalid}">
+            <form role="form" id="loginForm" name="loginForm" ng-submit="vm.userLogin()" novalidate>
+                <label class="item item-input">
                     <span class="input-label"><i class="icon ion-person"></i> Username</span>
-                    <input type="text" name="username" ng-model="userData.username" placeholder="username" ng-minlength="5" ng-maxlength="10" required autofocus>
-                    <div class="form-errors" ng-messages="loginForm.username.$error">
-                        <div class="form-error" ng-message="maxlength">This field is must be less than 10 characters</div>
-                        <div class="form-error" ng-message="minlength">This field is must be at least 5 characters.</div>
-                        <div class="form-error" ng-message="maxlength">This field is must be less than 50 characters</div>
-                    </div>
+                    <input type="text" name="username" ng-model="vm.userData.username" placeholder="username" ng-minlength="4" ng-maxlength="10" required autofocus/>
                 </label>
+                <div ng-messages="loginForm.username.$error" class="form-errors" ng-if="loginForm.username.$touched">
+                    <ng-messages-include src="app/login/messages.html"></ng-messages-include>
+                    <div class="form-error" ng-message="required">Please enter your Username</div>
+                </div>
                 <label class="item item-input">
                     <span class="input-label"><i class="icon ion-ios7-email"></i> password</span>
-                    <input type="password" ng-model="userData.password" placeholder="password">
+                    <input type="password" ng-model="vm.userData.password" placeholder="password">
                 </label>
-                <button type="submit" class="button button-block button-outline button-royal">
+                <div ng-messages="loginForm.password.$error" class="form-errors" ng-if="loginForm.username.$touched">
+                    <ng-messages-include src="app/login/messages.html"></ng-messages-include>
+                    <div class="form-error" ng-message="required">Please enter your Password</div>
+                </div>
+                <button type="submit" class="button button-block button-outline button-royal" ng-disabled="loginForm.$invalid">
                     <b> Login </b>
                 </button>
                 <center>

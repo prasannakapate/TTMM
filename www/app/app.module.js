@@ -2,13 +2,8 @@
     'use strict';
     angular
         .module('ttmmApp', [
-            'ionic',
-            'ngSanitize',
-            'ngCookies',
-            'ngCordova',
-            'ngMessages',
-            'ionic-datepicker',
-            'angular-cache'
+            'ttmmApp.core',
+            'ttmmApp.expense'
         ])
         //DSCacheFactory is not CacheFactory
         .run(function($ionicPlatform, CacheFactory) {

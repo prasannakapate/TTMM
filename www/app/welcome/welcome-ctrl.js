@@ -3,9 +3,9 @@
     angular
         .module("ttmmApp")
         .controller("WelcomeCtrl", WelcomeCtrl);
-    WelcomeCtrl.$inject = ['$state', '$scope'];
+    WelcomeCtrl.$inject = ['$state'];
 
-    function WelcomeCtrl($state, $scope) {
+    function WelcomeCtrl($state) {
 
     }
 })();
