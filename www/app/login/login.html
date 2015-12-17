@@ -15,13 +15,13 @@
                 </label>
                 <div ng-messages="loginForm.username.$error" class="form-errors" ng-if="loginForm.username.$touched">
                     <ng-messages-include src="app/login/messages.html"></ng-messages-include>
-                    <div class="form-error" ng-message="required">Please enter your Username</div>
+                    <div class="form-error" ng-message="required">Please enter your username</div>
                 </div>
                 <label class="item item-input">
                     <span class="input-label"><i class="icon ion-ios7-email"></i> password</span>
-                    <input type="password" ng-model="vm.userData.password" placeholder="password">
+                    <input type="password" name="password" ng-model="vm.userData.password" placeholder="password" ng-minlength="4" ng-maxlength="10" required>
                 </label>
-                <div ng-messages="loginForm.password.$error" class="form-errors" ng-if="loginForm.username.$touched">
+                <div ng-messages="loginForm.password.$error" class="form-errors" ng-if="loginForm.password.$touched">
                     <ng-messages-include src="app/login/messages.html"></ng-messages-include>
                     <div class="form-error" ng-message="required">Please enter your Password</div>
                 </div>
