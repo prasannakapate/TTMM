@@ -6,10 +6,11 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var karma = require('karma').server;
 
 var paths = {
     sass: ['./scss/**/*.scss'],
-    scripts: ['./www/app/**/*.js']
+    scripts: ['./www/app/**/*.js','./www/app/**/**/*.js']
 };
 
 gulp.task('sass', function(done) {
@@ -37,7 +38,19 @@ gulp.task('watch', function() {
     gulp.watch(paths.scripts, ['scripts']);
 });
 
-gulp.task('wiredep',function(){
+/**
+ * Test task, run test once and exit
+ */
+gulp.task('test', function(done) {
+    karma.start({
+        configFile: __dirname + '/spec/my.conf.js',
+        singleRun: true
+    }, function() {
+        done();
+    });
+});
+
+gulp.task('wiredep', function() {
 
 });
 
@@ -63,4 +76,4 @@ gulp.task('git-check', function(done) {
     done();
 });
 
-gulp.task('default', ['sass','scripts']);
+gulp.task('default', ['sass', 'scripts']);

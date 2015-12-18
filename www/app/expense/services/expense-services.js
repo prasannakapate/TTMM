@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ttmmApp.expense')
+        .module('ttmmApp')
         .factory('expenseDataApi', expenseDataApi);
 
     expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', 'CacheFactory', 'userLoginDataApi'];

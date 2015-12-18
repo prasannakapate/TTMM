@@ -6,7 +6,7 @@
             /*
              *Ionic modules*
              */
-            'ionic', 'ionic-datepicker',
+             'ionic-datepicker',
             /*
              *Angular modules
              */

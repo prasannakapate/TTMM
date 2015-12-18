@@ -1,10 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('ttmmApp', [
-            'ttmmApp.core',
-            'ttmmApp.expense'
-        ])
+        .module('ttmmApp', ['ionic', 'ttmmApp.core', 'ttmmApp.expense', 'ttmmApp.account'])
         //DSCacheFactory is not CacheFactory
         .run(function($ionicPlatform, CacheFactory) {
             $ionicPlatform.ready(function() {
@@ -29,7 +26,7 @@
                     maxAge: 100000,
                     deleteOnExpire: "aggressive"
                 });
-                
+
                 CacheFactory("sessionCache", {
                     storageMode: "localStorage",
                     maxAge: 100000,

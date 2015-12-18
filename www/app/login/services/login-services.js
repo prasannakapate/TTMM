@@ -7,7 +7,9 @@
     userLoginDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', '$ionicPopup'];
 
     function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup) {
-        var userToken = '';
+        /*jshint validthis: true */
+        var vm = this;
+        vm.userData = '';
 
         var LoginServices = {
             loginUser: loginUser,
@@ -16,28 +18,13 @@
         };
         return LoginServices;
 
-        function logoutUser() {
-            var deffered = $q.defer();
-            $http.get('https://api.parse.com/1/logout', {
-
-                })
-                .success(function() {
-
-                })
-                .error(function() {
-
-                });
-
-            return deffered.promise;
-        }
-
         function getCurrentUser() {
             var deffered = $q.defer();
             $http.get('https://api.parse.com/1/users/me', {
                     headers: {
                         'X-Parse-Application-Id': key.appid,
                         'X-Parse-REST-API-Key': key.restid,
-                        'X-Parse-Session-Token': userToken
+                        'X-Parse-Session-Token': vm.userData.sessionToken
                     }
                 })
                 .success(function(response) {
@@ -46,6 +33,26 @@
                 })
                 .error(function(error, status) {
                     console.log("error getting current users details", error, status);
+                    deffered.reject(error, status);
+                });
+            return deffered.promise;
+        }
+
+        function logoutUser() {
+            var deffered = $q.defer();
+            $http.post('https://api.parse.com/1/sessions/' + vm.userData.objectId, {
+                    headers: {
+                        'X-Parse-Application-Id': key.appid,
+                        'X-Parse-REST-API-Key': key.restid,
+                        'X-Parse-Session-Token': vm.userData.sessionToken
+                    }
+                })
+                .success(function(response) {
+                    console.log("Current users Successfully logout", response);
+                    deffered.resolve(response);
+                })
+                .error(function(error, status) {
+                    console.log("error while logging out for currentUser", error, status);
                     deffered.reject(error, status);
                 });
             return deffered.promise;
@@ -73,7 +80,8 @@
                         $ionicLoading.hide();
                         //console.log("user login Successfully", response);
                         deffered.resolve(response);
-                        userToken = response.sessionToken;
+                        vm.userData = response;
+                        console.log("user data ->>>>>>>>>>>>", vm.userData);
                     }, 2000);
 
                 }).error(function(error, status) {

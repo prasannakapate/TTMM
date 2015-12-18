@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "bower": "^1.6.3",
+    "gulp": "^3.9.0",
     "gulp-inject": "^3.0.0",
     "gulp-util": "^3.0.7",
     "jasmine-core": "^2.4.1",

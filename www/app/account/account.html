@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view ng-controller="AccountCtrl as vm">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
             <b>TTMM</b>
@@ -8,10 +8,10 @@
     <ion-content class="padding">
         <div class="list">
             <div class="item item-icon-right">
-                 Hello! <i class="ion-checkmark-circled"></i>
+                 Hello ! {{vm.currentUser.username}} <i class="ion-checkmark-circled"></i>
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </div>
-            <a href="#" class="item item-icon-right">
+            <a href="#" class="item item-icon-right" ng-click="vm.currentUserLogout()">
                 logout <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
         </div>
