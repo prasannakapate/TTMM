@@ -81,6 +81,14 @@
                         }
                     }
                 })
+                .state('tab.account', {
+                    url: '/account',
+                    views: {
+                        'tab-account': {
+                            templateUrl: 'app/account/account.html'
+                        }
+                    }
+                })
                 .state('expense-details', {
                     url: '/expenses/expense-details/:id',
                     templateUrl: 'app/expense/expense-details/expense-details.html'
