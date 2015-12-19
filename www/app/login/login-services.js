@@ -4,10 +4,11 @@
         .module('ttmmApp')
         .factory('userLoginDataApi', userLoginDataApi);
 
-    userLoginDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', '$ionicPopup'];
+    userLoginDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', '$ionicPopup', 'commonService'];
 
-    function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup) {
+    function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup, commonService) {
         /*jshint validthis: true */
+        var key = commonService.getKey();
         var vm = this;
         vm.userData = '';
 

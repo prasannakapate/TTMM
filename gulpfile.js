@@ -7,11 +7,28 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var karma = require('karma').server;
+/*var jshint = require('gulp-jshint');
+var jscs = require('gulp-jscs');*/
 
 var paths = {
     sass: ['./scss/**/*.scss'],
-    scripts: ['./www/app/**/*.js','./www/app/**/**/*.js']
+    scripts: ['./www/app/**/*module.js',
+        './www/app/**/*services.js',
+        './www/app/**/**/*ctrl.js',
+        './www/app/**/*ctrl.js'
+    ]
 };
+
+//code check for quality
+/*gulp.task('vet', function() {
+    return gulp
+        .src(paths.scripts)
+        .pipe(jscs())
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish', {
+            verbose: true
+        }));
+});*/
 
 gulp.task('sass', function(done) {
     gulp.src('./scss/ionic.app.scss')
@@ -27,20 +44,20 @@ gulp.task('sass', function(done) {
         .on('end', done);
 });
 
+//concat and minify js files
 gulp.task('scripts', function() {
-    gulp.src('./www/app/**/*.js') // path to your files
-        .pipe(concat('all.min.js')) // concat and name it "concat.js"
-        .pipe(gulp.dest('./build'));
+    gulp.src(paths.scripts)
+        .pipe(concat('all.min.js'))
+        .pipe(gulp.dest('./www/build'));
 });
 
+//what out your scrits and sass file changes
 gulp.task('watch', function() {
     gulp.watch(paths.sass, ['sass']);
     gulp.watch(paths.scripts, ['scripts']);
 });
 
-/**
- * Test task, run test once and exit
- */
+//Test task, run test once and exit
 gulp.task('test', function(done) {
     karma.start({
         configFile: __dirname + '/spec/my.conf.js',
@@ -51,7 +68,13 @@ gulp.task('test', function(done) {
 });
 
 gulp.task('wiredep', function() {
-
+    var options = config.getWiredepDefaultOptions();//TODO
+    var wiredep = require('wiredep').stream;
+    return gulp
+        .src(paths.index)//TODO index.html
+        .pipe(wiredep(options))
+        .pipe($.inject(gulp.src(config.js)))//TODO
+        .pipe(gulp.dest(config.client)) //TODO
 });
 
 //////////////////////

@@ -5,9 +5,11 @@
         .module('ttmmApp')
         .factory('signUpDataApi', signUpDataApi);
 
-    signUpDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout'];
+    signUpDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', 'commonService'];
 
-    function signUpDataApi($http, $q, $ionicLoading, $timeout) {
+    function signUpDataApi($http, $q, $ionicLoading, $timeout, commonService) {
+        var key = commonService.getKey();
+
         var service = {
             newUserSignUp: newUserSignUp
         };

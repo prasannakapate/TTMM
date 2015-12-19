@@ -4,10 +4,10 @@
     angular
         .module('ttmmApp')
         .factory('sessionService', sessionService);
-    sessionService.$inject = ['$log', 'CacheFactory', 'userLoginDataApi'];
+    sessionService.$inject = ['$log', 'CacheFactory', 'userLoginDataApi', 'commonService'];
 
-    function sessionService($log, CacheFactory, userLoginDataApi) {
-
+    function sessionService($log, CacheFactory, userLoginDataApi, commonService) {
+        var key = commonService.getKey();
         self.userCache = CacheFactory.get('loginUserCache');
         self.accessTokenCache = CacheFactory.get('sessionCache');
 

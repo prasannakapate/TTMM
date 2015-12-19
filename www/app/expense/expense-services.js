@@ -5,10 +5,11 @@
         .module('ttmmApp')
         .factory('expenseDataApi', expenseDataApi);
 
-    expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', 'CacheFactory', 'userLoginDataApi'];
+    expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', 'CacheFactory', 'userLoginDataApi', 'commonService'];
 
-    function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory, userLoginDataApi) {
+    function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory, userLoginDataApi, commonService) {
 
+        var key = commonService.getKey();
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
 
         self.getExpenseListCache.setOptions({
