@@ -39,6 +39,7 @@ gulp.task('sass', function(done) {
 
 //concat and minify js files
 gulp.task('scripts', function() {
+    log("Scripts concat and then minify");
     gulp.src(config.scripts)
         .pipe(concat('all.min.js'))
         .pipe(gulp.dest('./www/build'));
@@ -52,6 +53,7 @@ gulp.task('watch', function() {
 
 //Test task, run test once and exit
 gulp.task('test', function(done) {
+    log("Test executions starts");
     karma.start({
         configFile: __dirname + '/spec/my.conf.js',
         singleRun: true
@@ -93,5 +95,18 @@ gulp.task('git-check', function(done) {
     }
     done();
 });
+
+/////////////////////
+function log(msg) {
+    if (typeof(msg) === 'object') {
+        for (var item in msg) {
+            if (msg.hasOwnProperty(item)) {
+                $.util.log($.util.colors.blue(msg[item]));
+            }
+        }
+    } else {
+        $.util.log($.util.colors.blue(msg));
+    }
+}
 
 gulp.task('default', ['sass', 'scripts']);

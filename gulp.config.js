@@ -19,9 +19,10 @@ module.exports = function() {
         index: './www/index.html',
 
         bower: {
-            json: './bower.json',
-            directory: root + 'lib',
-            ignorePath: '../..'
+            json: require('./bower.json'),
+            directory: root + 'lib/',
+            ignorePath: '../..',
+            exclude: 'www/lib/angular/angular.js'
         }
     };
 
