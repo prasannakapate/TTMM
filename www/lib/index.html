@@ -10,26 +10,6 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
-    <!--  <script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId: '1653907274837998',
-            xfbml: true,
-            version: 'v2.3'
-        });
-    };
-
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "http://connect.facebook.net/en_US/all.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script> -->
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
@@ -39,18 +19,17 @@
 
 <body ng-app="ttmmApp">
     <ion-nav-view animation="slide-left-right"></ion-nav-view>
-    <!-- library files -->
     <!-- bower:js -->
     <!-- endbower -->
-    <!-- <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <!-- library files -->
+    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="lib/angular-cookies/angular-cookies.min.js"></script>
     <script src="lib/angular-messages/angular-messages.min.js"></script>
     <script src="lib/angular-cache/dist/angular-cache.min.js"></script>
-    
-    <script src="lib/lodash/lodash.min.js"></script> -->
+    <script src="lib/lodash/lodash.min.js"></script>
     <script src="lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
-    <!-- your app's js -->
-    <!--  <script src="build/all.min.js"></script> -->
+    <!-- all bundled minified js -->
+    <script src="build/all.min.js"></script>
     <!-- inject:js -->
     <script src="/www/app/app.module.js"></script>
     <script src="/www/app/account/account.module.js"></script>
@@ -58,37 +37,17 @@
     <script src="/www/app/expense/expense.module.js"></script>
     <script src="/www/app/common/settings-services.js"></script>
     <script src="/www/app/expense/expense-services.js"></script>
-    <script src="/www/app/login/login-services.js"></script>
     <script src="/www/app/session/session-services.js"></script>
+    <script src="/www/app/login/login-services.js"></script>
     <script src="/www/app/sign-up/sign-up-services.js"></script>
     <script src="/www/app/account/account-ctrl.js"></script>
     <script src="/www/app/login/login-ctrl.js"></script>
-    <script src="/www/app/sign-up/sign-up-ctrl.js"></script>
     <script src="/www/app/welcome/welcome-ctrl.js"></script>
-    <script src="/www/app/expense/expense-list/expense-list-ctrl.js"></script>
+    <script src="/www/app/sign-up/sign-up-ctrl.js"></script>
     <script src="/www/app/expense/expense-details/expense-details-ctrl.js"></script>
+    <script src="/www/app/expense/expense-list/expense-list-ctrl.js"></script>
     <script src="/www/app/expense/make-expense/make-expense-ctrl.js"></script>
     <!-- endinject -->
-
-<!--<script src="app/app.module.js"></script>
-   <script src="app/core/core.module.js"></script>
-   <script src="app/expense/expense.module.js"></script>
-   <script src="app/account/account.module.js"></script> -->
-
-<!-- Services files -->
-    <!-- <script src="app/common/settings-services.js"></script>
-    <script src="app/login/login-services.js"></script>
-    <script src="app/session/session-services.js"></script>
-    <script src="app/expense/expense-services.js"></script>
-    <script src="app/sign-up/sign-up-services.js"></script> -->
-
-<!-- Controllers files -->
-    <!-- <script src="app/login/login-ctrl.js"></script>
-    <script src="app/sign-up/sign-up-ctrl.js"></script>
-    <script src="app/expense/make-expense/make-expense-ctrl.js"></script>
-    <script src="app/expense/expense-list/expense-list-ctrl.js"></script>
-    <script src="app/expense/expense-details/expense-details-ctrl.js"></script>
-    <script src="app/account/account-ctrl.js"></script> -->
 </body>
 
 </html>

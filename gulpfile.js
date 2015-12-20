@@ -60,15 +60,16 @@ gulp.task('test', function(done) {
     });
 });
 
+//wiredep task for bower and scripts to inject on index page
 gulp.task('wiredep', function() {
-    options = config.getWiredepDefaultOptions();
-    wiredep = require('wiredep').stream;
+    var options = config.getWiredepDefaultOptions();
+    var wiredep = require('wiredep').stream;
 
     return gulp
         .src(config.index)
         .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.scripts)))
-        .pipe(gulp.dest(config.root + 'lib'))
+        .pipe(gulp.dest(config.root))
 });
 
 //////////////////////

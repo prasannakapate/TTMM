@@ -19,7 +19,7 @@ module.exports = function() {
         index: './www/index.html',
 
         bower: {
-            json: 'bower.json',
+            json: './bower.json',
             directory: root + 'lib',
             ignorePath: '../..'
         }
