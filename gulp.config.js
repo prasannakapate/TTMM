@@ -5,19 +5,21 @@ module.exports = function() {
     var config = {
         //scss files
         sass: ['./scss/**/*.scss'],
-
         //sequene wise script load
         scripts: [rootApp + '**/*module.js',
             rootApp + '**/*services.js',
             rootApp + '**/**/*ctrl.js',
             rootApp + '**/*ctrl.js'
         ],
+        //images scource
+        images: root + 'img/**/*.*',
+        //build folder
+        build: root + 'build/',
         //root dir ./www
         root: root,
-
         //index html
-        index: './www/index.html',
-
+        index: root + 'index.html',
+        //bower configuration options for html inject
         bower: {
             json: require('./bower.json'),
             directory: root + 'lib/',

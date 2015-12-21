@@ -12,17 +12,38 @@ var gulp = require('gulp'),
         lazy: true
     });
 
+//lists all tasks which are defined
+gulp.task('help', $.taskListing);
+
+//copy and compress the images
+gulp.task('images', function() {
+    log('Copying  and compressing images');
+
+    return gulp
+        .src(config.images)
+        .pipe($.imagemin({
+            optimizationLevel: 4
+        }))
+        .pipe(gulp.dest(config.build + 'img/'));
+})
+
+
 //code check for quality
 gulp.task('vet', function() {
+    log('Analyzing source with JSHint and JSCS');
+
     return gulp
         .src(config.scripts)
+        .pipe($.if(args.verbose, $.print()))
         .pipe($.jscs())
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish', {
             verbose: true
-        }));
+        }))
+        .pipe($.jshint.reporter('fail'));
 });
 
+//sass compilation
 gulp.task('sass', function(done) {
     gulp.src('./scss/ionic.app.scss')
         .pipe(sass())
@@ -42,7 +63,7 @@ gulp.task('scripts', function() {
     log("Scripts concat and then minify");
     gulp.src(config.scripts)
         .pipe(concat('all.min.js'))
-        .pipe(gulp.dest('./www/build'));
+        .pipe(gulp.dest(config.build + 'js/'));
 });
 
 //what out your scrits and sass file changes
