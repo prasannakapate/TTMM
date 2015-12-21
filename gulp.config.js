@@ -1,6 +1,7 @@
 module.exports = function() {
     var root = './www/';
     var rootApp = root + 'app/';
+    server = './server.js';
 
     var config = {
         //scss files
@@ -25,7 +26,14 @@ module.exports = function() {
             directory: root + 'lib/',
             ignorePath: '../..',
             exclude: 'www/lib/angular/angular.js'
-        }
+        },
+        //node express server
+        server: server,
+        /**
+         * Node Settings
+         */
+        defaultPort: 5000,
+        nodeServer: './server.js'
     };
 
     config.getWiredepDefaultOptions = function() {

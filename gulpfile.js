@@ -15,6 +15,23 @@ var gulp = require('gulp'),
 //lists all tasks which are defined
 gulp.task('help', $.taskListing);
 
+//serving my dev environment
+gulp.task('serve-dev', ['wiredep'], function() {
+    var nodeOptions = {
+        script: config.nodeServer,
+        delayTime: 1,
+        env: {
+            'PORT': port,
+            'NODE_ENV': isDev ? 'dev' : 'build'
+
+        },
+        watch: [config.server]
+    };
+
+    return $.nodemon(nodeOptions);
+
+});
+
 //copy and compress the images
 gulp.task('images', function() {
     log('Copying  and compressing images');
@@ -25,7 +42,7 @@ gulp.task('images', function() {
             optimizationLevel: 4
         }))
         .pipe(gulp.dest(config.build + 'img/'));
-})
+});
 
 
 //code check for quality
@@ -92,7 +109,7 @@ gulp.task('wiredep', function() {
         .src(config.index)
         .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.scripts)))
-        .pipe(gulp.dest(config.root))
+        .pipe(gulp.dest(config.root));
 });
 
 //////////////////////
