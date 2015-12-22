@@ -3,6 +3,7 @@ module.exports = function() {
     var rootApp = root + 'app/';
     var server = './server.js';
     var temp = root + 'temp/';
+    var report = './report/';
 
     var config = {
         sass: ['./scss/**/*.scss'],
@@ -18,6 +19,7 @@ module.exports = function() {
         index: root + 'index.html',
         server: server,
         temp: temp,
+        report: report,
         /**
          * template cache
          */
@@ -39,6 +41,10 @@ module.exports = function() {
         },
 
         /**
+         * karma and testing settings
+         */
+        serverIntegrationSpecs: [root + 'tests/server-integration/**/*.spec.js'],
+        /**
          * Node Settings
          */
         defaultPort: 5000,
@@ -53,5 +59,39 @@ module.exports = function() {
         };
         return options;
     };
+
+    config.karma = getKarmaOptions();
+
     return config;
+
+    ///////////////////////////////////
+
+    function getKarmaOptions() {
+        var options = {
+            files: [].concat(
+                //bowerFiles,
+                config.specHelpers,
+                rootApp + '**/*.module.js',
+                rootApp + '**/*.js',
+                //build + config.templateCache.file,
+                config.serverIntegrationSpecs
+            ),
+            exclude: [],
+            coverage: {
+                dit: report + 'coverage',
+                reporters: [{
+                    type: 'html',
+                    subdir: 'report-html'
+                }, {
+                    type: 'lcov',
+                    subdir: 'report-lcov'
+                }, {
+                    type: 'text-summary'
+                }]
+            },
+            preprocessors:{}
+        };
+        options.preprocessors[rootApp + '**/!(*.spec)+(.js)'] = ['coverage'];
+        return options;
+    }
 };

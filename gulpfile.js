@@ -1,4 +1,7 @@
 var gulp = require('gulp'),
+    args = require('yargs').argv,
+    config = require('./gulp.config')(),
+    karma = require('karma').server,
     browserSync = require('browser-sync'),
     gutil = require('gulp-util'),
     bower = require('bower'),
@@ -6,12 +9,12 @@ var gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
     sh = require('shelljs'),
-    config = require('./gulp.config')(),
-    karma = require('karma').server,
     $ = require('gulp-load-plugins')({
         lazy: true
     });
+
 var port = process.env.PORT || config.defaultPort;
+
 
 //lists all tasks which are defined
 gulp.task('help', $.taskListing);
@@ -67,10 +70,12 @@ gulp.task('serve-build', ['scripts', 'templatecache', 'images'], function() {
         .on('restart', function(ev) {
             log('**** nodemon restarted');
             log('files changed on restart:\n' + ev);
-            setTimeout(function(){
+            setTimeout(function() {
                 browserSync.notify('reloading now ...');
-                browserSync.reload({stream:false});
-            },config.browserReloadDelay);
+                browserSync.reload({
+                    stream: false
+                });
+            }, config.browserReloadDelay);
         })
         .on('start', function() {
             log('**** nodemon started');
@@ -88,7 +93,6 @@ gulp.task('serve-build', ['scripts', 'templatecache', 'images'], function() {
 //code check for quality
 gulp.task('vet', function() {
     log('Analyzing source with JSHint and JSCS');
-
     return gulp
         .src(config.scripts)
         .pipe($.if(args.verbose, $.print()))
@@ -125,12 +129,7 @@ gulp.task('watch', function() {
 //Test task, run test once and exit
 gulp.task('test', function(done) {
     log("Test executions starts");
-    karma.start({
-        configFile: __dirname + '/spec/my.conf.js',
-        singleRun: true
-    }, function() {
-        done();
-    });
+    startTests(true /*singleRun*/ , done);
 });
 
 //wiredep task for bower and scripts to inject on index page
@@ -167,9 +166,35 @@ gulp.task('git-check', function(done) {
     done();
 });
 
-gulp.task('default', ['sass', 'scripts', 'vet']);
+gulp.task('default', ['sass', 'scripts']);
+
 
 /////////////////////
+
+
+function startTests(singleRun, run) {
+    var karma = require('karma').server;
+    var excludeFiles = [];
+    var serverSpec = config.serverIntegrationSpecs; //todo
+
+    excludeFiles = serverSpec;
+
+    karma.start({
+        config: __dirname + 'karma.config.js',
+        exclude: excludeFiles,
+        single: !!singleRun
+    }, karmaCompleted);
+
+    function karmaCompleted(karmaResult) {
+        log('karma completed !');
+        if (karmaResult === 1) {
+            done('karma: tests failed with code ' + karmaResult);
+        } else {
+            done();
+        }
+    }
+}
+
 function log(msg) {
     if (typeof(msg) === 'object') {
         for (var item in msg) {
