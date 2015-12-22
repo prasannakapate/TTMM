@@ -2,13 +2,14 @@
     'use strict';
 
     angular
-        .module('ttmmApp')
+        .module('ttmmApp.expense')
         .controller('MakeExpenseCtrl', MakeExpenseCtrl);
 
-    MakeExpenseCtrl.$inject = ['$scope', '$state', 'expenseDataApi'];
+    MakeExpenseCtrl.$inject = ['$scope', '$state', 'expenseDataApi', 'userLoginDataApi'];
 
-    function MakeExpenseCtrl($scope, $state, expenseDataApi) {
+    function MakeExpenseCtrl($scope, $state, expenseDataApi, userLoginDataApi) {
         $scope.loadList = '';
+        $scope.currentUser = '';
         $scope.makeExpense = makeExpense;
         $scope.expense = {};
         $scope.datepickerObject = {};
@@ -40,15 +41,23 @@
 
         ////////////////
 
+        /*userLoginDataApi.getCurrentUser().then(function(data) {
+            $scope.currentUser = data;
+            console.log("current user details", $scope.currentUser);
+            $scope.expense.userId = data.objectId;
+        });*/
+
+
         function datePickerCallback(val) {
             if (typeof(val) === 'undefined') {
                 console.log('No date selected');
             } else {
                 $scope.datepickerObjectPopup.inputDate = val;
-                $scope.expense.expenseMonth = $scope.datepickerObjectPopup.inputDate;
+                $scope.expense.expenseMonth = val;
                 console.log('Selected date is : ', val);
             }
         }
+
 
         function makeExpense(expense) {
             console.log("makeExpense Called", expense);

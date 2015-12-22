@@ -1,2 +1,5 @@
 # TTMM  2015-1-25
-Expense Tracker.
+Your personal and group expense tracker and much more.
+
+## Deployed on heroku demo
+https://ttmm.herokuapp.com

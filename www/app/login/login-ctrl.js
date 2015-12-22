@@ -3,21 +3,29 @@
     angular
         .module("ttmmApp")
         .controller("LoginCtrl", LoginCtrl);
-    LoginCtrl.$inject = ['$state', '$scope', 'LoginApi', '$cookieStore'];
+    LoginCtrl.$inject = ['$state', 'userLoginDataApi', '$cookieStore'];
 
-    function LoginCtrl($state, $scope, LoginApi, $cookieStore) {
+    function LoginCtrl($state, userLoginDataApi, $cookieStore) {
+        var vm = this;
+        vm.userData = {};
+        vm.currentUser = {};
+        vm.userLogin = userLogin;
+        vm.fbLogin = fbLogin;
 
-        $scope.signIn = function(user) {
-            console.log("User Data=", user);
-            $state.go('tab.expenses');
+        //Login for users
+        function userLogin() {
+            userLoginDataApi.
+            loginUser(vm.userData.username, vm.userData.password)
+                .then(function(user) {
+                    $state.go('tab.makeExpense');
+                    vm.currentUser = user;
+                    console.log("User details", vm.currentUser);
+                });
         }
 
-        $scope.goToSignUp = function(user) {
-            $state.go('newSignUp');
-        }
 
         // FB Login
-        $scope.fbLogin = function() {
+        function fbLogin() {
             FB.login(function(response) {
                 if (response.authResponse) {
                     getUserInfo();
@@ -54,6 +62,6 @@
                     });
                 });
             }
-        };
+        }
     }
 })();

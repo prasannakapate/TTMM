@@ -10,26 +10,6 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
-    <script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId: '1653907274837998',
-            xfbml: true,
-            version: 'v2.3'
-        });
-    };
-
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "http://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
@@ -40,24 +20,26 @@
 <body ng-app="ttmmApp">
     <ion-nav-view animation="slide-left-right"></ion-nav-view>
     <!-- library files -->
-    <script src="lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
-    <script src="lib/lodash/lodash.min.js"></script>
     <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="lib/angular-cookies/angular-cookies.min.js"></script>
     <script src="lib/angular-messages/angular-messages.min.js"></script>
     <script src="lib/angular-cache/dist/angular-cache.min.js"></script>
-    <!-- your app's js -->
-    <!-- <script src="../build/www/all.js"></script> -->
-    <script src="app/settings.js"></script>
-    <script src="app/app.js"></script>
-    <script src="app/login/login-services.js"></script>
-    <script src="app/event/services/event-services.js"></script>
-    <script src="app/expense/services/make-expense-services.js"></script>
-    <script src="app/login/login-ctrl.js"></script>
-    <script src="app/sign-up/sign-up-ctrl.js"></script>
-    <script src="app/expense/make-expense/make-expense-ctrl.js"></script>
-    <script src="app/expense/expense-list/expense-list-ctrl.js"></script>
-    <script src="app/expense/expense-details/expense-details-ctrl.js"></script>
+    <script src="lib/lodash/lodash.min.js"></script>
+    <script src="lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
+    
+    
+    <script src="build/js/all.min.js"></script>
+    <script src="build/js/template.js"></script>
+    
+    <!-- build:js js/all.min.js -->
+
+    <!-- inject:js -->
+    <!-- endinject -->
+    
+    <!-- inject:templates:js -->
+    <!-- endinject -->
+
+    <!-- endbuild -->
 </body>
 
 </html>

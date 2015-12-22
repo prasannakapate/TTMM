@@ -1,7 +1,7 @@
-<ion-view ng-controller="SignUpCtrl">
+<ion-view ng-controller="SignUpCtrl as vm">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
-            <button class="button button-clear ion-android-arrow-back" ui-sref="app"> back
+            <button class="button button-clear ion-android-arrow-back" ui-sref="welcome"> back
             </button>
             <h1 class="title">Sign Up</h1>
         </div>
@@ -9,22 +9,27 @@
     <ion-content class="padding">
         <div class="list">
             <label class="item item-input">
-                <input type="text" placeholder="Choose Username">
+                <span class="input-label"><i class="icon ion-person"></i> Username</span>
+                <input type="text" ng-model="vm.userData.username" placeholder="Choose Username" autofocus>
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Mobile">
+                <span class="input-label"><i class="icon ion-key"></i> Password</span>
+                <input type="password" ng-model="vm.userData.password" placeholder="Password">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Country">
+                <span class="input-label"><i class="icon ion-ios7-email"></i> Email</span>
+                <input type="text" ng-model="vm.userData.email" placeholder="Email">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="DOB">
+                <span class="input-label"><i class="icon ion-ios7-flag"></i> Country</span>
+                <input type="text" ng-model="vm.userData.country" placeholder="Country">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Gender">
+                <span class="input-label"><i class="icon ion-iphone"></i> Mobile No</span>
+                <input type="text" ng-model="vm.userData.mobileNo" placeholder="Mobile (optional)">
             </label>
-            <button class="button button-block button-outline button-royal" ui-sref="tab.expenses">
-                <b> Sign In </b>
+            <button class="button button-block button-outline button-royal" ng-click="vm.userSignUp(vm.userData)">
+                <b> Sign Up </b>
             </button>
         </div>
     </ion-content>

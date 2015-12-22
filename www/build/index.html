@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+</head>
+
+<body ng-app="ttmmApp">
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    <!-- library files -->
+    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+    <script src="lib/angular-messages/angular-messages.min.js"></script>
+    <script src="lib/angular-cache/dist/angular-cache.min.js"></script>
+    <script src="lib/lodash/lodash.min.js"></script>
+    <script src="lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
+    
+    
+    
+    <!-- build:js js/all.min.js -->
+
+    <!-- inject:js -->
+    <script src="/app/app.module.js"></script>
+    <script src="/app/account/account.module.js"></script>
+    <script src="/app/common/common.module.js"></script>
+    <script src="/app/core/core.module.js"></script>
+    <script src="/app/expense/expense.module.js"></script>
+    <script src="/app/common/settings-services.js"></script>
+    <script src="/app/expense/expense-services.js"></script>
+    <script src="/app/login/login-services.js"></script>
+    <script src="/app/session/session-services.js"></script>
+    <script src="/app/sign-up/sign-up-services.js"></script>
+    <script src="/app/account/account-ctrl.js"></script>
+    <script src="/app/login/login-ctrl.js"></script>
+    <script src="/app/sign-up/sign-up-ctrl.js"></script>
+    <script src="/app/welcome/welcome-ctrl.js"></script>
+    <script src="/app/expense/expense-details/expense-details-ctrl.js"></script>
+    <script src="/app/expense/expense-list/expense-list-ctrl.js"></script>
+    <script src="/app/expense/make-expense/make-expense-ctrl.js"></script>
+    <!-- endinject -->
+    
+    <!-- inject:templates:js -->
+    <script src="/www/temp/template.js"></script>
+    <!-- endinject -->
+
+    <!-- endbuild -->
+</body>
+
+</html>
