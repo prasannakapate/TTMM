@@ -1,34 +1,43 @@
 module.exports = function() {
     var root = './www/';
     var rootApp = root + 'app/';
-    server = './server.js';
+    var server = './server.js';
+    var temp = root + 'temp/';
 
     var config = {
-        //scss files
         sass: ['./scss/**/*.scss'],
-        //sequene wise script load
         scripts: [rootApp + '**/*module.js',
             rootApp + '**/*services.js',
             rootApp + '**/**/*ctrl.js',
             rootApp + '**/*ctrl.js'
         ],
-        //images scource
+        htmltemplates: rootApp + '**/**/*.html',
         images: root + 'img/**/*.*',
-        //build folder
         build: root + 'build/',
-        //root dir ./www
         root: root,
-        //index html
         index: root + 'index.html',
-        //bower configuration options for html inject
+        server: server,
+        temp: temp,
+        /**
+         * template cache
+         */
+        templateCache: {
+            file: 'template.js',
+            options: {
+                module: 'ttmmApp.core',
+                standAlone: false,
+                root: 'app/'
+            }
+        },
+        /**
+         * bower configuration options for html inject
+         */
         bower: {
             json: require('./bower.json'),
             directory: root + 'lib/',
-            ignorePath: '../..',
-            exclude: 'www/lib/angular/angular.js'
+            ignorePath: '../..'
         },
-        //node express server
-        server: server,
+
         /**
          * Node Settings
          */

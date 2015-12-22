@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('ttmmApp', ['ionic', 'ttmmApp.core', 'ttmmApp.expense', 'ttmmApp.account'])
+        .module('ttmmApp', ['ionic', 'ttmmApp.core', 'ttmmApp.expense', 'ttmmApp.account','ttmmApp.common'])
         //DSCacheFactory is not CacheFactory
         .run(function($ionicPlatform, CacheFactory) {
             $ionicPlatform.ready(function() {
@@ -49,12 +49,12 @@
 
             $stateProvider
                 .state('welcome', {
-                    url: "/welcome",
+                    url: "/app/welcome",
                     templateUrl: "app/welcome/welcome.html"
                 })
 
             .state('login', {
-                    url: "/login",
+                    url: "/app/login",
                     templateUrl: "app/login/login.html"
                 })
                 .state('tab', {
@@ -63,7 +63,7 @@
                     templateUrl: "app/layout/tabs.html"
                 })
                 .state('tab.makeExpense', {
-                    url: '/makeExpense',
+                    url: '/app/makeExpense',
                     views: {
                         'tab-makeExpense': {
                             templateUrl: 'app/expense/make-expense/make-expense.html'
@@ -87,21 +87,21 @@
                     }
                 })
                 .state('expense-details', {
-                    url: '/expenses/expense-details/:id',
+                    url: '/app/expenses/expense-details/:id',
                     templateUrl: 'app/expense/expense-details/expense-details.html'
                 })
                 .state('newSignUp', {
-                    url: '/newSignUp',
+                    url: '/app/newSignUp',
                     templateUrl: 'app/sign-up/sign-up.html'
                 })
                 .state('forgotPassword', {
-                    url: '/forgotPassword',
+                    url: '/app/forgotPassword',
                     templateUrl: 'app/forgot-password/forgot-password.html'
                 })
                 .state('contactUs', {
-                    url: '/contactUs',
+                    url: '/app/contactUs',
                     templateUrl: 'app/contact-us/contact-us.html'
                 });
-            $urlRouterProvider.otherwise('/welcome');
+            $urlRouterProvider.otherwise('/app/welcome');
         });
 })();

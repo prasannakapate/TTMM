@@ -1,5 +1,7 @@
 (function() {
     'use strict';
+    var port = process.env.PORT || 5000;
+    var environment = process.env.NODE_ENV;
     var express = require('express'),
         app = express();
 
@@ -15,7 +17,7 @@
     // API Routes
     // app.get('/blah', routeHandler);
 
-    app.set('port', process.env.PORT || 5000);
+    app.set('port', port);
 
     app.listen(app.get('port'), function() {
         console.log('Express server listening on port ' + app.get('port'));

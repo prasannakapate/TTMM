@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
+    browserSync = require('browser-sync'),
     gutil = require('gulp-util'),
     bower = require('bower'),
-    concat = require('gulp-concat'),
     sass = require('gulp-sass'),
     minifyCss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
@@ -11,25 +11,32 @@ var gulp = require('gulp'),
     $ = require('gulp-load-plugins')({
         lazy: true
     });
+var port = process.env.PORT || config.defaultPort;
 
 //lists all tasks which are defined
 gulp.task('help', $.taskListing);
 
-//serving my dev environment
-gulp.task('serve-dev', ['wiredep'], function() {
-    var nodeOptions = {
-        script: config.nodeServer,
-        delayTime: 1,
-        env: {
-            'PORT': port,
-            'NODE_ENV': isDev ? 'dev' : 'build'
+//concat and minify js files
+gulp.task('scripts', function() {
+    log("Scripts concat and then minify to build folder");
+    gulp.src(config.scripts)
+        .pipe($.concat('all.min.js'))
+        .pipe(gulp.dest(config.build + 'js/'));
+});
 
-        },
-        watch: [config.server]
-    };
 
-    return $.nodemon(nodeOptions);
-
+//html templatecache
+gulp.task('templatecache', function() {
+    log('creating angularjs $templateCache');
+    return gulp
+        .src(config.htmltemplates)
+        .pipe($.minifyHtml({
+            empty: true
+        }))
+        .pipe($.angularTemplatecache(
+            config.templateCache.file,
+            config.templateCache.options))
+        .pipe(gulp.dest(config.build + 'js/'));
 });
 
 //copy and compress the images
@@ -42,6 +49,39 @@ gulp.task('images', function() {
             optimizationLevel: 4
         }))
         .pipe(gulp.dest(config.build + 'img/'));
+});
+
+
+//serving my dev environment
+gulp.task('serve-build', ['scripts', 'templatecache', 'images'], function() {
+    var isDev = true;
+    var nodeOptions = {
+        script: config.nodeServer,
+        delayTime: 1,
+        env: {
+            'PORT': port
+        },
+        watch: [config.server]
+    };
+    return $.nodemon(nodeOptions)
+        .on('restart', function(ev) {
+            log('**** nodemon restarted');
+            log('files changed on restart:\n' + ev);
+            setTimeout(function(){
+                browserSync.notify('reloading now ...');
+                browserSync.reload({stream:false});
+            },config.browserReloadDelay);
+        })
+        .on('start', function() {
+            log('**** nodemon started');
+            startBrowserSync();
+        })
+        .on('crash', function() {
+            log('**** nodemon crashed: script crashed for some reason');
+        })
+        .on('exit', function() {
+            log('**** nodemon exited cleanly');
+        });
 });
 
 
@@ -75,13 +115,6 @@ gulp.task('sass', function(done) {
         .on('end', done);
 });
 
-//concat and minify js files
-gulp.task('scripts', function() {
-    log("Scripts concat and then minify");
-    gulp.src(config.scripts)
-        .pipe(concat('all.min.js'))
-        .pipe(gulp.dest(config.build + 'js/'));
-});
 
 //what out your scrits and sass file changes
 gulp.task('watch', function() {
@@ -134,6 +167,8 @@ gulp.task('git-check', function(done) {
     done();
 });
 
+gulp.task('default', ['sass', 'scripts', 'vet']);
+
 /////////////////////
 function log(msg) {
     if (typeof(msg) === 'object') {
@@ -147,4 +182,47 @@ function log(msg) {
     }
 }
 
-gulp.task('default', ['sass', 'scripts']);
+function startBrowserSync() {
+    if (browserSync.active) {
+        return;
+    }
+    log('start browser-sync on port' + port);
+    var options = {
+        proxy: 'localhost:' + port,
+        port: 4000,
+        files: [config.root + '**/*.*'],
+        ghostMode: {
+            clicks: true,
+            location: true,
+            forms: true,
+            scroll: true
+        },
+        injectChanges: true,
+        logFileChanges: true,
+        logLevel: 'debug',
+        logPrefix: 'gulp-patterns',
+        notify: true,
+        reloadDelay: 1000
+    };
+
+    browserSync(options);
+}
+
+
+
+/*gulp.task('optimize', ['wiredep'], function() {
+    log('Optimizing the js, html, css');
+
+    var templateCache = config.temp + config.templateCache.file;
+
+    return gulp
+        .src(config.index)
+        .pipe($.plumber())
+        //todo processing
+        .pipe($.inject(gulp.src(templateCache, {
+            read: false
+        }), {
+            starttag: '<!-- inject:templates:js -->'
+        }))
+        .pipe(gulp.dest(config.build));
+});*/
