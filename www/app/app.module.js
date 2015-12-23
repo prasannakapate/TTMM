@@ -71,7 +71,7 @@
                     }
                 })
                 .state('tab.expenses', {
-                    url: '/expenses',
+                    url: '/app/expenses',
                     views: {
                         'tab-expenses': {
                             templateUrl: 'app/expense/expense-list/expense-list.html'
@@ -79,7 +79,7 @@
                     }
                 })
                 .state('tab.account', {
-                    url: '/account',
+                    url: '/app/account',
                     views: {
                         'tab-account': {
                             templateUrl: 'app/account/account.html'

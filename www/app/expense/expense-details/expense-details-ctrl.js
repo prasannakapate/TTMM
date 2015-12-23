@@ -13,7 +13,7 @@
         $scope.totalMonthlySum = '';
         $scope.loadList = '';
 
-        console.log("stateParams = ", $scope.expenseMonth);
+        //console.log("stateParams = ", $scope.expenseMonth);
 
         $scope.loadList = function(forceRefresh) {
             expenseDataApi.getExpenseList(forceRefresh).then(function(data) {

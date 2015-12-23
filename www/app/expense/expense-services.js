@@ -53,7 +53,7 @@
             }
 
             if (expenseListData) {
-                console.log("Found data inside the cache", expenseListData);
+                //console.log("Found data inside the cache", expenseListData);
                 deffered.resolve(expenseListData);
             } else {
 
@@ -68,10 +68,10 @@
                     }
                 }).success(function(response) {
                     $timeout(function() {
-                        console.log("Received getExpenseList Data via HTTP");
                         self.getExpenseListCache.put(cacheKey, response);
                         $ionicLoading.hide();
                         deffered.resolve(response);
+                        //console.log("Received getExpenseList Data via HTTP");
                     }, 2000);
 
                 }).error(function(error, status) {
