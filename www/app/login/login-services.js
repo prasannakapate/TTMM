@@ -82,7 +82,7 @@
                         //console.log("user login Successfully", response);
                         deffered.resolve(response);
                         vm.userData = response;
-                        console.log("user data ->>>>>>>>>>>>", vm.userData);
+                        //console.log("user data ->>>>>>>>>>>>", vm.userData);
                     }, 2000);
 
                 }).error(function(error, status) {

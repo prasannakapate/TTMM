@@ -24,6 +24,7 @@ gulp.task('scripts', function() {
     log("Scripts concat and then minify to build folder");
     gulp.src(config.scripts)
         .pipe($.concat('all.min.js'))
+        .pipe($.uglify({mangle: false}, {compress: false}))
         .pipe(gulp.dest(config.build + 'js/'));
 });
 

@@ -8,31 +8,29 @@
     ExpenseListCtrl.$inject = ['$scope', '$filter', 'expenseDataApi'];
 
     function ExpenseListCtrl($scope, $filter, expenseDataApi) {
-        $scope.title = 'My Expenses';
-        $scope.expenseGroupByMonth = '';
-        $scope.loadList = '';
+        var vm = this;
+        vm.title = 'My Expenses';
+        vm.expenseGroupByMonth = '';
+        vm.loadList = loadList;
 
-        $scope.loadList = function(forceRefresh) {
+        function loadList(forceRefresh) {
             //item.dateAsString = $filter('date')(item.date, "yyyy-MM-dd");  // for type="date" binding
             expenseDataApi.getExpenseList(forceRefresh).then(function(data) {
-                $scope.expenseGroupByMonth = _(data.results).chain()
+                vm.expenseGroupByMonth = _(data.results).chain()
                     .groupBy(function(item) {
                         item.expenseMonth = $filter('date')(item.expenseMonth, "MMM-yyyy");
-                        return item.expenseMonth.substring(0, 8);
+                        return item.expenseMonth;
                     })
                     .pairs()
                     .map(function(currentItem) {
                         return _.object(_.zip(["month", "expenseDetails"], currentItem));
                     })
                     .value();
-                //console.log($scope.expenseGroupByMonth);
-                //item.dateAsString = $filter('date')(item.date, "yyyy-MM-dd");
-                //$scope.expenseGroupByMonth.month = $filter('date')(new Date(), 'month'); // for type="date" binding
-                console.log($scope.expenseGroupByMonth);
+                //console.log(vm.expenseGroupByMonth);
             }).finally(function() {
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };
-        $scope.loadList(false);
+        vm.loadList(false);
     }
 })();

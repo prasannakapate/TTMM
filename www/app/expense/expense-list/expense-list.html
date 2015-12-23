@@ -1,18 +1,18 @@
-<ion-view ng-controller="ExpenseListCtrl">
+<ion-view ng-controller="ExpenseListCtrl as vm">
     <ion-header-bar class="bar-royal">
         <div class="buttons">
             <b>TTMM</b>
-            <h1 class="title">{{title}}</h1>
+            <h1 class="title">{{vm.title}}</h1>
         </div>
     </ion-header-bar>
     <ion-content>
-    <ion-refresher pulling-text="pull to refresh..." on-refresh="loadList(true)"></ion-refresher>
+    <ion-refresher pulling-text="pull to refresh..." on-refresh="vm.loadList(true)"></ion-refresher>
         <div class="list">
             <div class="item item-divider item-stable">
                <h2 class="text-balanced"><b>Monthly Expenses</b></h2>
             </div>
-            <a class="item item-icon-right" ng-repeat="expense in expenseGroupByMonth | orderBy: '-createdAt'" 
-                href="#/expenses/expense-details/{{expense.month}}"> 
+            <a class="item item-icon-right" ng-repeat="expense in vm.expenseGroupByMonth" 
+                href="#/app/expenses/expense-details/{{expense.month}}"> 
                 {{expense.month}}
                 <i class="icon icon-accessory ion-chevron-right"></i>
             </a>
