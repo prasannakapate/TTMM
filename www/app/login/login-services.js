@@ -4,9 +4,9 @@
         .module('ttmmApp')
         .factory('userLoginDataApi', userLoginDataApi);
 
-    userLoginDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', '$ionicPopup', 'commonService'];
+    userLoginDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', '$ionicPopup', 'commonService', 'formEncode'];
 
-    function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup, commonService) {
+    function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup, commonService, formEncode) {
         /*jshint validthis: true */
         var key = commonService.getKey();
         var vm = this;
@@ -61,6 +61,11 @@
 
         function loginUser(username, password) {
             var deffered = $q.defer();
+            var data = {
+                username: username,
+                password: password,
+                grant_type: 'password'
+            };
 
             $ionicLoading.show({
                 template: '<div class="ion-loading-c"></div> Loading...'
@@ -69,12 +74,10 @@
             $http.get('https://api.parse.com/1/login', {
                     headers: {
                         'X-Parse-Application-Id': key.appid,
-                        'X-Parse-REST-API-Key': key.restid
+                        'X-Parse-REST-API-Key': key.restid,
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    params: {
-                        username: username,
-                        password: password
-                    }
+                    params: data
                 })
                 .success(function(response) {
                     $timeout(function() {

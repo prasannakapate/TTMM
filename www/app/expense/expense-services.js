@@ -8,6 +8,14 @@
     expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', 'CacheFactory', 'userLoginDataApi', 'commonService'];
 
     function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory, userLoginDataApi, commonService) {
+        /*jshint validthis: true */
+        var vm = this;
+        vm.currentUser = '';
+
+        userLoginDataApi.getCurrentUser().then(function(data) {
+            vm.currentUser = data.objectId;
+            console.log("currentUser details lllllllllll", vm.currentUser);
+        });
 
         var key = commonService.getKey();
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
@@ -41,6 +49,15 @@
 
         function getExpenseList(forceRefresh) {
 
+            /*            var query = where = {
+                            "userId": {
+                                "__type": "Pointer",
+                                "className": "_User",
+                                "objectId": "2CoLw1z9RQ"
+                            }
+                        };*/
+
+
             if (typeof forceRefresh === 'undefined') {
                 forceRefresh = false;
             }
@@ -65,13 +82,22 @@
                     headers: {
                         'X-Parse-Application-Id': key.appid,
                         'X-Parse-REST-API-Key': key.restid
+                    },
+                    params: {
+                        where: {
+                            userId: {
+                                __type: 'Pointer',
+                                className: '_User',
+                                objectId: vm.currentUser
+                            }
+                        }
                     }
                 }).success(function(response) {
                     $timeout(function() {
                         self.getExpenseListCache.put(cacheKey, response);
                         $ionicLoading.hide();
                         deffered.resolve(response);
-                        //console.log("Received getExpenseList Data via HTTP");
+                        console.log("Received getExpenseList Data via HTTP", response);
                     }, 2000);
 
                 }).error(function(error, status) {
@@ -91,7 +117,15 @@
                 headers: {
                     'X-Parse-Application-Id': key.appid,
                     'X-Parse-REST-API-Key': key.restid
+                },
+                data: {
+                    userId: {
+                        __type: 'Pointer',
+                        className: '_User',
+                        objectId: vm.currentUser
+                    }
                 }
+
             }).success(function(response) {
                 deffered.resolve(response);
                 console.log("make new expense success");

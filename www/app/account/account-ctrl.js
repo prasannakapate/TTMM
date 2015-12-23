@@ -28,9 +28,5 @@
                 console.log("Logout user datails", data);
             });
         }
-        /*        userLoginDataApi.getCurrentUser().then(function(data) {
-                    vm.currentUser = data;
-                });
-        */
     }
 })();

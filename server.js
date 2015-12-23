@@ -15,7 +15,6 @@
     });
 
     // API Routes
-    // app.get('/blah', routeHandler);
 
     app.set('port', port);
 

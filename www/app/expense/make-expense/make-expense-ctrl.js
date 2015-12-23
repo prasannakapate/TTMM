@@ -41,12 +41,12 @@
 
         ////////////////
 
-        /*userLoginDataApi.getCurrentUser().then(function(data) {
+/*        userLoginDataApi.getCurrentUser().then(function(data) {
             $scope.currentUser = data;
             console.log("current user details", $scope.currentUser);
             $scope.expense.userId = data.objectId;
-        });*/
-
+        });
+*/
 
         function datePickerCallback(val) {
             if (typeof(val) === 'undefined') {
