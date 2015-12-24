@@ -8,21 +8,19 @@
     function LoginCtrl($state, userLoginDataApi, $cookieStore) {
         var vm = this;
         vm.userData = {};
-        vm.currentUser = {};
+        vm.currentUserId = '';
         vm.userLogin = userLogin;
         vm.fbLogin = fbLogin;
 
         //Login for users
         function userLogin() {
-            userLoginDataApi.
-            loginUser(vm.userData.username, vm.userData.password)
+            userLoginDataApi.loginUser(vm.userData.username, vm.userData.password)
                 .then(function(user) {
                     $state.go('tab.makeExpense');
-                    vm.currentUser = user;
-                    console.log("User details", vm.currentUser);
+                    vm.currentUserId = user.id;
+                    console.log("User id :", vm.currentUserId);
                 });
         }
-
 
         // FB Login
         function fbLogin() {

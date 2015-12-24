@@ -5,9 +5,9 @@
         .module('ttmmApp.account')
         .controller('AccountCtrl', AccountCtrl);
 
-    AccountCtrl.$inject = ['userLoginDataApi'];
+    AccountCtrl.$inject = ['userLoginDataApi', '$state'];
 
-    function AccountCtrl(userLoginDataApi) {
+    function AccountCtrl(userLoginDataApi, $state) {
         /*jshint validthis: true */
         var vm = this;
         vm.title = 'AccountCtrl';
@@ -23,10 +23,9 @@
         }
 
         function currentUserLogout() {
-            console.log("currentUserLogout called");
-            userLoginDataApi.logoutUser().then(function(data) {
-                console.log("Logout user datails", data);
-            });
+            console.log("currentUser Logout called");
+            userLoginDataApi.logout();
+            $state.go('welcome');
         }
     }
 })();

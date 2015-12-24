@@ -14,6 +14,7 @@
         $scope.expense = {};
         $scope.datepickerObject = {};
         $scope.expenseMonth = '';
+        $scope.userId = '';
         $scope.datepickerObject.inputDate = new Date();
 
         $scope.datepickerObjectPopup = {
@@ -41,12 +42,6 @@
 
         ////////////////
 
-/*        userLoginDataApi.getCurrentUser().then(function(data) {
-            $scope.currentUser = data;
-            console.log("current user details", $scope.currentUser);
-            $scope.expense.userId = data.objectId;
-        });
-*/
 
         function datePickerCallback(val) {
             if (typeof(val) === 'undefined') {

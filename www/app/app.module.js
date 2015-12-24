@@ -21,12 +21,6 @@
                     deleteOnExpire: "aggressive"
                 });
 
-                CacheFactory("loginUserCache", {
-                    storageMode: "localStorage",
-                    maxAge: 100000,
-                    deleteOnExpire: "aggressive"
-                });
-
                 CacheFactory("sessionCache", {
                     storageMode: "localStorage",
                     maxAge: 100000,

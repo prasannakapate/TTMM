@@ -4,23 +4,55 @@
         .module('ttmmApp')
         .factory('userLoginDataApi', userLoginDataApi);
 
-    userLoginDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', '$ionicPopup', 'commonService', 'formEncode'];
+    userLoginDataApi.$inject = [
+    '$http', 
+    '$q', 
+    '$ionicLoading', 
+    '$timeout', 
+    '$ionicPopup', 
+    'commonService', 
+    'CacheFactory'];
 
-    function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup, commonService, formEncode) {
-        /*jshint validthis: true */
+    function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup, commonService, CacheFactory) {
         var key = commonService.getKey();
+        Parse.initialize(key.appid, key.jsid);
         var vm = this;
         vm.userData = '';
+        vm.sessionData = null;
+
+        self.sessionCache = CacheFactory.get('sessionCache');
+
+        self.sessionCache.setOptions({
+            onExpire: function(key, value) {
+                getCurrentUser()
+                    .then(function() {
+                        console.log("sessionCache was automatically refreshed", new Date());
+                    }, function() {
+                        console.log("Error getting sessionCache. Putting expired item back to cache", new Date());
+                    });
+            },
+            cacheFlushInterval: 55000,
+            maxAge: 3600000,
+            verifyIntegrity: true
+        });
+        
 
         var LoginServices = {
             loginUser: loginUser,
             logoutUser: logoutUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            logout: logout
         };
         return LoginServices;
 
+        function logout() {
+            Parse.User.logOut();
+        }
+
+
         function getCurrentUser() {
-            var deffered = $q.defer();
+            var deffered = $q.defer(),
+                cacheKey = 'session';
             $http.get('https://api.parse.com/1/users/me', {
                     headers: {
                         'X-Parse-Application-Id': key.appid,
@@ -30,6 +62,7 @@
                 })
                 .success(function(response) {
                     //console.log("Current users details", response);
+                    self.sessionCache.put(cacheKey, response.sessionToken);
                     deffered.resolve(response);
                 })
                 .error(function(error, status) {
@@ -85,7 +118,7 @@
                         //console.log("user login Successfully", response);
                         deffered.resolve(response);
                         vm.userData = response;
-                        //console.log("user data ->>>>>>>>>>>>", vm.userData);
+                        console.log("user data ->>>>>>>>>>>>", vm.userData);
                     }, 2000);
 
                 }).error(function(error, status) {

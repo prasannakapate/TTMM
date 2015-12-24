@@ -11,14 +11,16 @@
         /*jshint validthis: true */
         var vm = this;
         vm.currentUser = '';
+        var key = commonService.getKey();
 
         userLoginDataApi.getCurrentUser().then(function(data) {
             vm.currentUser = data.objectId;
-            console.log("currentUser details lllllllllll", vm.currentUser);
+            console.log("currentUser Id:-", vm.currentUser);
         });
 
-        var key = commonService.getKey();
+
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
+
 
         self.getExpenseListCache.setOptions({
             onExpire: function(key, value) {
@@ -48,15 +50,6 @@
 
 
         function getExpenseList(forceRefresh) {
-
-            /*            var query = where = {
-                            "userId": {
-                                "__type": "Pointer",
-                                "className": "_User",
-                                "objectId": "2CoLw1z9RQ"
-                            }
-                        };*/
-
 
             if (typeof forceRefresh === 'undefined') {
                 forceRefresh = false;
@@ -116,19 +109,21 @@
             $http.post('https://api.parse.com/1/classes/Expenses', expenseData, {
                 headers: {
                     'X-Parse-Application-Id': key.appid,
-                    'X-Parse-REST-API-Key': key.restid
+                    'X-Parse-REST-API-Key': key.restid,
+                    'Content-Type': 'application/json'
                 },
                 data: {
-                    userId: {
+                    objectId: {
+                        __op: 'AddPointer',
                         __type: 'Pointer',
                         className: '_User',
-                        objectId: vm.currentUser
+                        userId: vm.currentUser
                     }
                 }
-
             }).success(function(response) {
                 deffered.resolve(response);
                 console.log("make new expense success");
+
             }).error(function(error, status) {
                 deffered.reject(error, status);
                 console.log("make new expense Error", error, " Status =", status);
@@ -153,12 +148,19 @@
             return deffered.promise;
         }
 
-        function editExpense(id, data) {
+        function editExpense(id) {
             var deffered = $q.defer();
-            $http.put('https://api.parse.com/1/classes/Expenses/' + id, data, {
+            $http.put('https://api.parse.com/1/classes/Expenses/' + id, {
                 headers: {
                     'X-Parse-Application-Id': key.appid,
                     'X-Parse-REST-API-Key': key.restid
+                },
+                data: {
+                    userId: {
+                        __type: 'Pointer',
+                        className: '_User',
+                        objectId: id
+                    }
                 }
             }).success(function(response) {
                 console.log("Data edit successfully");
