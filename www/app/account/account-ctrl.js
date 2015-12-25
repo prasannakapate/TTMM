@@ -24,8 +24,11 @@
 
         function currentUserLogout() {
             console.log("currentUser Logout called");
-            userLoginDataApi.logout();
-            $state.go('welcome');
+            userLoginDataApi.logoutUser(vm.currentUser.objectId).then(function(data) {
+                console.log("currentUser Logout called", data);
+                $state.go('welcome');
+            });
+
         }
     }
 })();

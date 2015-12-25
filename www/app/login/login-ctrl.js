@@ -3,21 +3,22 @@
     angular
         .module("ttmmApp")
         .controller("LoginCtrl", LoginCtrl);
-    LoginCtrl.$inject = ['$state', 'userLoginDataApi', '$cookieStore'];
+    LoginCtrl.$inject = ['$state', 'userLoginDataApi', '$cookieStore', 'sessionService'];
 
-    function LoginCtrl($state, userLoginDataApi, $cookieStore) {
+    function LoginCtrl($state, userLoginDataApi, $cookieStore, sessionService) {
         var vm = this;
         vm.userData = {};
         vm.currentUserId = '';
         vm.userLogin = userLogin;
         vm.fbLogin = fbLogin;
 
+
         //Login for users
         function userLogin() {
             userLoginDataApi.loginUser(vm.userData.username, vm.userData.password)
                 .then(function(user) {
                     $state.go('tab.makeExpense');
-                    vm.currentUserId = user.id;
+                    vm.currentUserId = user.objectId;
                     console.log("User id :", vm.currentUserId);
                 });
         }

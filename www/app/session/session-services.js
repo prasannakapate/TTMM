@@ -4,36 +4,20 @@
     angular
         .module('ttmmApp')
         .factory('sessionService', sessionService);
-    sessionService.$inject = ['$log', 'CacheFactory', 'userLoginDataApi', 'commonService'];
+    sessionService.$inject = ['$log', '$q', '$http', 'CacheFactory', 'userLoginDataApi', 'commonService'];
 
-    function sessionService($log, CacheFactory, userLoginDataApi, commonService) {
+    function sessionService($log, $q, $http, CacheFactory, userLoginDataApi, commonService) {
         var key = commonService.getKey();
-        self.userCache = CacheFactory.get('loginUserCache');
-        self.accessTokenCache = CacheFactory.get('sessionCache');
+        var currentUser = '';
 
-        self.userCache.setOptions({
+        self.sessionCache = CacheFactory.get('sessionCache');
+        self.sessionCache.setOptions({
             onExpire: function(key, value) {
-                userLoginDataApi.loginUser()
+                getCurrentUser()
                     .then(function() {
-                        console.log("userLoginDataApi.loginUser was automatically refreshed", new Date());
+                        console.log("sessionCache was automatically refreshed", new Date());
                     }, function() {
-                        console.log("Error getting data. Putting expired item back to cache", new Date());
-                        self.userCache.put(key, value);
-                    });
-            },
-            cacheFlushInterval: 55000,
-            maxAge: 3600000,
-            verifyIntegrity: true
-        });
-
-        self.accessTokenCache.setOptions({
-            onExpire: function(key, value) {
-                userLoginDataApi.loginUser()
-                    .then(function() {
-                        console.log("userLoginDataApi.loginUser was automatically refreshed", new Date());
-                    }, function() {
-                        console.log("Error getting data. Putting expired item back to cache", new Date());
-                        self.accessTokenCache.put(key, value);
+                        console.log("Error getting sessionCache. Putting expired item back to cache", new Date());
                     });
             },
             cacheFlushInterval: 55000,
@@ -42,40 +26,44 @@
         });
 
         var service = {
-            getUser: getUser,
-            setUser: setUser,
-            getAccessToken: getAccessToken,
-            destroy: destroy
+            getUserSession: getUserSession
         };
-
 
         return service;
 
         ////////////////
 
-        function getUser() {
-            return self.user;
-        }
+        function getUserSession() {
+            var deffered = $q.defer(),
+                cacheKey = 'sessions',
+                sessiontData = null;
 
-        function setUser(user) {
-            self.user = user;
-            self.user.put(cacheKey, user);
-            return self.user;
-        }
+            if (!currentUser) {
+                sessiontData = self.sessionCache.get(cacheKey);
+            }
+            if (sessiontData) {
+                deffered.resolve(sessiontData);
+            } else {
+                $http.get('https://api.parse.com/1/users/me', {
+                        headers: {
+                            'X-Parse-Application-Id': key.appid,
+                            'X-Parse-REST-API-Key': key.restid,
+                            'X-Parse-Session-Token': currentUser.sessionToken
+                        }
+                    })
+                    .success(function(response) {
+                        self.sessionCache.put(cacheKey, response);
+                        console.log("Current users details", response);
+                        deffered.resolve(response);
+                    })
+                    .error(function(error, status) {
+                        console.log("error getting current users details", error, status);
+                        deffered.reject(error, status);
+                    });
+                return deffered.promise;
 
-        function getAccessToken() {
-            return self.accessToken;
-        }
+            }
 
-        function setAccessToken(token) {
-            self.accessToken = token;
-            CacheFactory.put(cacheKey, token);
-            return self;
-        }
-
-        function destroy() {
-            setUser(null);
-            setAccessToken(null);
         }
     }
 })();

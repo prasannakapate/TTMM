@@ -5,23 +5,23 @@
         .factory('userLoginDataApi', userLoginDataApi);
 
     userLoginDataApi.$inject = [
-    '$http', 
-    '$q', 
-    '$ionicLoading', 
-    '$timeout', 
-    '$ionicPopup', 
-    'commonService', 
-    'CacheFactory'];
+        '$http',
+        '$q',
+        '$ionicLoading',
+        '$timeout',
+        '$ionicPopup',
+        'commonService',
+        'CacheFactory'
+    ];
 
     function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup, commonService, CacheFactory) {
         var key = commonService.getKey();
         Parse.initialize(key.appid, key.jsid);
         var vm = this;
+        vm.sessionData = '';
         vm.userData = '';
-        vm.sessionData = null;
 
         self.sessionCache = CacheFactory.get('sessionCache');
-
         self.sessionCache.setOptions({
             onExpire: function(key, value) {
                 getCurrentUser()
@@ -35,7 +35,7 @@
             maxAge: 3600000,
             verifyIntegrity: true
         });
-        
+
 
         var LoginServices = {
             loginUser: loginUser,
@@ -53,32 +53,42 @@
         function getCurrentUser() {
             var deffered = $q.defer(),
                 cacheKey = 'session';
-            $http.get('https://api.parse.com/1/users/me', {
-                    headers: {
-                        'X-Parse-Application-Id': key.appid,
-                        'X-Parse-REST-API-Key': key.restid,
-                        'X-Parse-Session-Token': vm.userData.sessionToken
-                    }
-                })
-                .success(function(response) {
-                    //console.log("Current users details", response);
-                    self.sessionCache.put(cacheKey, response.sessionToken);
-                    deffered.resolve(response);
-                })
-                .error(function(error, status) {
-                    console.log("error getting current users details", error, status);
-                    deffered.reject(error, status);
-                });
+
+            if (!vm.userData) {
+                vm.sessionData = self.sessionCache.get(cacheKey);
+            }
+            if (vm.sessionData) {
+                console.log("Found data inside the cache", vm.sessionData);
+                deffered.resolve(vm.sessionData);
+
+            } else {
+                $http.get('https://api.parse.com/1/users/me', {
+                        headers: {
+                            'X-Parse-Application-Id': key.appid,
+                            'X-Parse-REST-API-Key': key.restid,
+                            'X-Parse-Session-Token': vm.userData.sessionToken || vm.sessionData.sessionToken
+                        }
+                    })
+                    .success(function(response) {
+                        console.log("Current users details using http", response);
+                        self.sessionCache.put(cacheKey, response);
+                        deffered.resolve(response);
+                    })
+                    .error(function(error, status) {
+                        console.log("error getting current users details", error, status);
+                        deffered.reject(error, status);
+                    });
+            }
             return deffered.promise;
         }
 
-        function logoutUser() {
+        function logoutUser(currentUserId) {
             var deffered = $q.defer();
-            $http.post('https://api.parse.com/1/sessions/' + vm.userData.objectId, {
+            $http.post('https://api.parse.com/1/logout', '', {
                     headers: {
                         'X-Parse-Application-Id': key.appid,
                         'X-Parse-REST-API-Key': key.restid,
-                        'X-Parse-Session-Token': vm.userData.sessionToken
+                        'X-Parse-Session-Token': vm.userData.sessionToken || vm.sessionData.sessionToken
                     }
                 })
                 .success(function(response) {
@@ -93,7 +103,8 @@
         }
 
         function loginUser(username, password) {
-            var deffered = $q.defer();
+            var deffered = $q.defer(),
+                cacheKey = 'session';
             var data = {
                 username: username,
                 password: password,
@@ -118,7 +129,7 @@
                         //console.log("user login Successfully", response);
                         deffered.resolve(response);
                         vm.userData = response;
-                        console.log("user data ->>>>>>>>>>>>", vm.userData);
+                        console.log("user session token ->>>>>>>>>>>>", vm.userData.sessionToken);
                     }, 2000);
 
                 }).error(function(error, status) {

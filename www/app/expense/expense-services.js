@@ -21,7 +21,6 @@
 
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
 
-
         self.getExpenseListCache.setOptions({
             onExpire: function(key, value) {
                 getExpenseList()
