@@ -42,6 +42,9 @@
 
         ////////////////
 
+        userLoginDataApi.getCurrentUser().then(function(data){
+            $scope.expense.userId = data;
+        });
 
         function datePickerCallback(val) {
             if (typeof(val) === 'undefined') {

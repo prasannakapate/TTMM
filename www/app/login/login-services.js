@@ -17,6 +17,7 @@
     function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup, commonService, CacheFactory) {
         var key = commonService.getKey();
         Parse.initialize(key.appid, key.jsid);
+        /*jshint validthis: true */
         var vm = this;
         vm.sessionData = '';
         vm.userData = '';
@@ -41,12 +42,22 @@
             loginUser: loginUser,
             logoutUser: logoutUser,
             getCurrentUser: getCurrentUser,
-            logout: logout
+            login: login,
+            logout: logout,
+            currentUser : currentUser
         };
         return LoginServices;
 
         function logout() {
             Parse.User.logOut();
+        }
+
+        function login() {
+
+        }
+
+        function currentUser(){
+            
         }
 
 

@@ -110,14 +110,6 @@
                     'X-Parse-Application-Id': key.appid,
                     'X-Parse-REST-API-Key': key.restid,
                     'Content-Type': 'application/json'
-                },
-                data: {
-                    objectId: {
-                        __op: 'AddPointer',
-                        __type: 'Pointer',
-                        className: '_User',
-                        userId: vm.currentUser
-                    }
                 }
             }).success(function(response) {
                 deffered.resolve(response);
