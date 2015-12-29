@@ -14,23 +14,22 @@
         vm.loadList = loadList;
 
         function loadList(forceRefresh) {
-            //item.dateAsString = $filter('date')(item.date, "yyyy-MM-dd");  // for type="date" binding
             expenseDataApi.getExpenseList(forceRefresh).then(function(data) {
                 vm.expenseGroupByMonth = _(data.results).chain()
                     .groupBy(function(item) {
-                        item.expenseMonth = $filter('date')(item.expenseMonth, "MMM-yyyy");
+                        item.expenseMonth = $filter('date')(item.expenseMonth, 'MMM-yyyy');
                         return item.expenseMonth;
                     })
                     .pairs()
                     .map(function(currentItem) {
-                        return _.object(_.zip(["month", "expenseDetails"], currentItem));
+                        return _.object(_.zip(['month', 'expenseDetails'], currentItem));
                     })
                     .value();
                 //console.log(vm.expenseGroupByMonth);
             }).finally(function() {
                 $scope.$broadcast('scroll.refreshComplete');
             });
-        };
+        }
         vm.loadList(false);
     }
 })();

@@ -5,17 +5,25 @@
         .module('ttmmApp')
         .factory('expenseDataApi', expenseDataApi);
 
-    expenseDataApi.$inject = ['$http', '$q', '$ionicLoading', '$timeout', 'CacheFactory', 'userLoginDataApi', 'commonService'];
+    expenseDataApi.$inject = [
+                                '$http', 
+                                '$q', 
+                                '$ionicLoading', 
+                                '$timeout', 
+                                'CacheFactory', 
+                                'userLoginDataApi', 
+                                'commonService'];
 
     function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory, userLoginDataApi, commonService) {
         /*jshint validthis: true */
         var vm = this;
+        var self = vm;
         vm.currentUser = '';
         var key = commonService.getKey();
 
         userLoginDataApi.getCurrentUser().then(function(data) {
             vm.currentUser = data.objectId;
-            console.log("currentUser Id:-", vm.currentUser);
+            console.log('currentUser Id:-', vm.currentUser);
         });
 
 
@@ -25,9 +33,9 @@
             onExpire: function(key, value) {
                 getExpenseList()
                     .then(function() {
-                        console.log("getExpenseListCache was automatically refreshed", new Date());
+                        console.log('getExpenseListCache was automatically refreshed', new Date());
                     }, function() {
-                        console.log("Error getting data. Putting expired item back to cache", new Date());
+                        console.log('Error getting data. Putting expired item back to cache', new Date());
                         self.getExpenseListCache.put(key, value);
                     });
             },
@@ -89,12 +97,12 @@
                         self.getExpenseListCache.put(cacheKey, response);
                         $ionicLoading.hide();
                         deffered.resolve(response);
-                        console.log("Received getExpenseList Data via HTTP", response);
+                        console.log('Received getExpenseList Data via HTTP', response);
                     }, 2000);
 
                 }).error(function(error, status) {
                     $timeout(function() {
-                        console.log("Error While making HTTP Call");
+                        console.log('Error While making HTTP Call');
                         $ionicLoading.hide();
                         deffered.reject(error, status);
                     }, 2000);
@@ -113,11 +121,11 @@
                 }
             }).success(function(response) {
                 deffered.resolve(response);
-                console.log("make new expense success");
+                console.log('make new expense success');
 
             }).error(function(error, status) {
                 deffered.reject(error, status);
-                console.log("make new expense Error", error, " Status =", status);
+                console.log('make new expense Error', error, ' Status =', status);
             });
             return deffered.promise;
         }
@@ -130,10 +138,10 @@
                     'X-Parse-REST-API-Key': key.restid
                 }
             }).success(function(response) {
-                console.log("Data delete successfully");
+                console.log('Data delete successfully');
                 deffered.resolve(response);
             }).error(function(error, status) {
-                console.log("Data delete error");
+                console.log('Data delete error');
                 deffered.reject(error, status);
             });
             return deffered.promise;
@@ -154,10 +162,10 @@
                     }
                 }
             }).success(function(response) {
-                console.log("Data edit successfully");
+                console.log('Data edit successfully');
                 deffered.resolve(response);
             }).error(function(error, status) {
-                console.log("Data edit error");
+                console.log('Data edit error');
                 deffered.reject(error, status);
             });
             return deffered.promise;

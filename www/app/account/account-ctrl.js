@@ -23,9 +23,9 @@
         }
 
         function currentUserLogout() {
-            console.log("currentUser Logout called");
+            console.log('currentUser Logout called');
             userLoginDataApi.logoutUser(vm.currentUser.objectId).then(function(data) {
-                console.log("currentUser Logout called", data);
+                console.log('currentUser Logout called', data);
                 $state.go('welcome');
             });
 

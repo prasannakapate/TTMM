@@ -21,10 +21,14 @@ gulp.task('help', $.taskListing);
 
 //concat and minify js files
 gulp.task('scripts', function() {
-    log("Scripts concat and then minify to build folder");
+    log('Scripts concat and then minify to build folder');
     gulp.src(config.scripts)
         .pipe($.concat('all.min.js'))
-        .pipe($.uglify({mangle: false}, {compress: false}))
+        .pipe($.uglify({
+            mangle: false
+        }, {
+            compress: false
+        }))
         .pipe(gulp.dest(config.build + 'js/'));
 });
 
@@ -57,7 +61,7 @@ gulp.task('images', function() {
 
 
 //serving my dev environment
-gulp.task('serve-build', ['scripts', 'templatecache', 'images'], function() {
+gulp.task('serve-build', ['vet', 'scripts', 'templatecache', 'images'], function() {
     var isDev = true;
     var nodeOptions = {
         script: config.nodeServer,
@@ -124,12 +128,12 @@ gulp.task('sass', function(done) {
 //what out your scrits and sass file changes
 gulp.task('watch', function() {
     gulp.watch(config.sass, ['sass']);
-    gulp.watch(config.scripts, ['scripts']);
+    gulp.watch(config.scripts, ['vet', 'scripts']);
 });
 
 //Test task, run test once and exit
 gulp.task('test', function(done) {
-    log("Test executions starts");
+    log('Test executions starts');
     startTests(true /*singleRun*/ , done);
 });
 
@@ -167,7 +171,7 @@ gulp.task('git-check', function(done) {
     done();
 });
 
-gulp.task('default', ['sass', 'scripts']);
+gulp.task('default', ['sass', 'vet', 'scripts']);
 
 
 /////////////////////

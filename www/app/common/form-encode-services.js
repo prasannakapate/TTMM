@@ -1,4 +1,4 @@
-(function(module) {
+/*(function(module) {
 
     var formEncode = function() {
         return function(data) {
@@ -10,10 +10,10 @@
         };
     };
 
-    module.factory("formEncode", formEncode);
+    module.factory('formEncode', formEncode);
 
-}(angular.module("ttmmApp.common")));
-
+}(angular.module('ttmmApp.common')));
+*/
 
 /*
 (function() {

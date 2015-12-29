@@ -1,5 +1,5 @@
 (function() {
-    "use strict";
+    'use strict';
     angular
         .module('ttmmApp')
         .factory('userLoginDataApi', userLoginDataApi);
@@ -19,6 +19,7 @@
         Parse.initialize(key.appid, key.jsid);
         /*jshint validthis: true */
         var vm = this;
+        var self = vm;
         vm.sessionData = '';
         vm.userData = '';
 
@@ -27,9 +28,9 @@
             onExpire: function(key, value) {
                 getCurrentUser()
                     .then(function() {
-                        console.log("sessionCache was automatically refreshed", new Date());
+                        console.log('sessionCache was automatically refreshed', new Date());
                     }, function() {
-                        console.log("Error getting sessionCache. Putting expired item back to cache", new Date());
+                        console.log('Error getting sessionCache. Putting expired item back to cache', new Date());
                     });
             },
             cacheFlushInterval: 55000,
@@ -69,7 +70,7 @@
                 vm.sessionData = self.sessionCache.get(cacheKey);
             }
             if (vm.sessionData) {
-                console.log("Found data inside the cache", vm.sessionData);
+                console.log('Found data inside the cache', vm.sessionData);
                 deffered.resolve(vm.sessionData);
 
             } else {
@@ -81,12 +82,12 @@
                         }
                     })
                     .success(function(response) {
-                        console.log("Current users details using http", response);
+                        console.log('Current users details using http', response);
                         self.sessionCache.put(cacheKey, response);
                         deffered.resolve(response);
                     })
                     .error(function(error, status) {
-                        console.log("error getting current users details", error, status);
+                        console.log('error getting current users details', error, status);
                         deffered.reject(error, status);
                     });
             }
@@ -103,11 +104,11 @@
                     }
                 })
                 .success(function(response) {
-                    console.log("Current users Successfully logout", response);
+                    console.log('Current users Successfully logout', response);
                     deffered.resolve(response);
                 })
                 .error(function(error, status) {
-                    console.log("error while logging out for currentUser", error, status);
+                    console.log('error while logging out for currentUser', error, status);
                     deffered.reject(error, status);
                 });
             return deffered.promise;
@@ -118,8 +119,7 @@
                 cacheKey = 'session';
             var data = {
                 username: username,
-                password: password,
-                grant_type: 'password'
+                password: password
             };
 
             $ionicLoading.show({
@@ -137,15 +137,15 @@
                 .success(function(response) {
                     $timeout(function() {
                         $ionicLoading.hide();
-                        //console.log("user login Successfully", response);
+                        //console.log('user login Successfully', response);
                         deffered.resolve(response);
                         vm.userData = response;
-                        console.log("user session token ->>>>>>>>>>>>", vm.userData.sessionToken);
+                        console.log('user session token ->>>>>>>>>>>>', vm.userData.sessionToken);
                     }, 2000);
 
                 }).error(function(error, status) {
                     $timeout(function() {
-                        console.log("Error While making HTTP Call");
+                        console.log('Error While making HTTP Call');
                         $ionicLoading.hide();
                         deffered.reject(error, status);
                         // An alert dialog

@@ -1,8 +1,8 @@
 (function() {
     'use strict';
     angular
-        .module("ttmmApp")
-        .controller("LoginCtrl", LoginCtrl);
+        .module('ttmmApp')
+        .controller('LoginCtrl', LoginCtrl);
     LoginCtrl.$inject = ['$state', 'userLoginDataApi', '$cookieStore', 'sessionService'];
 
     function LoginCtrl($state, userLoginDataApi, $cookieStore, sessionService) {
@@ -10,8 +10,6 @@
         vm.userData = {};
         vm.currentUserId = '';
         vm.userLogin = userLogin;
-        vm.fbLogin = fbLogin;
-
 
         //Login for users
         function userLogin() {
@@ -19,11 +17,11 @@
                 .then(function(user) {
                     $state.go('tab.makeExpense');
                     vm.currentUserId = user.objectId;
-                    console.log("User id :", vm.currentUserId);
+                    console.log('User id :', vm.currentUserId);
                 });
         }
 
-        // FB Login
+        /*// FB Login
         function fbLogin() {
             FB.login(function(response) {
                 if (response.authResponse) {
@@ -61,6 +59,6 @@
                     });
                 });
             }
-        }
+        }*/
     }
 })();

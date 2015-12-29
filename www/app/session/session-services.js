@@ -9,21 +9,21 @@
     function sessionService($log, $q, $http, CacheFactory, userLoginDataApi, commonService) {
         var key = commonService.getKey();
         var currentUser = '';
-
+/*
         self.sessionCache = CacheFactory.get('sessionCache');
         self.sessionCache.setOptions({
             onExpire: function(key, value) {
                 getCurrentUser()
                     .then(function() {
-                        console.log("sessionCache was automatically refreshed", new Date());
+                        console.log('sessionCache was automatically refreshed', new Date());
                     }, function() {
-                        console.log("Error getting sessionCache. Putting expired item back to cache", new Date());
+                        console.log('Error getting sessionCache. Putting expired item back to cache', new Date());
                     });
             },
             cacheFlushInterval: 55000,
             maxAge: 3600000,
             verifyIntegrity: true
-        });
+        });*/
 
         var service = {
             getUserSession: getUserSession
@@ -53,11 +53,11 @@
                     })
                     .success(function(response) {
                         self.sessionCache.put(cacheKey, response);
-                        console.log("Current users details", response);
+                        console.log('Current users details', response);
                         deffered.resolve(response);
                     })
                     .error(function(error, status) {
-                        console.log("error getting current users details", error, status);
+                        console.log('error getting current users details', error, status);
                         deffered.reject(error, status);
                     });
                 return deffered.promise;

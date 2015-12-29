@@ -55,6 +55,13 @@
     "node": true,
 
     "globals": {
-        "angular": false
+        "angular": false,
+        "_": false,
+        "cordova": false,
+        "StatusBar": false,
+        "self": false,
+        "FB": false,
+        "CacheFactory": false,
+        "Parse":false
     }
 }

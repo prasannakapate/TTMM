@@ -58,7 +58,7 @@
 
 
         function makeExpense(expense) {
-            console.log("makeExpense Called", expense);
+            console.log('makeExpense Called', expense);
             $scope.loadList = function(forceRefresh) {
                 expenseDataApi.makeExpense(expense).then(function(data) {
                     expenseDataApi.getExpenseList(forceRefresh).then(function(data) {

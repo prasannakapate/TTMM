@@ -31,7 +31,7 @@
                 $timeout(function() {
                     $ionicLoading.hide();
                     deffered.resolve(response);
-                    console.log("signUpUserData completed successfully", response);
+                    console.log('signUpUserData completed successfully', response);
                 }, 2000);
 
             }).error(function(error, status) {

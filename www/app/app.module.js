@@ -1,8 +1,8 @@
 (function() {
     'use strict';
     angular
-        .module('ttmmApp', ['ionic', 'ttmmApp.core', 'ttmmApp.expense', 'ttmmApp.account','ttmmApp.common'])
-        //DSCacheFactory is not CacheFactory
+        .module('ttmmApp', ['ionic', 'ttmmApp.core', 'ttmmApp.expense', 'ttmmApp.account', 'ttmmApp.common'])
+        //DSCacheFactory is now CacheFactory
         .run(function($ionicPlatform, CacheFactory) {
             $ionicPlatform.ready(function() {
                 // Hide the accessory bar by default
@@ -15,21 +15,23 @@
                     StatusBar.styleDefault();
                 }
                 //cache for the offline usage
-                CacheFactory("getExpenseListCache", {
-                    storageMode: "localStorage",
+                /* jshint ignore: start */
+                CacheFactory('getExpenseListCache', {
+                    storageMode: 'localStorage',
                     maxAge: 100000,
-                    deleteOnExpire: "aggressive"
+                    deleteOnExpire: 'aggressive'
                 });
 
-                CacheFactory("sessionCache", {
-                    storageMode: "localStorage",
+                CacheFactory('sessionCache', {
+                    storageMode: 'localStorage',
                     maxAge: 100000,
-                    deleteOnExpire: "aggressive"
+                    deleteOnExpire: 'aggressive'
                 });
 
-                CacheFactory("staticCache", {
-                    storageMode: "localStorage"
+                CacheFactory('staticCache', {
+                    storageMode: 'localStorage'
                 });
+                /* jshint ignore: end*/
             });
         })
         .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
@@ -43,18 +45,18 @@
 
             $stateProvider
                 .state('welcome', {
-                    url: "/app/welcome",
-                    templateUrl: "app/welcome/welcome.html"
+                    url: '/app/welcome',
+                    templateUrl: 'app/welcome/welcome.html'
                 })
 
             .state('login', {
-                    url: "/app/login",
-                    templateUrl: "app/login/login.html"
+                    url: '/app/login',
+                    templateUrl: 'app/login/login.html'
                 })
                 .state('tab', {
-                    url: "/tab",
+                    url: '/tab',
                     abstract: true,
-                    templateUrl: "app/layout/tabs.html"
+                    templateUrl: 'app/layout/tabs.html'
                 })
                 .state('tab.makeExpense', {
                     url: '/app/makeExpense',

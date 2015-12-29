@@ -13,18 +13,18 @@
         $scope.totalMonthlySum = '';
         $scope.loadList = '';
 
-        //console.log("stateParams = ", $scope.expenseMonth);
+        //console.log('stateParams = ", $scope.expenseMonth);
 
         $scope.loadList = function(forceRefresh) {
             expenseDataApi.getExpenseList(forceRefresh).then(function(data) {
                 $scope.expenseDetails = _(data.results).chain()
                     .groupBy(function(item) {
-                        item.expenseMonth = $filter('date')(item.expenseMonth, "MMM-yyyy");
+                        item.expenseMonth = $filter('date')(item.expenseMonth, 'MMM-yyyy');
                         return item.expenseMonth.substring(0, 8);
                     })
                     .pairs()
                     .map(function(currentItem) {
-                        return _.object(_.zip(["month", "expenses"], currentItem));
+                        return _.object(_.zip(['month', 'expenses'], currentItem));
                     })
                     .find({
                         'month': $scope.expenseMonth
