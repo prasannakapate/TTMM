@@ -73,6 +73,8 @@ module.exports = function() {
                 config.specHelpers,
                 rootApp + '**/*.module.js',
                 rootApp + '**/*.js',
+                rootApp + '**/*spec.js',
+                root + 'lib/angular-mocks.js',
                 //build + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),
@@ -89,7 +91,7 @@ module.exports = function() {
                     type: 'text-summary'
                 }]
             },
-            preprocessors:{}
+            preprocessors: {}
         };
         options.preprocessors[rootApp + '**/!(*.spec)+(.js)'] = ['coverage'];
         return options;

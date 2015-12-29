@@ -181,7 +181,6 @@ function startTests(singleRun, run) {
     var karma = require('karma').server;
     var excludeFiles = [];
     var serverSpec = config.serverIntegrationSpecs; //todo
-
     excludeFiles = serverSpec;
 
     karma.start({
