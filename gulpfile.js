@@ -145,7 +145,11 @@ gulp.task('wiredep', function() {
     return gulp
         .src(config.index)
         .pipe(wiredep(options))
-        .pipe($.inject(gulp.src(config.scripts)))
+        .pipe($.inject(gulp.src(config.scripts),{
+            read: false,
+            ignorePath: 'www',
+            addRootSlash: false
+            }))
         .pipe(gulp.dest(config.root));
 });
 

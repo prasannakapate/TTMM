@@ -20,6 +20,7 @@
 
         function currentUserLogout(){
             firebaseAuthService.signOut();
+             $state.go('welcome');
         }
     }
 })();
