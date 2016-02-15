@@ -19,7 +19,7 @@
                 </span>
                 <label class="item item-input">
                     <span class="input-label"><i class="icon ion-ios7-email"></i> password</span>
-                    <input type="password" name="password" ng-model="vm.userData.password" placeholder="password" required ng-minlength="4" ng-maxlength="10">
+                    <input type="password" name="password" ng-model="vm.userData.password" placeholder="password" required ng-minlength="4" ng-maxlength="30">
                 </label>
                 <span ng-messages="loginForm.password.$error" class="form-errors" ng-if="loginForm.password.$touched">
                     <ng-messages-include src="app/login/messages.html"></ng-messages-include>

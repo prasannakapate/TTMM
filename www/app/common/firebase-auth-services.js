@@ -5,9 +5,24 @@
         .module('ttmmApp.common')
         .factory('firebaseAuthService', firebaseAuthService);
 
-    firebaseAuthService.$inject = ['$firebaseAuth', '$window', '$q', '$log', '$cordovaFacebook', 'commonService'];
+    firebaseAuthService.$inject = [
+                                    '$firebaseAuth', 
+                                    '$window', 
+                                    '$q', 
+                                    '$log', 
+                                    '$cordovaFacebook', 
+                                    '$ionicPopup', 
+                                    'commonService'
+                                ];
 
-    function firebaseAuthService($firebaseAuth, $window, $q, $log, $cordovaFacebook, commonService) {
+    function firebaseAuthService(
+                                $firebaseAuth, 
+                                $window, 
+                                $q, 
+                                $log, 
+                                $cordovaFacebook, 
+                                $ionicPopup, 
+                                commonService) {
         var user = {
             displayName: '',
             email: ''
@@ -39,15 +54,18 @@
                 }).then(function(authData) {
                     commonService.firebaseRef.child('users').child(authData.uid).set({
                         email: credentials.email,
-                        username: credentials.username
+                        username: credentials.username,
+                        country: credentials.country,
+                        mobileNo: credentials.mobileNo
                     });
                     return fAuth.$authWithPassword({
                         email: credentials.email,
-                        password: credentials.password
+                        password: credentials.password,
+                        country: credentials.country,
+                        mobileNo: credentials.mobileNo
                     });
                 })
                 .then(function(authData) {
-
                     var userObj = authData[authData.provider];
                     if (userObj) {
                         user.displayName = userObj.displayName || credentials.username || userObj.email;
@@ -84,7 +102,7 @@
                     return fAuth.$authWithOAuthToken('facebook', facebookAuthData.access_token);
                 })
                 .then(function(authData) {
-                   console.log('Logged In', 2000, 'center');
+                    console.log('Logged In', 2000, 'center');
                     $log.debug('Firebase Facebook Login ', authData);
 
                     var userObj = authData[authData.provider];
@@ -178,6 +196,11 @@
                     email: credentials.email
                 })
                 .then(function() {
+                    $ionicPopup.alert({
+                        title: 'Success !',
+                        template: 'Email sent to your registerd email id .',
+                        okType: 'button-royal'
+                    });
                     $log.debug('Password reset email sent successfully!');
                     deferred.resolve('Password reset email sent successfully!');
                 })

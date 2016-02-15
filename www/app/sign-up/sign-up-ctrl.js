@@ -33,6 +33,7 @@
         // }
 
         function userSignUp(credentials) {
+            console.log(credentials);
             $log.debug('Create credentials Function called');
             if (credentials) {
                 $ionicLoading.show({
