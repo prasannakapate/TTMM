@@ -11,20 +11,14 @@
                                 '$ionicLoading', 
                                 '$timeout', 
                                 'CacheFactory', 
-                                'userLoginDataApi', 
                                 'commonService'];
 
-    function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory, userLoginDataApi, commonService) {
+    function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory, commonService) {
         /*jshint validthis: true */
         var vm = this;
         var self = vm;
         vm.currentUser = '';
         var key = commonService.getKey();
-
-        userLoginDataApi.getCurrentUser().then(function(data) {
-            vm.currentUser = data.objectId;
-            console.log('currentUser Id:-', vm.currentUser);
-        });
 
 
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');

@@ -8,7 +8,10 @@
     commonService.$inject = [];
 
     function commonService() {
+        var firebaseRef = new Firebase('https://ttmm.firebaseio.com');
+
         var service = {
+            firebaseRef: firebaseRef,
             getKey: getKey
         };
         return service;

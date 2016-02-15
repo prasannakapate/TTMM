@@ -3,5 +3,7 @@
   "scripts":{
   	"postinstall":"gulp wiredep"
   },
-  "registry": "http://bower.herokuapp.com"
+  "registry": "http://bower.herokuapp.com",
+  "proxy":"http://genproxy.amdocs.com:8080",
+  "https-proxy":"http://genproxy.amdocs.com:8080"
 }

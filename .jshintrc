@@ -62,6 +62,7 @@
         "self": false,
         "FB": false,
         "CacheFactory": false,
-        "Parse":false
+        "Parse":false,
+        "Firebase":false
     }
 }

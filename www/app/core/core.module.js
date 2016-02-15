@@ -6,7 +6,7 @@
             /*
              *Ionic modules*
              */
-             'ionic-datepicker',
+            'ionic-datepicker',
             /*
              *Angular modules
              */
@@ -14,6 +14,6 @@
             /*
              *3rd party modules
              */
-            'angular-cache'
+            'angular-cache', 'firebase'
         ]);
 })();

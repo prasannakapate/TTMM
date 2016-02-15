@@ -5,9 +5,9 @@
         .module('ttmmApp.expense')
         .controller('MakeExpenseCtrl', MakeExpenseCtrl);
 
-    MakeExpenseCtrl.$inject = ['$scope', '$state', 'expenseDataApi', 'userLoginDataApi'];
+    MakeExpenseCtrl.$inject = ['$scope', '$state', 'expenseDataApi'];
 
-    function MakeExpenseCtrl($scope, $state, expenseDataApi, userLoginDataApi) {
+    function MakeExpenseCtrl($scope, $state, expenseDataApi) {
         $scope.loadList = '';
         $scope.currentUser = '';
         $scope.makeExpense = makeExpense;
@@ -42,9 +42,6 @@
 
         ////////////////
 
-        userLoginDataApi.getCurrentUser().then(function(data){
-            $scope.expense.userId = data;
-        });
 
         function datePickerCallback(val) {
             if (typeof(val) === 'undefined') {

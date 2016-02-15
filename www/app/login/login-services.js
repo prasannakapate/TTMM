@@ -16,7 +16,6 @@
 
     function userLoginDataApi($http, $q, $ionicLoading, $timeout, $ionicPopup, commonService, CacheFactory) {
         var key = commonService.getKey();
-        Parse.initialize(key.appid, key.jsid);
         /*jshint validthis: true */
         var vm = this;
         var self = vm;

@@ -4,26 +4,26 @@
     angular
         .module('ttmmApp')
         .factory('sessionService', sessionService);
-    sessionService.$inject = ['$log', '$q', '$http', 'CacheFactory', 'userLoginDataApi', 'commonService'];
+    sessionService.$inject = ['$log', '$q', '$http', 'CacheFactory', 'commonService'];
 
-    function sessionService($log, $q, $http, CacheFactory, userLoginDataApi, commonService) {
+    function sessionService($log, $q, $http, CacheFactory, commonService) {
         var key = commonService.getKey();
         var currentUser = '';
-/*
-        self.sessionCache = CacheFactory.get('sessionCache');
-        self.sessionCache.setOptions({
-            onExpire: function(key, value) {
-                getCurrentUser()
-                    .then(function() {
-                        console.log('sessionCache was automatically refreshed', new Date());
-                    }, function() {
-                        console.log('Error getting sessionCache. Putting expired item back to cache', new Date());
-                    });
-            },
-            cacheFlushInterval: 55000,
-            maxAge: 3600000,
-            verifyIntegrity: true
-        });*/
+        /*
+                self.sessionCache = CacheFactory.get('sessionCache');
+                self.sessionCache.setOptions({
+                    onExpire: function(key, value) {
+                        getCurrentUser()
+                            .then(function() {
+                                console.log('sessionCache was automatically refreshed', new Date());
+                            }, function() {
+                                console.log('Error getting sessionCache. Putting expired item back to cache', new Date());
+                            });
+                    },
+                    cacheFlushInterval: 55000,
+                    maxAge: 3600000,
+                    verifyIntegrity: true
+                });*/
 
         var service = {
             getUserSession: getUserSession

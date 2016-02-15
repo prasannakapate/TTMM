@@ -8,10 +8,10 @@
     </ion-header-bar>
     <ion-content class="padding">
         <div class="list">
-            <form role="form" id="loginForm" name="loginForm" ng-submit="vm.userLogin()" novalidate>
+            <form role="form" id="loginForm" name="loginForm" ng-submit="vm.userLogin(vm.userData)" novalidate>
                 <label class="item item-input">
                     <span class="input-label"><i class="icon ion-person"></i> Username</span>
-                    <input type="text" name="username" ng-model="vm.userData.username" placeholder="username" required ng-minlength="4" ng-maxlength="10" autofocus/>
+                    <input type="text" name="username" ng-model="vm.userData.email" placeholder="username" required ng-minlength="4" ng-maxlength="30" autofocus/>
                 </label>
                 <span ng-messages="loginForm.username.$error" class="form-errors" ng-if="loginForm.username.$touched">
                     <ng-messages-include src="app/login/messages.html"></ng-messages-include>
