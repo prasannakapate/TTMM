@@ -1,10 +1,4 @@
-<ion-view ng-controller="ExpenseListCtrl as vm">
-    <ion-header-bar class="bar-royal">
-        <div class="buttons">
-            <b>TTMM</b>
-            <h1 class="title">{{vm.title}}</h1>
-        </div>
-    </ion-header-bar>
+<ion-view ng-controller="ExpenseListCtrl as vm" view-title="My Expense">
     <ion-content>
     <ion-refresher pulling-text="pull to refresh..." on-refresh="vm.loadList(true)"></ion-refresher>
         <div class="list">
