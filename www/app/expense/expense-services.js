@@ -19,6 +19,7 @@
         var self = vm;
         vm.currentUser = '';
         var key = commonService.getKey();
+        var baseUrl = commonService.baseUrl;
 
 
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
@@ -107,7 +108,7 @@
 
         function makeExpense(expenseData) {
             var deffered = $q.defer();
-            $http.post('https://api.parse.com/1/classes/Expenses', expenseData, {
+            $http.post(baseUrl + 'expenses.json', expenseData, {
                 headers: {
                     'X-Parse-Application-Id': key.appid,
                     'X-Parse-REST-API-Key': key.restid,

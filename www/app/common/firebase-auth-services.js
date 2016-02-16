@@ -25,7 +25,8 @@
                                 commonService) {
         var user = {
             displayName: '',
-            email: ''
+            email: '',
+            mobileNo : ''
         };
 
         var nativeProviderHandler = {
@@ -177,7 +178,6 @@
                     // To Update AngularJS $scope either use $apply or $timeout
                     user.username = val;
                     user.displayName = val;
-
                 });
                 user.displayName = userObj.displayName || userObj.email;
                 user.email = userObj.email;

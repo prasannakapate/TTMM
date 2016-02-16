@@ -2,15 +2,17 @@
     'use strict';
 
     angular
-        .module('ttmmApp')
+        .module('ttmmApp.common')
         .factory('commonService', commonService);
 
     commonService.$inject = [];
 
     function commonService() {
         var firebaseRef = new Firebase('https://ttmm.firebaseio.com');
+        var baseUrl = 'https://ttmm.firebaseio.com/';
 
         var service = {
+            baseUrl : baseUrl,
             firebaseRef: firebaseRef,
             getKey: getKey
         };
