@@ -20,6 +20,7 @@
             vm.currentUser = firebaseAuthService.isLoggedIn();
             console.log('Current User', vm.currentUser);
             vm.user = Auth.user;
+            console.log('User Details', vm.user);
         }
 
         function currentUserLogout(){

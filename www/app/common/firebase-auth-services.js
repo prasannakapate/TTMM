@@ -6,25 +6,25 @@
         .factory('firebaseAuthService', firebaseAuthService);
 
     firebaseAuthService.$inject = [
-                                    '$firebaseAuth', 
-                                    '$window', 
-                                    '$q', 
-                                    '$log', 
-                                    '$cordovaFacebook', 
-                                    '$ionicPopup', 
-                                    'commonService'
-                                ];
+        '$firebaseAuth',
+        '$window',
+        '$q',
+        '$log',
+        '$cordovaFacebook',
+        '$ionicPopup',
+        'commonService'
+    ];
 
     function firebaseAuthService(
-                                $firebaseAuth, 
-                                $window, 
-                                $q, 
-                                $log, 
-                                $cordovaFacebook, 
-                                $ionicPopup, 
-                                commonService) {
+        $firebaseAuth,
+        $window,
+        $q,
+        $log,
+        $cordovaFacebook,
+        $ionicPopup,
+        commonService) {
         var user = {
-            displayName: '',
+            username: '',
             email: '',
             mobileNo : ''
         };
@@ -62,6 +62,7 @@
                     return fAuth.$authWithPassword({
                         email: credentials.email,
                         password: credentials.password,
+                        username: credentials.username,
                         country: credentials.country,
                         mobileNo: credentials.mobileNo
                     });
@@ -69,7 +70,7 @@
                 .then(function(authData) {
                     var userObj = authData[authData.provider];
                     if (userObj) {
-                        user.displayName = userObj.displayName || credentials.username || userObj.email;
+                        user.username = userObj.username || userObj.email;
                         user.email = userObj.email;
                     }
                     deferred.resolve(user);
@@ -99,15 +100,16 @@
                     return facebookAuthData;
                 })
                 .then(function(facebookAuthData) {
-
+                    /* jshint -W106 */
                     return fAuth.$authWithOAuthToken('facebook', facebookAuthData.access_token);
+
                 })
                 .then(function(authData) {
                     console.log('Logged In', 2000, 'center');
                     $log.debug('Firebase Facebook Login ', authData);
 
                     var userObj = authData[authData.provider];
-                    user.displayName = userObj.displayName || userObj.email;
+                    user.username = userObj.username || userObj.email;
                     user.email = userObj.email;
                     deferred.resolve(user);
 
@@ -123,7 +125,7 @@
                 .then(function(authData) {
                     console.log('Logged In', 2000, 'center');
                     var userObj = authData[authData.provider];
-                    user.displayName = userObj.displayName || userObj.email;
+                    user.username = userObj.username || userObj.email;
                     user.email = userObj.email;
                     deferred.resolve(user);
 
@@ -173,14 +175,21 @@
             }).then(function(authData) {
                 console.log('Logged In', 2000, 'center');
                 var userObj = authData[authData.provider];
-                commonService.firebaseRef.child('users').child(authData.uid).once('value', function(snapshot) {
+                /*console.log('userObj ---->', userObj);
+                Object {email: "sonu@gmail.com", isTemporaryPassword: false, profileImageURL: 
+                         "https://secure.gravatar.com/avatar/9bd6dab5e084292a34168a899882f400?d=retro"
+                        }*/
+                commonService.firebaseRef
+                             .child('users')
+                             .child(authData.uid)
+                             .once('value', function(snapshot) {
                     var val = snapshot.val();
                     // To Update AngularJS $scope either use $apply or $timeout
-                    user.username = val;
-                    user.displayName = val;
+                    user = val;
+                    console.log('User details from signIn function in fauth ', user);
                 });
-                user.displayName = userObj.displayName || userObj.email;
-                user.email = userObj.email;
+                 user.username = userObj.username || userObj.email;
+                // user.email = userObj.email;
                 deferred.resolve(user);
 
             }).catch(function(error) {
@@ -216,11 +225,12 @@
 
             var currentUser = fAuth.$getAuth();
             var isUser = currentUser ? true : false;
-            if (isUser) {
-                var userObj = currentUser[currentUser.provider];
-                user.displayName = userObj.displayName || userObj.email;
-                user.email = userObj.email;
-            }
+            // if (isUser) {
+            //     var userObj = currentUser[currentUser.provider];
+            //     user.username = userObj.username || userObj.email;
+            //     user.email = userObj.email;
+            // }
+            
             return isUser;
         }
 

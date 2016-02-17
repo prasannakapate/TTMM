@@ -17,7 +17,8 @@
                             .then(function() {
                                 console.log('sessionCache was automatically refreshed', new Date());
                             }, function() {
-                                console.log('Error getting sessionCache. Putting expired item back to cache', new Date());
+                                console.log('Error getting sessionCache. 
+                                            Putting expired item back to cache', new Date());
                             });
                     },
                     cacheFlushInterval: 55000,

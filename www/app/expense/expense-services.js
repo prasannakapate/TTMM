@@ -12,18 +12,29 @@
         '$timeout',
         '$firebaseAuth',
         'CacheFactory',
-        'commonService'
+        'commonService',
+        'firebaseAuthService'
     ];
 
-    function expenseDataApi($http, $q, $ionicLoading, $timeout, $firebaseAuth, CacheFactory, commonService) {
+    function expenseDataApi(
+        $http,
+        $q,
+        $ionicLoading,
+        $timeout,
+        $firebaseAuth,
+        CacheFactory,
+        commonService,
+        firebaseAuthService) {
+
         /*jshint validthis: true */
         var vm = this;
         var self = vm;
-        vm.currentUser = '';
+        vm.currentUser = firebaseAuthService.user;
         var key = commonService.getKey();
         var baseUrl = commonService.baseUrl;
         var fAuth = commonService.firebaseRef;
 
+        console.log('User details from firebaseAuthService', firebaseAuthService.user);
 
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
 
@@ -55,7 +66,7 @@
 
 
         function getExpenseList(forceRefresh) {
-
+             console.log('User details from firebaseAuthService', vm.currentUser);
             if (typeof forceRefresh === 'undefined') {
                 forceRefresh = false;
             }
@@ -77,16 +88,7 @@
                 });
 
                 $http.get(baseUrl + 'expenses.json', {
-                    /*,
-                    params: {
-                        where: {
-                            userId: {
-                                __type: 'Pointer',
-                                className: '_User',
-                                objectId: vm.currentUser
-                            }
-                        }
-                    }*/
+
                 }).success(function(response) {
                     $timeout(function() {
                         self.getExpenseListCache.put(cacheKey, response);
