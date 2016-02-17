@@ -17,7 +17,7 @@
 
         $scope.loadList = function(forceRefresh) {
             expenseDataApi.getExpenseList(forceRefresh).then(function(data) {
-                $scope.expenseDetails = _(data.results).chain()
+                $scope.expenseDetails = _(data).chain()
                     .groupBy(function(item) {
                         item.expenseMonth = $filter('date')(item.expenseMonth, 'MMM-yyyy');
                         return item.expenseMonth.substring(0, 8);

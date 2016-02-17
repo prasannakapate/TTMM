@@ -64,6 +64,7 @@
                 });
             };
             $scope.loadList(false);
+            $scope.expense = '';
         }
     }
 })();

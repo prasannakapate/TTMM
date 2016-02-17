@@ -1,4 +1,11 @@
-<ion-view ng-controller="ExpenseDetailsCtrl" view-title="'{{expenseMonth}}'">
+<ion-view ng-controller="ExpenseDetailsCtrl" >
+    <ion-header-bar class="bar-royal">
+        <div class="buttons">
+            <button class="button button-clear ion-android-arrow-back" ui-sref="tab.expenses"> back
+            </button>
+            <h1 class="title">{{expenseMonth}}</h1>
+        </div>
+    </ion-header-bar>
     <ion-content>
         <div class="list">
             <div class="item item-divider">

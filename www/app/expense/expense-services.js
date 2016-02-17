@@ -6,20 +6,23 @@
         .factory('expenseDataApi', expenseDataApi);
 
     expenseDataApi.$inject = [
-                                '$http', 
-                                '$q', 
-                                '$ionicLoading', 
-                                '$timeout', 
-                                'CacheFactory', 
-                                'commonService'];
+        '$http',
+        '$q',
+        '$ionicLoading',
+        '$timeout',
+        '$firebaseAuth',
+        'CacheFactory',
+        'commonService'
+    ];
 
-    function expenseDataApi($http, $q, $ionicLoading, $timeout, CacheFactory, commonService) {
+    function expenseDataApi($http, $q, $ionicLoading, $timeout, $firebaseAuth, CacheFactory, commonService) {
         /*jshint validthis: true */
         var vm = this;
         var self = vm;
         vm.currentUser = '';
         var key = commonService.getKey();
         var baseUrl = commonService.baseUrl;
+        var fAuth = commonService.firebaseRef;
 
 
         self.getExpenseListCache = CacheFactory.get('getExpenseListCache');
@@ -73,11 +76,8 @@
                     template: '<div class="ion-loading-c"></div> Loading...'
                 });
 
-                $http.get('https://api.parse.com/1/classes/Expenses', {
-                    headers: {
-                        'X-Parse-Application-Id': key.appid,
-                        'X-Parse-REST-API-Key': key.restid
-                    },
+                $http.get(baseUrl + 'expenses.json', {
+                    /*,
                     params: {
                         where: {
                             userId: {
@@ -86,7 +86,7 @@
                                 objectId: vm.currentUser
                             }
                         }
-                    }
+                    }*/
                 }).success(function(response) {
                     $timeout(function() {
                         self.getExpenseListCache.put(cacheKey, response);
@@ -110,8 +110,6 @@
             var deffered = $q.defer();
             $http.post(baseUrl + 'expenses.json', expenseData, {
                 headers: {
-                    'X-Parse-Application-Id': key.appid,
-                    'X-Parse-REST-API-Key': key.restid,
                     'Content-Type': 'application/json'
                 }
             }).success(function(response) {
